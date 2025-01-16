@@ -1,4 +1,5 @@
 import React from "react";
+import '@/styles/globals.scss';
 
 export const metadata = {
     title: 'The FRC 4079 Robotics Website',
