@@ -42,4 +42,6 @@ next-env.d.ts
 
 # ide files
 .vscode
-/.idea/
+.vscode/
+.idea/
+.idea

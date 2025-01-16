@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import styles from "@/styles/_components/navbar.module.scss";
+import styles from "@/styles/_components/footer.module.scss";
 
-export default function Navbar(): React.ReactElement {
+export default function Footer(): React.ReactElement {
     return (
         <>
             <nav className={styles.navbar}>
