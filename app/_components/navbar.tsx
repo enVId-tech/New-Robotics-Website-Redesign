@@ -8,7 +8,7 @@ export default function Navbar(): React.ReactElement {
         <>
             <nav className={styles.navbar}>
                 <div className={styles.left}>
-                    <h1>FRC 4079 Robotics</h1>
+                    <h1>OA Robotics</h1>
                 </div>
                 <div className={styles.right}>
                     <Link href={"/"}>Home</Link>

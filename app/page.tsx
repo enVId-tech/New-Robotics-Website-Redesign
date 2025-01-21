@@ -5,6 +5,7 @@ import {NextFont} from "next/dist/compiled/@next/font";
 import Navbar from "@/app/_components/navbar";
 import styles from "@/styles/home.module.scss";
 import Footer from "@/app/_components/footer";
+import Title from "@/app/_components/title";
 
 const Work_Sans_300: NextFont = Work_Sans({
     weight: "300",
@@ -13,13 +14,11 @@ const Work_Sans_300: NextFont = Work_Sans({
 })
 
 export default async function Home(): Promise<React.ReactElement> {
+
     return (
         <div id={`${styles.homepage}`}>
             <Navbar/>
-            <div className={`${styles.top}`}>
-                <h1>Welcome to the FRC 4079 Robotics Website</h1>
-                <p>Developed by the FRC 4079 Robotics Team</p>
-            </div>
+            <Title />
             <Footer/>
         </div>
     )

@@ -1,0 +1,21 @@
+.top {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  h1 {
+    font-size: 5rem;
+    color: white;
+    text-align: center;
+  }
+
+  p {
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+  }
+}
