@@ -2,7 +2,7 @@ import React from "react";
 import '@/styles/globals.scss';
 
 export const metadata = {
-    title: 'The FRC 4079 Robotics Website',
+    title: 'OA Robotics Website',
     description: 'Developed by the FRC 4079 Robotics Team',
 }
 

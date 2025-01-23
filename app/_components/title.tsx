@@ -11,20 +11,22 @@ const Work_Sans_300: NextFont = Work_Sans({
 })
 
 export default function Title(): React.ReactElement {
-    const [textToType, setTextToType] = React.useState<string>("Learn. Compete. Thrive");
+    const [textToType, setTextToType] = React.useState<string>("");
 
     // Make a typewriter effect with the text with a sort of ease-in-out effect
     React.useEffect(() => {
         let i: number = 0;
         const text: string = "Learn. Compete. Thrive.";
-        const speed: number = 100;
+        const speed: number = 75; // Lower is faster
         const interval = setInterval(() => {
-            if (i < text.length) {
-                setTextToType(text.substring(0, i + 1));
-                i++;
-            } else {
-                clearInterval(interval);
-            }
+            setTimeout(() => {
+                if (i < text.length) {
+                    setTextToType(text.substring(0, i + 1));
+                    i++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 500);
         }, speed);
     }, []);
 
