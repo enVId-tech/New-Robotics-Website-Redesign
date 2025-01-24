@@ -6,6 +6,8 @@ import Navbar from "@/app/_components/navbar";
 import styles from "@/styles/home.module.scss";
 import Footer from "@/app/_components/footer";
 import Title from "@/app/_components/title";
+import PageBody from "@/app/_components/pagebody";
+import img from "@/public/images/FrontPageBanner.jpg";
 
 const Work_Sans_300: NextFont = Work_Sans({
     weight: "300",
@@ -18,7 +20,8 @@ export default async function Home(): Promise<React.ReactElement> {
     return (
         <div id={`${styles.homepage}`}>
             <Navbar/>
-            <Title />
+            <Title title={"Oxford Academy Robotics"} description={"Learn. Compete. Thrive."} img={img} bgMoveUp={30}/>
+            <PageBody/>
             <Footer/>
         </div>
     )

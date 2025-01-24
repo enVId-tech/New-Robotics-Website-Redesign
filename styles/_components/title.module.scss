@@ -1,21 +1,57 @@
 .top {
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   justify-content: center;
   flex-direction: column;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  align-items: flex-start;
 
-  h1 {
-    font-size: 5rem;
-    color: white;
-    text-align: center;
-  }
+  .overlay {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    background: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.7) 50%,
+      rgba(0, 0, 0, 1) 100%
+    );
+    width: 100%;
+    height: 100%;
+    padding-left: 10vw;
 
-  p {
-    font-size: 2rem;
-    color: white;
-    text-align: center;
+    h1 {
+      font-size: 5rem;
+      color: white;
+      text-align: center;
+      animation: h1fadeInLeft 2s forwards 0.75s;
+      opacity: 0;
+    }
+
+    h2 {
+        font-size: 3rem;
+        color: white;
+        text-align: center;
+        animation: h1fadeInLeft 2s forwards 1.5s;
+        opacity: 0;
+    }
+
+    p {
+      font-size: 2rem;
+      color: white;
+      text-align: center;
+    }
+
+    @keyframes h1fadeInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-10%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
   }
 }

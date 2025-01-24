@@ -3,12 +3,13 @@ import React from "react";
 import styles from "@/styles/vex.module.scss";
 import Navbar from "@/app/_components/navbar";
 import Footer from "@/app/_components/footer";
+import Title from "@/app/_components/title";
 
 export default async function Vex(): Promise<React.ReactElement> {
     return (
         <div id={`${styles.vex}`}>
             <Navbar/>
-            <h1>VEX</h1>
+            <Title title={"VEX Robotics Competition"} description={"VEX Teams 19812 & 23796"} bgMoveUp={5}/>
             <Footer/>
         </div>
     )
