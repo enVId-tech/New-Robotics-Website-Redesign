@@ -49,7 +49,7 @@ export default function Title({
                 } else {
                     clearInterval(interval);
                 }
-            }, 500);
+            }, 750);
         }, speed);
     }, []);
 
