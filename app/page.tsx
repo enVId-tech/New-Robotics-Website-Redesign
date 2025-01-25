@@ -19,7 +19,7 @@ export default async function Home(): Promise<React.ReactElement> {
 
     return (
         <div id={`${styles.homepage}`}>
-            <Navbar/>
+            <Navbar isFixed={true} />
             <Title title={"Oxford Academy Robotics"} description={"Learn. Compete. Thrive."} img={img} bgMoveUp={30}/>
             <AboutBrief/>
             <Footer/>

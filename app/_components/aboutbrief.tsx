@@ -22,7 +22,11 @@ const Work_Sans_500: NextFont = Work_Sans({
     subsets: ['latin'],
 });
 
-export default function AboutBrief(): React.ReactElement {
+interface AboutBriefProps {
+    children?: React.ReactNode;
+}
+
+export default function AboutBrief({ children }: AboutBriefProps): React.ReactElement {
     const [isClicked, setIsClicked] = React.useState<boolean[]>([]);
 
     const descriptors: Descriptor[] = React.useMemo((): Descriptor[] => [
@@ -116,6 +120,7 @@ export default function AboutBrief(): React.ReactElement {
                     </div>
                 </div>
             </div>
+            { children }
         </section>
     )
 };

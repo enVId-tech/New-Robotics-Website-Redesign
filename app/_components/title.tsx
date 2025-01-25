@@ -4,7 +4,7 @@ import styles from "@/styles/_components/title.module.scss";
 import {Work_Sans} from "next/font/google";
 import {NextFont} from "next/dist/compiled/@next/font";
 import {StaticImageData} from "next/image";
-import img1 from "@/public/images/Placeholder.jpg";
+import img1 from "@/public/images/PlaceholderBanner.jpg";
 
 const Work_Sans_300: NextFont = Work_Sans({
     weight: "300",

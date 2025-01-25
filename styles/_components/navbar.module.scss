@@ -10,23 +10,25 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
-  color: rgb(255, 255, 255);
+  transition: background-color 0.3s ease-in-out;
+  color: white;
 
 
   &.isWhite {
     background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+    .right,.left {
+        color: rgb(0, 0, 0);
+    }
   }
 
   a {
     text-decoration: none;
     color: inherit;
-    transition: inherit;
+    transition: color 0.3s ease-in-out;
 
     &:hover {
       color: rgb(91, 91, 91);
-      transition: color 0.3s ease-in-out;
+
     }
   }
 
@@ -48,7 +50,8 @@
     width: 25%;
     height: 100%;
     cursor: pointer;
-
+    transition: color 0.3s ease-in-out;
+    
     img {
       width: 50px;
       height: auto;
