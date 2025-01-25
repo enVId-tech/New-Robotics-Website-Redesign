@@ -11,15 +11,23 @@
   background-color: rgba(0, 0, 0, 0);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
-  color: white;
+  color: rgb(255, 255, 255);
 
-  &.switchView {
+
+  &.isWhite {
     background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
   }
 
   a {
     text-decoration: none;
     color: inherit;
+    transition: inherit;
+
+    &:hover {
+      color: rgb(91, 91, 91);
+      transition: color 0.3s ease-in-out;
+    }
   }
 
   .right {
@@ -42,9 +50,9 @@
     cursor: pointer;
 
     img {
-        width: 50px;
-        height: auto;
-        margin-right: 0.5vw;
+      width: 50px;
+      height: auto;
+      margin-right: 0.5vw;
     }
   }
 }

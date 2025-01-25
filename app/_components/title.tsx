@@ -12,6 +12,12 @@ const Work_Sans_300: NextFont = Work_Sans({
     subsets: ['latin'],
 });
 
+const Work_Sans_400: NextFont = Work_Sans({
+    weight: "400",
+    style: 'normal',
+    subsets: ['latin'],
+});
+
 interface TitleProps {
     children?: React.ReactNode;
     title: string | undefined;
@@ -54,11 +60,11 @@ export default function Title({
     }, []);
 
     return (
-        <div className={`${styles.top} ${Work_Sans_300.className}`} style={styleBanner}>
+        <div className={styles.top} style={styleBanner}>
             <div className={styles.overlay}>
-                <h1>{title}</h1>
-                <p>{textToType}</p>
-                <h2>{children}</h2>
+                <h1 className={Work_Sans_400.className}>{title}</h1>
+                <p className={Work_Sans_300.className}>{textToType}</p>
+                <h2 className={Work_Sans_300.className}>{children}</h2>
             </div>
         </div>
     );
