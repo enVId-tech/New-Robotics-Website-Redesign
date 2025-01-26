@@ -50,18 +50,20 @@ export default function Navbar({ children, isFixed = true }: NavbarProps): React
     return (
         <>
             <nav className={`${styles.navbar} ${isScrolled ? styles.isWhite : ""}`} style={isFixed ? styleFixed : {}}>
-                <div className={styles.left} onClick={() => window.location.href = "/"}>
-                    <img src={image1.src} alt={"Oxford Academy Robotics Logo"}/>
-                    <h1 className={Work_Sans_500.className}>OA Robotics</h1>
-                </div>
-                {children}
-                <div className={`${styles.right} ${Work_Sans_300.className}`}>
-                    <Link href={"/"} className={Work_Sans_300.className}>Home</Link>
-                    <Link href={"/about"} className={Work_Sans_300.className}>About</Link>
-                    <Link href={"/frc"} className={Work_Sans_300.className}>FRC</Link>
-                    <Link href={"/ftc"} className={Work_Sans_300.className}>FTC</Link>
-                    <Link href={"/vex"} className={Work_Sans_300.className}>VEX</Link>
-                    <Link href={"/contact"} className={Work_Sans_300.className}>Contact</Link>
+                <div className={styles.container}>
+                    <div className={styles.left} onClick={() => window.location.href = "/"}>
+                        <img src={image1.src} alt={"Oxford Academy Robotics Logo"}/>
+                        <h1 className={Work_Sans_500.className}>OA Robotics</h1>
+                    </div>
+                    {children}
+                    <div className={`${styles.right} ${Work_Sans_300.className}`}>
+                        <Link href={"/"} className={Work_Sans_300.className}>Home</Link>
+                        <Link href={"/about"} className={Work_Sans_300.className}>About</Link>
+                        <Link href={"/frc"} className={Work_Sans_300.className}>FRC</Link>
+                        <Link href={"/ftc"} className={Work_Sans_300.className}>FTC</Link>
+                        <Link href={"/vex"} className={Work_Sans_300.className}>VEX</Link>
+                        <Link href={"/contact"} className={Work_Sans_300.className}>Contact</Link>
+                    </div>
                 </div>
             </nav>
         </>

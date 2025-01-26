@@ -1,19 +1,19 @@
 "use client";
 import React from "react";
 import styles from "@/styles/_components/title.module.scss";
-import {Work_Sans} from "next/font/google";
+import {Major_Mono_Display, Rubik, Titillium_Web} from "next/font/google";
 import {NextFont} from "next/dist/compiled/@next/font";
 import {StaticImageData} from "next/image";
 import img1 from "@/public/images/PlaceholderBanner.jpg";
 
-const Work_Sans_300: NextFont = Work_Sans({
-    weight: "300",
+const Work_Sans_300: NextFont = Titillium_Web({
+    weight: "900",
     style: 'normal',
     subsets: ['latin'],
 });
 
-const Work_Sans_400: NextFont = Work_Sans({
-    weight: "400",
+const Work_Sans_400: NextFont = Titillium_Web({
+    weight: "900",
     style: 'normal',
     subsets: ['latin'],
 });

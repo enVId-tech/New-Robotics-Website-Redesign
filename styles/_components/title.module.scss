@@ -5,42 +5,51 @@
   justify-content: center;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 7vh;
 
   .overlay {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     flex-direction: column;
     align-items: flex-start;
-    background: radial-gradient(
-      circle,
-      rgba(0, 0, 0, 0.5) 0%,
-      rgba(0, 0, 0, 0.7) 50%,
-      rgba(0, 0, 0, 1) 100%
-    );
+    //background: radial-gradient(
+    //  circle,
+    //  rgba(0, 0, 0, 0) 0%,
+    //  rgba(0, 0, 0, 0.5) 35%,
+    //  rgba(0, 0, 0, 1) 100%
+    //);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 255) 100%);
     width: 100%;
     height: 100%;
-    padding-left: 10vw;
+    padding-left: 7vw;
 
     h1 {
       font-size: 5rem;
-      color: white;
+      color: red;
       text-align: center;
-      animation: h1fadeInLeft 2s forwards 0.75s;
+      animation: h1fadeInLeft 2s forwards 0.9s;
       opacity: 0;
+      padding: 0;
+      margin: 0;
+      letter-spacing: 0.15rem;
     }
 
     h2 {
         font-size: 3rem;
-        color: white;
+        color: red;
         text-align: center;
-        animation: h1fadeInLeft 2s forwards 0.75s;
+        animation: h1fadeInLeft 2s forwards 0.9s;
         opacity: 0;
+
     }
 
     p {
       font-size: 2rem;
       color: white;
       text-align: center;
+      padding: 0;
+      margin: 0;
+      letter-spacing: 0.04rem;
     }
 
     @keyframes h1fadeInLeft {

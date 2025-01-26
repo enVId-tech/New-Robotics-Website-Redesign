@@ -20,7 +20,7 @@ export default async function Home(): Promise<React.ReactElement> {
     return (
         <div id={`${styles.homepage}`}>
             <Navbar isFixed={true} />
-            <Title title={"Oxford Academy Robotics"} description={"Learn. Compete. Thrive."} img={img} bgMoveUp={30}/>
+            <Title title={"OXFORD ACADEMY ROBOTICS"} description={"Learn. Compete. Thrive."} img={img} bgMoveUp={30}/>
             <AboutBrief/>
             <Footer/>
         </div>
