@@ -16,7 +16,6 @@ const Work_Sans_300: NextFont = Work_Sans({
 })
 
 export default async function Home(): Promise<React.ReactElement> {
-
     return (
         <div id={`${styles.homepage}`}>
             <Navbar isFixed={true} />

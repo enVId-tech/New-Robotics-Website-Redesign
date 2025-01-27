@@ -42,13 +42,12 @@ export default function Title({
         backgroundRepeat: "no-repeat",
     }
 
-    // Make a typewriter effect with the text with a sort of ease-in-out effect
-    React.useEffect(() => {
+    React.useEffect((): void => {
         let i: number = 0;
         const text: string = description;
         const speed: number = 75; // Lower is faster
-        const interval = setInterval(() => {
-            setTimeout(() => {
+        const interval: NodeJS.Timeout = setInterval((): void => {
+            setTimeout((): void => {
                 if (i < text.length) {
                     setTextToType(text.substring(0, i + 1));
                     i++;

@@ -70,7 +70,7 @@ export default function AboutBrief({ children }: AboutBriefProps): React.ReactEl
         setIsClicked(new Array(descriptors.length).fill(false));
     }, [descriptors]);
 
-    const setClicked = (index: number): void => {
+    const setClicked: (index: number) => void = (index: number): void => {
         if (isClicked[index]) {
             setIsClicked(new Array(descriptors.length).fill(false));
         } else {
