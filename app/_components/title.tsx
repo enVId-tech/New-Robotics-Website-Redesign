@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import styles from "@/styles/_components/title.module.scss";
-import {Major_Mono_Display, Rubik, Titillium_Web} from "next/font/google";
+import {Titillium_Web} from "next/font/google";
 import {NextFont} from "next/dist/compiled/@next/font";
 import {StaticImageData} from "next/image";
 import img1 from "@/public/images/PlaceholderBanner.jpg";
@@ -56,7 +56,7 @@ export default function Title({
                 }
             }, 750);
         }, speed);
-    }, []);
+    }, [description]);
 
     return (
         <div className={styles.top} style={styleBanner}>

@@ -5,6 +5,7 @@ import image1 from "@/public/logos/OARoboticsLogo_24-25.webp";
 import Link from "next/link";
 import {NextFont} from "next/dist/compiled/@next/font";
 import {Work_Sans} from "next/font/google";
+import Image from "next/image";
 
 const Work_Sans_300: NextFont = Work_Sans({
     weight: "300",
@@ -52,7 +53,7 @@ export default function Navbar({ children, isFixed = true }: NavbarProps): React
             <nav className={`${styles.navbar} ${isScrolled ? styles.isWhite : ""}`} style={isFixed ? styleFixed : {}}>
                 <div className={styles.container}>
                     <div className={styles.left} onClick={(): string => window.location.href = "/"}>
-                        <img src={image1.src} alt={"Oxford Academy Robotics Logo"}/>
+                        <Image src={image1.src} alt={"Oxford Academy Robotics Logo"} width={50} height={50}/>
                         <h1 className={Work_Sans_500.className}>OA Robotics</h1>
                     </div>
                     {children}
