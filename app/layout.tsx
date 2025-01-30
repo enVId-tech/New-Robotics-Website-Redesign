@@ -1,21 +1,16 @@
 import React from "react";
 import '@/styles/globals.scss';
-import icon from '@/public/logos/OARoboticsLogo_24-25.webp';
+import img from "@/public/logos/OARoboticsLogo_24-25.webp";
 
 export const metadata = {
     title: 'OA Robotics Website',
-    description: 'Developed by the FRC 4079 Robotics Team',
+    description: 'The official website for Oxford Academy Robotics',
+    keywords: 'Oxford Academy, Robotics, FRC, FTC, VEX, Oxford Academy Robotics',
     icons: [
-        {
-            rel: 'icon',
-            type: 'image/png',
-            url: icon.src,
-        },
-        {
-            rel: 'apple-touch-icon',
-            url: icon.src,
-        },
-    ],
+        {rel: 'manifest', url: `${img.src}`},
+        {rel: 'apple-touch-icon', url: `${img.src}`},
+        {rel: 'icon', url: `${img.src}`}
+    ]
 }
 
 export default function RootLayout({children}: { children: React.ReactNode }): React.ReactElement {
