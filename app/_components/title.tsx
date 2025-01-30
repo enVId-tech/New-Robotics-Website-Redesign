@@ -6,13 +6,7 @@ import {NextFont} from "next/dist/compiled/@next/font";
 import {StaticImageData} from "next/image";
 import img1 from "@/public/images/PlaceholderBanner.jpg";
 
-const Work_Sans_300: NextFont = Titillium_Web({
-    weight: "900",
-    style: 'normal',
-    subsets: ['latin'],
-});
-
-const Work_Sans_400: NextFont = Titillium_Web({
+const Titillium_Web_900: NextFont = Titillium_Web({
     weight: "900",
     style: 'normal',
     subsets: ['latin'],
@@ -61,9 +55,9 @@ export default function Title({
     return (
         <div className={styles.top} style={styleBanner}>
             <div className={styles.overlay}>
-                <h1 className={Work_Sans_400.className}>{title}</h1>
-                <p className={Work_Sans_300.className}>{textToType}</p>
-                <h2 className={Work_Sans_300.className}>{children}</h2>
+                <h1 className={Titillium_Web_900.className}>{title}</h1>
+                <p className={Titillium_Web_900.className}>{textToType}</p>
+                <h2 className={Titillium_Web_900.className}>{children}</h2>
             </div>
         </div>
     );
