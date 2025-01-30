@@ -3,7 +3,7 @@ import React from 'react';
 import Head from 'next/head';
 import icon from '@/public/logos/OARoboticsLogo_24-25.webp';
 
-interface HeadProps {
+type HeadProps = {
     headTitle?: string;
     description?: string;
 }

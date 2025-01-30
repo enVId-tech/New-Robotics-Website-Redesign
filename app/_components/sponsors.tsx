@@ -11,7 +11,7 @@ const Work_Sans_300: NextFont = Work_Sans({
     subsets: ['latin'],
 });
 
-interface SponsorsProps {
+type SponsorsProps = {
     children?: React.ReactNode;
     sponsors: Sponsor[];
     title: string;

@@ -11,7 +11,7 @@ const Work_Sans_300: NextFont = Work_Sans({
     subsets: ['latin'],
 });
 
-interface AboutBriefProps {
+type AboutBriefProps = {
     children?: React.ReactNode;
     img: StaticImageData;
     description: string;

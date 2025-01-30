@@ -12,7 +12,7 @@ const Titillium_Web_900: NextFont = Titillium_Web({
     subsets: ['latin'],
 });
 
-interface TitleProps {
+type TitleProps = {
     children?: React.ReactNode;
     title: string | undefined;
     description: string;

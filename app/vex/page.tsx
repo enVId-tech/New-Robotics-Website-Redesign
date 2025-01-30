@@ -11,7 +11,10 @@ export default async function Vex(): Promise<React.ReactElement> {
         <div id={`${styles.vex}`}>
             <Navbar/>
             <Title title={"VEX Robotics Competition"} description={"VEX Teams 19812 & 23796"} bgMoveUp={5}/>
-            <AboutVEXTeams/>
+            <AboutVEXTeams
+                title={"About VEX Teams 19812 & 23796"}
+                description={"VEX Teams 1108A and 1108B are a robotics team based in the USA."}
+            />
             <Footer/>
         </div>
     )

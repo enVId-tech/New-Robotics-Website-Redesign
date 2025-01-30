@@ -17,7 +17,10 @@ export default async function FTC(): Promise<React.ReactElement> {
                 img={img1}
                 bgMoveUp={50}
             />
-            <AboutFTCTeams/>
+            <AboutFTCTeams
+                title={"About FTC Teams"}
+                description={"FTC Teams 19812 and 23796 are a robotics team based in the USA."}
+            />
             <Footer/>
         </div>
     )

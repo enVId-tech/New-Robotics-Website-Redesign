@@ -19,7 +19,7 @@ const Montserrat_500: NextFont = Montserrat({
     subsets: ['latin'],
 });
 
-interface NavbarProps {
+type NavbarProps = {
     children?: React.ReactNode;
     isFixed?: boolean;
 }

@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "@/styles/_components/footer.module.scss";
 
-interface FooterProps {
+type FooterProps = {
     children?: React.ReactNode;
 }
 

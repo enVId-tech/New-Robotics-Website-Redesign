@@ -12,7 +12,10 @@ export default async function Contact(): Promise<React.ReactElement> {
         <div id={`${styles.contact}`}>
             <Navbar/>
             <Title title={"Contact Us"} description={"We would love to hear from you!"}/>
-            <GeneralContact/>
+            <GeneralContact
+        email={"contact@oarobotics.org"}
+        phone={"+1 (123) 456-7890"}
+            />
             <Donations/>
             <Footer/>
         </div>

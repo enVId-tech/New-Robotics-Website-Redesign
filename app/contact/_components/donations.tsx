@@ -2,7 +2,7 @@
 import React from "react";
 import styles from '@/styles/_components/donations.module.scss';
 
-interface DonationsProps {
+type DonationsProps = {
     children?: React.ReactNode;
 }
 
