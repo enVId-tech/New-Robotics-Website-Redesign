@@ -3,6 +3,7 @@ import React from "react";
 import styles from "@/styles/_components/footer.module.scss";
 import {NextFont} from "next/dist/compiled/@next/font";
 import {Titillium_Web} from "next/font/google";
+import OARoboticsLogo from "@/public/logos/OARoboticsLogo_24-25.webp";
 
 const Titillium_Web_600: NextFont = Titillium_Web({
     weight: "600",
@@ -21,7 +22,8 @@ export default function Footer({children}: FooterProps): React.ReactElement {
                 <div className={styles.footerTop}>
                     <div className={styles.footerDetails}>
                         <div className={`${styles.orgDetails} ${Titillium_Web_600.className}`}>
-                            <h2>OA Robotics</h2>
+                            <h2><img src={OARoboticsLogo.src} alt={"OA Robotics"}/>OA Robotics</h2>
+                            <p>Quantum Leap</p>
                             <p>Oxford Academy</p>
                             <p>5172 Orange Avenue</p>
                         </div>

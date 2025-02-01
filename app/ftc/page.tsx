@@ -14,7 +14,7 @@ export default async function FTC(): Promise<React.ReactElement> {
             <Title
                 title={"FIRST Tech Challenge"}
                 description={"FTC Teams 19812 & 23796"}
-                img={img1}
+                img1={img1}
                 bgMoveUp={50}
             />
             <AboutFTCTeams

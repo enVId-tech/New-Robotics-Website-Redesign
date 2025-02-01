@@ -1,5 +1,5 @@
 .footer {
-    background-color: #090c24;
+    background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, #090C24 5%, #090c24 100%);
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -29,6 +29,15 @@
                     padding: 0;
                     margin: 0;
                     color: red;
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        width: 20%;
+                        height: auto;
+                        margin-right: 1vw;
+
+                    }
                 }
 
                 p {
