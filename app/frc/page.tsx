@@ -18,7 +18,12 @@ export default async function FRC(): Promise<React.ReactElement> {
     return (
         <div id={`${styles.frc}`}>
             <Navbar/>
-            <Title title={"FIRST Robotics Competition"} description={"FRC Team 4079"} img={img1} bgMoveUp={70}>
+            <Title
+                title={"FIRST Robotics Competition"}
+                description={"FRC Team 4079"}
+                img1={img1}
+                bgMoveUp={70}
+            >
                 2025 Season
             </Title>
             <AboutTeam4079

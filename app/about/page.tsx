@@ -13,7 +13,7 @@ export default async function About(): Promise<React.ReactElement> {
             <Title
                 title={"About Us"}
                 description={"Learn more about our team and mission."}
-                img={img1}
+                img1={img1}
                 bgMoveUp={50}
             />
             <Footer/>
