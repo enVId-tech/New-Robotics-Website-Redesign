@@ -2,17 +2,10 @@
 import React from "react";
 import styles from "@/styles/_components/footer.module.scss";
 import {NextFont} from "next/dist/compiled/@next/font";
-import {Titillium_Web, Work_Sans} from "next/font/google";
+import {Titillium_Web} from "next/font/google";
 
 const Titillium_Web_600: NextFont = Titillium_Web({
     weight: "600",
-    style: 'normal',
-    subsets: ['latin'],
-});
-
-
-const Work_Sans_300: NextFont = Work_Sans({
-    weight: "300",
     style: 'normal',
     subsets: ['latin'],
 });
