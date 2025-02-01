@@ -40,6 +40,7 @@ export default function AboutBrief({ children, img, description }: AboutBriefPro
         <section className={`${styles.about} ${Work_Sans_300.className}`}>
             <div className={styles.container}>
                 <div className={styles.aboutContent}>
+                    <h1 className={`${styles.aboutTitle} ${Titillium_Web_600.className}`}>About Us</h1>
                     <p>
                         {description}
                     </p>

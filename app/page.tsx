@@ -8,30 +8,14 @@ import AboutBrief from "@/app/_components/aboutbrief";
 import MainHead from "@/app/_components/head";
 import Slogan from "@/app/_components/slogan";
 import Sponsors from "@/app/_components/sponsors";
+import {sponsors} from "@/app/_components/logos";
 
-// Logos
+// Images
 import frontBannerImg from "@/public/images/FrontPageBanner.png";
 import collage2Img from "@/public/images/collage2.png";
 import designImg from "@/public/handmade/FrontPageDesign.webp";
-import nasa from "@/public/logos/sponsors/NASA_logo.png";
-
-// Other imports
-import {StaticImageData} from "next/image";
-
-// Interfaces / Types
-type Sponsor = {
-    img: StaticImageData;
-    name: string;
-    link: string;
-}
 
 export default async function Home(): Promise<React.ReactElement> {
-    const sponsors: Sponsor[] = [{
-        img: nasa,
-        name: "NASA",
-        link: "https://www.nasa.gov/"
-    }]
-
     return (
         <div id={`${styles.homepage}`}>
             <MainHead headTitle={"Home"}/>

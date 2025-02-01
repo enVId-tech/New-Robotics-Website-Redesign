@@ -25,8 +25,6 @@ type NavbarProps = {
 }
 
 export default function Navbar({ children, isFixed = true }: NavbarProps): React.ReactElement {
-    const [isScrolled, setIsScrolled] = React.useState<boolean>(false);
-
     const styleFixed: object = {
         position: "fixed",
         top: 0,
@@ -35,22 +33,17 @@ export default function Navbar({ children, isFixed = true }: NavbarProps): React
         zIndex: 1000,
     }
 
-    const handleScroll: () => void = (): void => {
-        if (window.scrollY > 0) {
-            setIsScrolled(true);
-        } else {
-            setIsScrolled(false);
-        }
+    const styleNotFixed: object = {
+        position: "relative",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
     }
-
-    React.useEffect((): () => void => {
-        window.addEventListener("scroll", handleScroll);
-        return (): void => window.removeEventListener("scroll", handleScroll);
-    }, []);
 
     return (
         <>
-            <nav className={`${styles.navbar} ${isScrolled ? styles.isWhite : ""}`} style={isFixed ? styleFixed : {}}>
+            <nav className={`${styles.navbar}`} style={isFixed ? styleFixed : {styleNotFixed}}>
                 <div className={styles.container}>
                     <div className={styles.left} onClick={(): string => window.location.href = "/"}>
                         <Image src={image1.src} alt={"Oxford Academy Robotics Logo"} width={50} height={50}/>
