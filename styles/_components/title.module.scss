@@ -27,7 +27,7 @@
       font-size: 5rem;
       color: red;
       text-align: center;
-      animation: h1fadeInLeft 2s forwards 0.9s;
+      animation: h1fadeInLeft 1.5s forwards 0.5s, bobbingHeader 1.5s infinite ease-in-out 1.5s;
       opacity: 0;
       letter-spacing: 0.15rem;
       //border: 3px solid rgba(255, 255, 255, 0.9);
@@ -35,6 +35,18 @@
       padding: 0; // 2vw;
       border-radius: 25px;
       margin: 0 0 2vh;
+
+      @keyframes bobbingHeader {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-0.5vh);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
     }
 
     h2 {

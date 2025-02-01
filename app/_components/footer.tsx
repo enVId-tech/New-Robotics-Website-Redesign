@@ -1,6 +1,21 @@
 "use client";
 import React from "react";
 import styles from "@/styles/_components/footer.module.scss";
+import {NextFont} from "next/dist/compiled/@next/font";
+import {Titillium_Web, Work_Sans} from "next/font/google";
+
+const Titillium_Web_600: NextFont = Titillium_Web({
+    weight: "600",
+    style: 'normal',
+    subsets: ['latin'],
+});
+
+
+const Work_Sans_300: NextFont = Work_Sans({
+    weight: "300",
+    style: 'normal',
+    subsets: ['latin'],
+});
 
 type FooterProps = {
     children?: React.ReactNode;
@@ -12,7 +27,7 @@ export default function Footer({children}: FooterProps): React.ReactElement {
             <div className={styles.footerContent}>
                 <div className={styles.footerTop}>
                     <div className={styles.footerDetails}>
-                        <div className={styles.orgDetails}>
+                        <div className={`${styles.orgDetails} ${Titillium_Web_600.className}`}>
                             <h2>OA Robotics</h2>
                             <p>Oxford Academy</p>
                             <p>5172 Orange Avenue</p>
@@ -22,7 +37,7 @@ export default function Footer({children}: FooterProps): React.ReactElement {
                         </div>
                     </div>
 
-                    <div className={styles.footerLinks}>
+                    <div className={`${styles.footerLinks} ${Titillium_Web_600.className}`}>
                         <h1>Quick Links</h1>
                         <a href={"/"}>Home</a>
                         <a href={"/about"}>About</a>
@@ -31,14 +46,21 @@ export default function Footer({children}: FooterProps): React.ReactElement {
                         <a href={"/vex"}>VEX</a>
                         <a href={"/contact"}>Contact</a>
                     </div>
+
+                    <div className={`${styles.footerLinks} ${Titillium_Web_600.className}`}>
+                        <h1>Our Socials</h1>
+                        <a href={"https://www.instagram.com/oxfordacademyrobotics/"} target="_blank">Instagram</a>
+                        <a href={"https://www.facebook.com/oxfordacademyrobotics"} target="_blank">Facebook</a>
+                        <a href={"https://www.youtube.com/channel/UC1cQVc9tJYX2J8jvV1J9NzQ"} target="_blank">YouTube</a>
+                    </div>
                 </div>
 
 
                 <div className={styles.footerBottom}>
-
-                    <div className={styles.footerBottomLinks}>
+                    <div className={`${styles.footerBottomLinks} ${Titillium_Web_600.className}`}>
                         <p>&copy; 2025 OA Robotics</p>
                         <p>Website by <a href="https://github.com/enVId-tech" target="_blank">Erick Tran</a></p>
+                        <p>Website in BETA - Bugs Beware!</p>
                     </div>
 
                 </div>

@@ -10,7 +10,7 @@ import Slogan from "@/app/_components/slogan";
 import Sponsors from "@/app/_components/sponsors";
 
 // Images
-import img from "@/public/images/FrontPageBanner.jpg";
+import img from "@/public/images/FrontPageBanner.png";
 import img2 from "@/public/images/collage2.png";
 
 // Images
@@ -37,7 +37,11 @@ export default async function Home(): Promise<React.ReactElement> {
         <div id={`${styles.homepage}`}>
             <MainHead headTitle={"Home"}/>
             <Navbar isFixed={true}/>
-            <Title title={"OXFORD ACADEMY ROBOTICS"} description={"Learn. Compete. Thrive."}/>
+            <Title
+                title={"OXFORD ACADEMY ROBOTICS"}
+                description={"Learn. Compete. Thrive."}
+                img={img}
+            />
             <AboutBrief
                 img={img2}
                 description={"Oxford Academy Robotics is a student-run organization that competes in the FIRST Robotics Competition (FRC), FIRST Tech Challenge (FTC), and VEX Robotics Competition. Our mission is to inspire students to pursue careers in STEM fields by providing them with the opportunity to learn, compete, and thrive in a supportive environment."}

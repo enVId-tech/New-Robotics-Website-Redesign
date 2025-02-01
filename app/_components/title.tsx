@@ -41,14 +41,14 @@ export default function Title({
         const text: string = description;
         const speed: number = 75; // Lower is faster
         const interval: NodeJS.Timeout = setInterval((): void => {
-            setTimeout((): void => {
+            // setTimeout((): void => {
                 if (i < text.length) {
                     setTextToType(text.substring(0, i + 1));
                     i++;
                 } else {
                     clearInterval(interval);
                 }
-            }, 750);
+            // }, 750);
         }, speed);
     }, [description]);
 
