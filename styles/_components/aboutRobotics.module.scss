@@ -1,18 +1,20 @@
-.aboutTeam4079 {
-  width: 100%;
+.aboutRobotics {
+  display: flex;
 
-  .content {
+  .container {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
     width: 100%;
     height: 100%;
     padding: 0 2vw;
+    justify-content: center;
     background-color: black;
     color: white;
     font-size: 1.5rem;
 
+    .aboutRoboticsContent {
 
+    }
   }
 }
