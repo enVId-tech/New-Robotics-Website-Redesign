@@ -10,8 +10,6 @@ interface AboutTeam4079Props {
 }
 
 export default async function AboutTeam4079({children, description}: AboutTeam4079Props): Promise<React.ReactElement> {
-
-
     return (
         <section className={styles.aboutTeam4079}>
             <div className={styles.content}>

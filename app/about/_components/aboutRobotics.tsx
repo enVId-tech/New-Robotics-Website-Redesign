@@ -22,6 +22,12 @@ const Titillium_Web_900: NextFont = Titillium_Web({
     subsets: ['latin'],
 });
 
+const Titillium_Web_700: NextFont = Titillium_Web({
+    weight: "700",
+    style: 'normal',
+    subsets: ['latin'],
+});
+
 type AboutRoboticsProps = {
     children?: React.ReactNode;
     img: StaticImageData[];
@@ -32,20 +38,24 @@ export default async function AboutRobotics({ children, img, description }: Abou
     return (
         <section className={`${styles.aboutRobotics} ${Work_Sans_300.className}`}>
             <div className={styles.container}>
+                <div className={styles.aboutRoboticsImg}>
+                    <img src={img[2].src} alt="Oxford Academy Robotics"/>
+                </div>
                 <div className={styles.aboutRoboticsContent}>
-                    <p>
+                    <h1 className={`${Titillium_Web_900.className}`}>What is OA Robotics?</h1>
+                    <p className={`${Titillium_Web_700.className}`}>
                         {description}
                     </p>
                 </div>
-                {
-                    img.map((img: StaticImageData, index: number): React.ReactElement => {
-                        return (
-                            <div key={index} className={styles.aboutRoboticsImage}>
-                                <img src={img.src} alt="Oxford Academy Robotics"/>
-                            </div>
-                        )
-                    })
-                }
+                {/*{*/}
+                {/*    img.map((img: StaticImageData, index: number): React.ReactElement => {*/}
+                {/*        return (*/}
+                {/*            <div key={index} className={styles.aboutRoboticsImage}>*/}
+                {/*                <img src={img.src} alt="Oxford Academy Robotics"/>*/}
+                {/*            </div>*/}
+                {/*        )*/}
+                {/*    })*/}
+                {/*}*/}
             </div>
             {children}
         </section>
