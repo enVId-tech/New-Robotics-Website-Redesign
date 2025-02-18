@@ -1,11 +1,11 @@
 "use server";
 import React from "react";
-import styles from "@/styles/vex.module.scss";
-import Navbar from "@/app/_components/navbar";
-import Footer from "@/app/_components/footer";
-import Title from "@/app/_components/title";
-import GeneralContact from "@/app/contact/_components/generalContact";
-import Donations from "@/app/contact/_components/donations";
+import styles from "@/app/contact/contact.module.scss";
+import Navbar from "@/app/_components/navbar/navbar";
+import Footer from "@/app/_components/footer/footer";
+import Title from "@/app/_components/title/title";
+import GeneralContact from "@/app/contact/_components/generalContact/generalContact";
+import Donations from "@/app/contact/_components/donations/donations";
 
 export default async function Contact(): Promise<React.ReactElement> {
     return (

@@ -1,13 +1,13 @@
 "use server";
 import React from "react";
-import Navbar from "@/app/_components/navbar";
-import styles from "@/styles/home.module.scss";
-import Footer from "@/app/_components/footer";
-import Title from "@/app/_components/title";
-import AboutBrief from "@/app/_components/aboutbrief";
+import Navbar from "@/app/_components/navbar/navbar";
+import styles from "@/app/home.module.scss";
+import Footer from "@/app/_components/footer/footer";
+import Title from "@/app/_components/title/title";
+import AboutBrief from "@/app/_components/aboutbrief/aboutbrief";
 import MainHead from "@/app/_components/head";
-import Slogan from "@/app/_components/slogan";
-import Sponsors from "@/app/_components/sponsors";
+import Slogan from "@/app/_components/slogan/slogan";
+import Sponsors from "@/app/_components/sponsors/sponsors";
 import {sponsors} from "@/app/_components/logos";
 
 // Images
@@ -17,7 +17,7 @@ import designImg from "@/public/handmade/FrontPageDesign.webp";
 
 export default async function Home(): Promise<React.ReactElement> {
     return (
-        <div id={`${styles.homepage}`}>
+        <div className={`${styles.homepage}`}>
             <MainHead headTitle={"Home"}/>
             <Navbar isFixed={true}/>
             <Title

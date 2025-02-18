@@ -1,5 +1,5 @@
 import React from 'react';
-import '@/styles/globals.scss';
+import '@/app/globals.scss';
 import type {AppProps} from 'next/app';
 
 function RoboticsWebsite({Component, pageProps}: AppProps): React.ReactElement {

@@ -1,5 +1,5 @@
 import React from "react";
-import '@/styles/globals.scss';
+import '@/app/globals.scss';
 import img from "@/public/logos/OARoboticsLogo_24-25.webp";
 
 export const metadata = {

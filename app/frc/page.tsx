@@ -1,11 +1,11 @@
 "use server";
 import React from "react";
-import styles from "@/styles/vex.module.scss";
-import Navbar from "@/app/_components/navbar";
-import Footer from "@/app/_components/footer";
-import Title from "@/app/_components/title";
+import styles from "@/app/frc/frc.module.scss";
+import Navbar from "@/app/_components/navbar/navbar";
+import Footer from "@/app/_components/footer/footer";
+import Title from "@/app/_components/title/title";
 import img1 from "@/public/images/FRCBanner.jpg";
-import AboutTeam4079 from "@/app/frc/_components/aboutTeam4079";
+import AboutTeam4079 from "@/app/frc/_components/aboutTeam4079/aboutTeam4079";
 
 export default async function FRC(): Promise<React.ReactElement> {
     const description: string[] = [
@@ -23,9 +23,7 @@ export default async function FRC(): Promise<React.ReactElement> {
                 description={"FRC Team 4079"}
                 img1={img1}
                 bgMoveUp={70}
-            >
-                2025 Season
-            </Title>
+            />
             <AboutTeam4079
                 description={description}
             />

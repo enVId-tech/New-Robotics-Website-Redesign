@@ -1,11 +1,11 @@
 "use server";
 import React from "react";
-import styles from "@/styles/vex.module.scss";
-import Navbar from "@/app/_components/navbar";
-import Footer from "@/app/_components/footer";
+import styles from "@/app/ftc/ftc.module.scss";
+import Navbar from "@/app/_components/navbar/navbar";
+import Footer from "@/app/_components/footer/footer";
 import img1 from "@/public/images/FTCBanner.jpg";
-import Title from "@/app/_components/title";
-import AboutFTCTeams from "@/app/ftc/_components/aboutFTCTeams";
+import Title from "@/app/_components/title/title";
+import AboutFTCTeams from "@/app/ftc/_components/aboutFTCTeams/aboutFTCTeams";
 
 export default async function FTC(): Promise<React.ReactElement> {
     return (

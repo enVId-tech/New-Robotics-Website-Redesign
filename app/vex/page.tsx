@@ -1,10 +1,10 @@
 "use server";
 import React from "react";
-import styles from "@/styles/vex.module.scss";
-import Navbar from "@/app/_components/navbar";
-import Footer from "@/app/_components/footer";
-import Title from "@/app/_components/title";
-import AboutVEXTeams from "@/app/vex/_components/aboutVEXTeams";
+import styles from "@/app/vex/vex.module.scss";
+import Navbar from "@/app/_components/navbar/navbar";
+import Footer from "@/app/_components/footer/footer";
+import Title from "@/app/_components/title/title";
+import AboutVEXTeams from "@/app/vex/_components/aboutVEXTeams/aboutVEXTeams";
 
 export default async function Vex(): Promise<React.ReactElement> {
     return (
