@@ -1,12 +1,13 @@
+"use server";
 import React from "react";
-import styles from "@/app/sponsors/sponsorguide/sponsorguide.module.scss";
+import styles from "@/app/sponsors/_components/howtheyhelp/howtheyhelp.module.scss";
 import {TW_900} from "@/utils/globalFonts";
 
-type SponsorGuide = {
+type HowTheyHelpUsProps = {
     children?: React.ReactNode;
 }
 
-export default async function SponsorGuide({children}: SponsorGuide): Promise<React.ReactElement> {
+export default async function HowTheyHelpUs({children}: HowTheyHelpUsProps): Promise<React.ReactElement> {
     return (
         <div className={`${styles.sponsorGuide} ${TW_900}`}>
             <h1>How to Sponsor</h1>

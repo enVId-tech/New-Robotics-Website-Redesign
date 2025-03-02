@@ -8,7 +8,7 @@ import AboutBrief from "@/app/_components/aboutbrief/aboutbrief";
 import MainHead from "@/app/_components/head";
 import Slogan from "@/app/_components/slogan/slogan";
 import Sponsors from "@/app/_components/sponsors/sponsors";
-import {sponsors} from "@/app/_components/logos";
+import {sponsors} from "@/utils/sponsors";
 
 // Images
 import frontBannerImg from "@/public/images/FrontPageBanner.png";

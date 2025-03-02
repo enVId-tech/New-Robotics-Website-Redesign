@@ -13,7 +13,7 @@ import MSI from "@/public/logos/sponsors/msi.png";
 import NASA from "@/public/logos/sponsors/nasa.png";
 import Solidworks from "@/public/logos/sponsors/solidworks.png";
 
-type Sponsor = {
+export type Sponsor = {
     img: StaticImageData;
     name: string;
     link: string;

@@ -19,11 +19,13 @@ export default function GeneralContact({
                                        }: GeneralContactProps): React.ReactElement {
     return (
         <div className={styles.generalContact}>
-            <h2>{title}</h2>
-            <p>{description}</p>
-            <p>Email: <a href={`mailto:${email}`}>{email}</a></p>
-            <p>Phone: <a href={`tel:${phone.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", "").replaceAll("-", "")}`}>{phone}</a></p>
-            {children}
+            <div className={styles.container}>
+                <h2>{title}</h2>
+                <p>{description}</p>
+                <p>Email: <a href={`mailto:${email}`}>{email}</a></p>
+                <p>Phone: <a href={`tel:${phone.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", "").replaceAll("-", "")}`}>{phone}</a></p>
+                {children}
+            </div>
         </div>
     );
 }
