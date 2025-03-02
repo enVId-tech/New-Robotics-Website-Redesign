@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "@/app/_components/footer/footer.module.scss";
 import OARoboticsLogo from "@/public/logos/OARoboticsLogo_24-25.webp";
-import {TW_600, TW_900} from "@/utils/globalFonts";
+import {TW_600} from "@/utils/globalFonts";
 
 type FooterProps = {
     children?: React.ReactNode;
