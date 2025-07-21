@@ -43,6 +43,14 @@ export default function Navbar({ children, isFixed = true }: NavbarProps): React
             href: "/about"
         },
         {
+            name: "Team",
+            href: "/team"
+        },
+        {
+            name: "News",
+            href: "/news"
+        },
+        {
             name: "Sponsors",
             href: "/sponsors"
         },
