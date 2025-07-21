@@ -29,6 +29,8 @@ export default function Footer({children}: FooterProps): React.ReactElement {
                         <h1>Quick Links</h1>
                         <a href={"/"}>Home</a>
                         <a href={"/about"}>About</a>
+                        <a href={"/team"}>Team</a>
+                        <a href={"/news"}>News</a>
                         <a href={"/frc"}>FRC</a>
                         <a href={"/ftc"}>FTC</a>
                         <a href={"/vex"}>VEX</a>
