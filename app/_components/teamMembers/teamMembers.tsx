@@ -11,7 +11,7 @@ type TeamMember = {
     bio: string;
     image?: string;
     skills: string[];
-    team: 'FRC' | 'FTC' | 'VEX' | 'All';
+    team: 'FRC' | 'FTC' | 'VEX' | 'Student Leadership' | 'Mentors' | 'Advisor' | 'All';
     socialLinks?: {
         linkedin?: string;
         github?: string;
@@ -29,58 +29,23 @@ type TeamMembersProps = {
 const defaultMembers: TeamMember[] = [
     {
         id: '1',
-        name: 'Sarah Johnson',
-        role: 'Team Captain',
+        name: 'Rishi Mishra',
+        role: 'Programs Director',
         grade: '12th Grade',
         bio: 'Passionate about robotics and leading the team to success. Specializes in mechanical design and team coordination.',
-        skills: ['Leadership', 'Mechanical Design', 'CAD', 'Project Management'],
-        team: 'FRC',
+        skills: ['Leadership', 'Project Management'],
+        team: 'Student Leadership',
         image: '/images/robotics/group.jpeg'
     },
     {
         id: '2',
-        name: 'Alex Chen',
-        role: 'Lead Programmer',
+        name: 'Aaron Truong',
+        role: 'FRC Team Captain',
         grade: '11th Grade',
-        bio: 'Expert in autonomous programming and sensor integration. Always looking for innovative coding solutions.',
-        skills: ['Java', 'Python', 'Autonomous Programming', 'Vision Processing'],
-        team: 'FRC'
-    },
-    {
-        id: '3',
-        name: 'Maria Rodriguez',
-        role: 'Mechanical Lead',
-        grade: '12th Grade',
-        bio: 'Specializes in robot construction and mechanical systems. Loves working with power tools and precision engineering.',
-        skills: ['Mechanical Engineering', 'Manufacturing', 'SolidWorks', 'Fabrication'],
-        team: 'FTC'
-    },
-    {
-        id: '4',
-        name: 'David Kim',
-        role: 'Electronics Specialist',
-        grade: '10th Grade',
-        bio: 'Expert in wiring, sensors, and electrical systems. Ensures all robots are properly connected and functional.',
-        skills: ['Electronics', 'Wiring', 'Sensors', 'Circuit Design'],
-        team: 'VEX'
-    },
-    {
-        id: '5',
-        name: 'Emma Wilson',
-        role: 'Marketing Lead',
-        grade: '11th Grade',
-        bio: 'Handles team branding, social media, and outreach programs. Passionate about STEM advocacy.',
-        skills: ['Marketing', 'Social Media', 'Graphic Design', 'Public Speaking'],
-        team: 'All'
-    },
-    {
-        id: '6',
-        name: 'James Park',
-        role: 'Strategy Analyst',
-        grade: '10th Grade',
-        bio: 'Analyzes competition data and develops winning strategies. Combines analytical thinking with robotics knowledge.',
-        skills: ['Data Analysis', 'Strategy', 'Competition Planning', 'Scouting'],
-        team: 'FRC'
+        bio: 'Passionate about robotics and leading the team to success. Specializes in mechanical design and team coordination.',
+        skills: ['Leadership', 'Mechanical Design', 'CAD', 'Project Management'],
+        team: 'FRC',
+        image: '/images/robotics/group.jpeg'
     }
 ];
 
@@ -93,7 +58,7 @@ export default function TeamMembers({
     const [selectedTeam, setSelectedTeam] = React.useState<string>('All');
     const [filteredMembers, setFilteredMembers] = React.useState<TeamMember[]>(members);
 
-    const teamTypes = ['All', 'FRC', 'FTC', 'VEX'];
+    const teamTypes = ['All', 'Leadership', 'FRC', 'FTC', 'VEX'];
 
     React.useEffect(() => {
         if (selectedTeam === 'All') {
@@ -160,7 +125,7 @@ export default function TeamMembers({
                                 </div>
 
                                 <div className={styles.memberTeam}>
-                                    <span className={`${styles.teamBadge} ${styles[member.team.toLowerCase()]}`}>
+                                    <span className={`${styles.teamBadge} ${styles[member.team.toLowerCase().split(' ').join('_')]}`}>
                                         {member.team}
                                     </span>
                                 </div>

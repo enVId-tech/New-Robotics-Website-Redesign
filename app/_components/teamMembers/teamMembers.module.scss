@@ -208,6 +208,21 @@
                         color: white;
                     }
 
+                    &.student_leadership {
+                        background: linear-gradient(45deg, #696969, #919191);
+                        color: white;
+                    }
+
+                    &.mentors {
+                        background: linear-gradient(45deg, #ff5722, #e91e63);
+                        color: white;
+                    }
+
+                    &.advisor {
+                        background: linear-gradient(45deg, #4caf50, #2e7d32);
+                        color: white;
+                    }
+
                     &.all {
                         background: linear-gradient(45deg, #ff5722, #e91e63);
                         color: white;
