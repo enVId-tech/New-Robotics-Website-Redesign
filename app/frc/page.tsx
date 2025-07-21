@@ -6,6 +6,9 @@ import Footer from "@/app/_components/footer/footer";
 import Title from "@/app/_components/title/title";
 import img1 from "@/public/images/FRCBanner.jpg";
 import AboutTeam4079 from "@/app/frc/_components/aboutTeam4079/aboutTeam4079";
+import TeamMembers from "@/app/_components/teamMembers/teamMembers";
+import Achievements from "@/app/_components/achievements/achievements";
+import MainHead from "@/app/_components/head";
 
 export default async function FRC(): Promise<React.ReactElement> {
     const description: string[] = [
@@ -15,17 +18,55 @@ export default async function FRC(): Promise<React.ReactElement> {
         "In addition to their competitive success, Team 4079 is also committed to giving back to their community. They participate in various outreach programs, including hosting workshops for younger students and volunteering at local events."
     ];
 
+    // Filter achievements for FRC only
+    const frcAchievements = [
+        {
+            id: '1',
+            title: 'Regional Champions',
+            description: 'Team 4079 achieved first place at the Los Angeles Regional Competition',
+            year: '2024',
+            type: 'FRC' as const,
+            award: '1st Place - Regional Champions',
+            image: '/images/comp/FRC_1.jpg'
+        },
+        {
+            id: '6',
+            title: 'Engineering Excellence',
+            description: 'Recognized for outstanding robot design and technical documentation',
+            year: '2024',
+            type: 'FRC' as const,
+            award: 'Engineering Excellence Award'
+        },
+        {
+            id: '7',
+            title: 'Autonomous Award',
+            description: 'Outstanding autonomous programming performance',
+            year: '2023',
+            type: 'FRC' as const,
+            award: 'Autonomous Award'
+        }
+    ];
+
     return (
         <div id={`${styles.frc}`}>
+            <MainHead headTitle={"FRC"} />
             <Navbar/>
             <Title
                 title={"FIRST Robotics Competition"}
-                description={"FRC Team 4079"}
+                description={"FRC Team 4079 - Quantum Leap"}
                 img1={img1}
                 bgMoveUp={70}
             />
             <AboutTeam4079
                 description={description}
+            />
+            <TeamMembers 
+                showFilter={false}
+                title="FRC Team Members"
+            />
+            <Achievements 
+                achievements={frcAchievements}
+                title="FRC Achievements"
             />
             <Footer/>
         </div>

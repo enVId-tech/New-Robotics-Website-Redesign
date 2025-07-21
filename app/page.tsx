@@ -8,6 +8,9 @@ import AboutBrief from "@/app/_components/aboutbrief/aboutbrief";
 import MainHead from "@/app/_components/head";
 import Slogan from "@/app/_components/slogan/slogan";
 import Sponsors from "@/app/_components/sponsors/sponsors";
+import NewsSection from "@/app/_components/newsSection/newsSection";
+import Achievements from "@/app/_components/achievements/achievements";
+import Stats from "@/app/_components/stats/stats";
 import {sponsors} from "@/utils/sponsors";
 
 // Images
@@ -30,10 +33,19 @@ export default async function Home(): Promise<React.ReactElement> {
                 img={collage2Img}
                 description={"Oxford Academy Robotics is a student-run organization that competes in the FIRST Robotics Competition (FRC), FIRST Tech Challenge (FTC), and VEX Robotics Competition. Our mission is to inspire students to pursue careers in STEM fields by providing them with the opportunity to learn, compete, and thrive in a supportive environment."}
             />
+            <Stats title="Our Impact by the Numbers" />
+            <NewsSection 
+                title="Latest News"
+                maxArticles={3}
+                showAll={false}
+            />
             <Slogan
                 img={[frontBannerImg, frontBannerImg, frontBannerImg]}
                 description={"We are Oxford Academy Robotics, a high school robotics team based in Cypress, California. We are dedicated to inspiring students to pursue careers in STEM fields through hands-on experience in robotics."}
                 title={"Our Goals"}
+            />
+            <Achievements 
+                title="Recent Achievements"
             />
             <Sponsors sponsors={sponsors} title={"Our Sponsors"}/>
             <Footer/>
