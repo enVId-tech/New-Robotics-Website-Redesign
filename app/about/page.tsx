@@ -1,5 +1,5 @@
-"use server";
 import React from "react";
+import { Metadata } from "next";
 import styles from "@/app/about/about.module.scss";
 import Navbar from "@/app/_components/navbar/navbar";
 import Footer from "@/app/_components/footer/footer";
@@ -12,6 +12,12 @@ import FRCLogo from "@/public/logos/OARoboticsLogo_24-25.webp";
 import AboutRobotics from "@/app/about/_components/aboutRobotics/aboutRobotics";
 import Timeline from "@/app/about/_components/timeline/timeline";
 import AboutFirst from "@/app/about/_components/aboutFirst/aboutFirst";
+
+export const metadata: Metadata = {
+    title: 'About Us - OA Robotics',
+    description: 'Learn about Oxford Academy Robotics, our history, mission, and commitment to STEM education through FRC, FTC, and VEX competitions.',
+    keywords: 'Oxford Academy Robotics, About Us, STEM Education, Robotics History, FRC FTC VEX, Mission'
+}
 
 export default async function About(): Promise<React.ReactElement> {
     const aboutDescriptor: string = "Started in 2009 by a passionate group of students, Oxford Academy Robotics has expanded from being a small VEX team to having a flagship FRC Team, multiple FTC teams and VEX teams. Our mission is to inspire students to pursue careers in STEM fields by providing them with the opportunity to learn, compete, and thrive in a supportive environment. We are dedicated to inspiring students to pursue careers in STEM fields through hands-on experience in robotics.";
