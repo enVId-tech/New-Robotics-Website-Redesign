@@ -61,7 +61,7 @@ export default async function FRC(): Promise<React.ReactElement> {
             title: 'FRC Team 4079 Advances to World Championship',
             excerpt: 'After winning the Los Angeles Regional, our FRC team has earned a spot at the FIRST Championship in Houston.',
             content: 'Full article content...',
-            author: 'Sarah Johnson',
+            author: 'Erick Tran',
             publishDate: '2024-04-15',
             category: 'Achievement' as const,
             image: '/images/comp/FRC_1.jpg',
@@ -72,7 +72,7 @@ export default async function FRC(): Promise<React.ReactElement> {
             title: '2024 Robot Reveal: Meet "Quantum Surge"',
             excerpt: 'Introducing our 2024 competition robot featuring innovative climbing mechanisms and precision shooting.',
             content: 'Full article content...',
-            author: 'Alex Chen',
+            author: 'Erick Tran',
             publishDate: '2024-02-20',
             category: 'General' as const,
             tags: ['Robot', 'Design', '2024']
@@ -82,7 +82,7 @@ export default async function FRC(): Promise<React.ReactElement> {
             title: 'Rookie Mentor Program Success',
             excerpt: 'Our experienced FRC members successfully mentored 3 new rookie teams this season.',
             content: 'Full article content...',
-            author: 'Maria Rodriguez',
+            author: 'Erick Tran',
             publishDate: '2024-01-30',
             category: 'Event' as const,
             tags: ['Mentoring', 'Outreach', 'Rookie']

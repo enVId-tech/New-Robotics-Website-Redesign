@@ -75,7 +75,7 @@ export default async function FTC(): Promise<React.ReactElement> {
         },
         {
             id: "2",
-            name: "Sarah Johnson", 
+            name: "Erick Tran", 
             role: "Programming Lead - Team 23796",
             image: "/images/team/placeholder.jpg",
             specialties: ["Java Programming", "Autonomous", "Vision Processing"],
@@ -86,7 +86,7 @@ export default async function FTC(): Promise<React.ReactElement> {
         },
         {
             id: "3",
-            name: "Marcus Rodriguez",
+            name: "Erick Tran",
             role: "Mechanical Engineer",
             image: "/images/team/placeholder.jpg", 
             specialties: ["CAD Design", "Manufacturing", "Assembly"],
@@ -97,7 +97,7 @@ export default async function FTC(): Promise<React.ReactElement> {
         },
         {
             id: "4",
-            name: "Emma Thompson",
+            name: "Erick Tran",
             role: "Electrical Systems",
             image: "/images/team/placeholder.jpg",
             specialties: ["Wiring", "Sensors", "Hardware Integration"],
