@@ -9,7 +9,6 @@ import Slogan from "@/app/_components/slogan/slogan";
 import NewsSection from "@/app/_components/newsSection/newsSection";
 import Achievements from "@/app/_components/achievements/achievements";
 import Stats from "@/app/_components/stats/stats";
-import {sponsors} from "@/utils/sponsors";
 
 export const metadata: Metadata = {
     title: 'Home - OA Robotics',

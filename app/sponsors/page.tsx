@@ -5,7 +5,6 @@ import Navbar from "@/app/_components/navbar/navbar";
 import Title from "@/app/_components/title/title";
 import Footer from "@/app/_components/footer/footer";
 import ContactForm from "@/app/_components/contactForm/contactForm";
-import {sponsors} from "@/utils/sponsors";
 
 export const metadata: Metadata = {
     title: 'Our Sponsors - OA Robotics',
