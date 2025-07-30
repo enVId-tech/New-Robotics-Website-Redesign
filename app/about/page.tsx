@@ -130,7 +130,7 @@ export default async function About(): Promise<React.ReactElement> {
                 </div>
             </section>
 
-            {/* Timeline Section */}
+            {/* Timeline Section
             <section className={styles.timelineSection}>
                 <div className={styles.container}>
                     <h2>Our Journey</h2>
@@ -172,7 +172,7 @@ export default async function About(): Promise<React.ReactElement> {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* Impact Section */}
             <section className={styles.impactSection}>

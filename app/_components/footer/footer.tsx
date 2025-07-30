@@ -29,8 +29,8 @@ export default function Footer({children}: FooterProps): React.ReactElement {
                         <h1>Quick Links</h1>
                         <a href={"/"}>Home</a>
                         <a href={"/about"}>About</a>
-                        <a href={"/team"}>Team</a>
-                        <a href={"/news"}>News</a>
+                        {/* <a href={"/team"}>Team</a> */}
+                        {/* <a href={"/news"}>News</a> */}
                         <a href={"/frc"}>FRC</a>
                         <a href={"/ftc"}>FTC</a>
                         <a href={"/vex"}>VEX</a>
@@ -39,9 +39,8 @@ export default function Footer({children}: FooterProps): React.ReactElement {
 
                     <div className={`${styles.footerLinks} ${TW_600}`}>
                         <h1>Our Socials</h1>
-                        <a href={"https://www.instagram.com/oxfordacademyrobotics/"} target="_blank">Instagram</a>
-                        <a href={"https://www.facebook.com/oxfordacademyrobotics"} target="_blank">Facebook</a>
-                        <a href={"https://www.youtube.com/channel/UC1cQVc9tJYX2J8jvV1J9NzQ"} target="_blank">YouTube</a>
+                        <a href={"https://www.instagram.com/oa_robotics/"} target="_blank">Instagram</a>
+                        <a href={"https://www.youtube.com/@Team-QuantumLeap"} target="_blank">YouTube</a>
                     </div>
                 </div>
 

@@ -5,6 +5,7 @@ import Navbar from "@/app/_components/navbar/navbar";
 import Footer from "@/app/_components/footer/footer";
 import Title from "@/app/_components/title/title";
 import ContactForm from "@/app/_components/contactForm/contactForm";
+import img1 from "@/public/images/robotics/contact_bg.jpg";
 
 export const metadata: Metadata = {
     title: 'Contact Us - OA Robotics',
@@ -20,6 +21,8 @@ export default async function Contact(): Promise<React.ReactElement> {
                 title={"Get Connected"} 
                 description={"Join our robotics community or reach out to learn more about our programs"}
                 bgMoveUp={30}
+                img1={img1}
+                bgShift={-50}
             />
             
             {/* Contact Hero Section */}
@@ -199,7 +202,7 @@ export default async function Contact(): Promise<React.ReactElement> {
                                 </a>
                                 <div className={styles.teamDetails}>
                                     <span>📅 Meeting: Daily 3:15-6:00 PM</span>
-                                    <span>👥 Ages: 15-18 years old</span>
+                                    <span>👥 7th - 12th Graders Welcome!</span>
                                 </div>
                             </div>
                         </div>

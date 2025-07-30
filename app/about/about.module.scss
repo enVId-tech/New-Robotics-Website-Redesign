@@ -17,8 +17,9 @@
   // Hero Section
   .heroSection {
     padding: 15vh 0 10vh 0;
-    background: #000000;
+    // Add vignette effect
     position: relative;
+    background-size: cover;
     
     &::before {
       content: '';

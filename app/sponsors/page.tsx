@@ -5,6 +5,7 @@ import Navbar from "@/app/_components/navbar/navbar";
 import Title from "@/app/_components/title/title";
 import Footer from "@/app/_components/footer/footer";
 import ContactForm from "@/app/_components/contactForm/contactForm";
+import img1 from "@/public/images/robotics/sponsors_bg.jpg";
 
 export const metadata: Metadata = {
     title: 'Our Sponsors - OA Robotics',
@@ -19,7 +20,9 @@ export default async function Sponsor(): Promise<React.ReactElement> {
             <Title 
                 title={"Our Amazing Sponsors"} 
                 description={"Partnerships that power innovation"}
+                img1={img1}
                 bgMoveUp={30}
+                bgShift={-50}
             />
             
             {/* Hero Section */}

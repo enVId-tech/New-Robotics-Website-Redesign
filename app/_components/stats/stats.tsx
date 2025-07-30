@@ -21,8 +21,8 @@ const defaultStats: Stat[] = [
     {
         id: '1',
         label: 'Years Active',
-        value: '15+',
-        description: 'Since 2009',
+        value: '12+',
+        description: 'Since 2012',
         icon: '🏆'
     },
     {
@@ -35,30 +35,16 @@ const defaultStats: Stat[] = [
     {
         id: '3',
         label: 'Competitions',
-        value: '50+',
+        value: '30+',
         description: 'Participated in',
         icon: '🤖'
     },
     {
         id: '4',
         label: 'Awards Won',
-        value: '25+',
-        description: 'Regional & State',
+        value: '10+',
+        description: 'Regional, On-season & Off-season',
         icon: '🥇'
-    },
-    {
-        id: '5',
-        label: 'STEM Students',
-        value: '500+',
-        description: 'Outreach program',
-        icon: '🎓'
-    },
-    {
-        id: '6',
-        label: 'Community Hours',
-        value: '1000+',
-        description: 'Annual volunteer',
-        icon: '❤️'
     }
 ];
 

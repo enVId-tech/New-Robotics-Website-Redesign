@@ -296,15 +296,6 @@ export default async function FTC(): Promise<React.ReactElement> {
         >
             <TeamOverviewSection {...teamOverviewData} />
             
-            <Stats 
-                stats={ftcStats}
-                title="FTC Teams by the Numbers" 
-            />
-
-            <RobotGallery 
-                title="Robot Showcase"
-                robots={robots}
-            />
 
             <TeamStructure 
                 title="Team Organization"
@@ -319,18 +310,6 @@ export default async function FTC(): Promise<React.ReactElement> {
             <Achievements 
                 achievements={ftcAchievements}
                 title="FTC Team Achievements"
-            />
-
-            <TeamMembers 
-                showFilter={false}
-                title="Meet Our FTC Teams"
-            />
-
-            <NewsSection 
-                articles={ftcNews}
-                title="Latest FTC Updates"
-                showAll={false}
-                maxArticles={3}
             />
         </TeamPageLayout>
     )

@@ -256,37 +256,10 @@ export default async function FRC(): Promise<React.ReactElement> {
             bgShift={125}
         >
             <TeamOverviewSection {...teamOverviewData} />
-            
-            <Stats 
-                stats={frcStats}
-                title="FRC Team 4079 by the Numbers" 
-            />
-
-            <RobotGallery 
-                title="Our Competition Robots"
-                robots={robots}
-            />
 
             <TeamStructure 
                 title="Team Structure & Subteams"
                 subteams={subteams}
-            />
-
-            <TeamMembers 
-                showFilter={false}
-                title="Meet Our FRC Team"
-            />
-
-            <NewsSection 
-                articles={frcNews}
-                title="Latest FRC Updates"
-                showAll={false}
-                maxArticles={3}
-            />
-
-            <Achievements 
-                achievements={frcAchievements}
-                title="FRC Team 4079 Achievements"
             />
 
             <CompetitionSchedule 
