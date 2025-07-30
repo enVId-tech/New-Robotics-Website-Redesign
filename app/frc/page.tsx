@@ -1,14 +1,15 @@
 import React from "react";
 import { Metadata } from "next";
-import styles from "@/app/frc/frc.module.scss";
-import Navbar from "@/app/_components/navbar/navbar";
-import Footer from "@/app/_components/footer/footer";
-import Title from "@/app/_components/title/title";
-import img1 from "@/public/images/FRCBanner.jpg";
-import TeamMembers from "@/app/_components/teamMembers/teamMembers";
-import Achievements from "@/app/_components/achievements/achievements";
-import NewsSection from "@/app/_components/newsSection/newsSection";
-import Stats from "@/app/_components/stats/stats";
+import img1 from "../../public/images/comp/BB2024.jpg";
+import TeamMembers from "../_components/teamMembers/teamMembers";
+import Achievements from "../_components/achievements/achievements";
+import NewsSection from "../_components/newsSection/newsSection";
+import Stats from "../_components/stats/stats";
+import TeamPageLayout from "../_components/teamPageLayout/teamPageLayout";
+import TeamOverviewSection from "../_components/teamOverviewSection/teamOverviewSection";
+import RobotGallery from "../_components/robotGallery/robotGallery";
+import TeamStructure from "../_components/teamStructure/teamStructure";
+import CompetitionSchedule from "../_components/competitionSchedule/competitionSchedule";
 
 export const metadata: Metadata = {
     title: 'FRC Team 4079 - OA Robotics',
@@ -121,203 +122,161 @@ export default async function FRC(): Promise<React.ReactElement> {
         }
     ];
 
+    // Team overview data
+    const teamOverviewData = {
+        teamName: 'About Team 4079 "Quantum Leap"',
+        teamDescription: [
+            'Team 4079, also known as "Quantum Leap", represents Oxford Academy\'s flagship robotics program in the FIRST Robotics Competition. Founded in 2012, our team has grown from a small group of passionate students into one of Southern California\'s most respected FRC teams.',
+            'We compete annually in the FIRST Robotics Competition, where teams have six weeks to design, build, and program industrial-sized robots weighing up to 125 pounds. Our robots must complete complex tasks in a fast-paced alliance-based competition format.'
+        ],
+        highlights: [
+            {
+                icon: '🎯',
+                title: 'Our Mission',
+                description: 'To inspire students to pursue STEM careers while building innovative robots and fostering gracious professionalism.'
+            },
+            {
+                icon: '⚙️',
+                title: 'What We Do',
+                description: 'Design and build competition robots, mentor younger teams, and engage in community STEM outreach programs.'
+            },
+            {
+                icon: '🏆',
+                title: 'Our Values',
+                description: 'Excellence in engineering, collaborative teamwork, gracious professionalism, and continuous learning.'
+            }
+        ],
+        image: '/images/robotics/robotics_working.jpg',
+        imageCaption: 'Team 4079 members working on our 2024 competition robot'
+    };
+
+    // Robot gallery data
+    const robots = [
+        {
+            name: 'Quantum Surge',
+            year: '2024',
+            description: 'Featured innovative climbing mechanism and precision note shooting for the CRESCENDO game.',
+            image: '/images/comp/FRC_1.jpg',
+            specs: ['Weight: 120 lbs', 'Height: 4\'8"', 'Programming: Java']
+        },
+        {
+            name: 'Charge Forward',
+            year: '2023',
+            description: 'Designed for CHARGED UP with advanced autonomous balancing and cone/cube manipulation.',
+            image: '/images/robotics/competition_working.jpg',
+            specs: ['Weight: 118 lbs', 'Height: 4\'6"', 'Programming: Java']
+        },
+        {
+            name: 'Rapid React',
+            year: '2022',
+            description: 'Built for RAPID REACT with high-speed ball shooting and climbing capabilities.',
+            image: '/images/robotics/marketing_working.jpg',
+            specs: ['Weight: 115 lbs', 'Height: 4\'10"', 'Programming: Java']
+        }
+    ];
+
+    // Team structure data
+    const subteams = [
+        {
+            icon: '⚙️',
+            name: 'Mechanical Team',
+            description: 'Designs and builds the physical robot structure, mechanisms, and moving parts using CAD software and manufacturing tools.',
+            skills: ['SolidWorks', 'Machining', '3D Printing', 'Fabrication']
+        },
+        {
+            icon: '💻',
+            name: 'Programming Team',
+            description: 'Develops robot control software, autonomous routines, and driver assistance systems using Java and advanced algorithms.',
+            skills: ['Java', 'Git/GitHub', 'Sensors', 'Computer Vision']
+        },
+        {
+            icon: '🔌',
+            name: 'Electrical Team',
+            description: 'Handles robot wiring, control systems, sensor integration, and ensures reliable electrical connections.',
+            skills: ['Circuit Design', 'Wiring', 'Sensors', 'Troubleshooting']
+        },
+        {
+            icon: '📊',
+            name: 'Strategy & Scouting',
+            description: 'Analyzes competition data, develops match strategies, and coordinates alliance selections at competitions.',
+            skills: ['Data Analysis', 'Statistics', 'Strategy', 'Scouting Apps']
+        },
+        {
+            icon: '📢',
+            name: 'Media & Outreach',
+            description: 'Manages team branding, documentation, social media, and community engagement initiatives.',
+            skills: ['Photography', 'Social Media', 'Public Speaking', 'Documentation']
+        },
+        {
+            icon: '💰',
+            name: 'Business Team',
+            description: 'Handles team finances, sponsor relations, fundraising, and ensures team sustainability.',
+            skills: ['Fundraising', 'Sponsorship', 'Budgeting', 'Presentations']
+        }
+    ];
+
+    // Competition schedule data
+    const events = [
+        {
+            month: 'JAN',
+            day: '06',
+            title: 'Kickoff & Game Release',
+            description: 'Official game reveal and 6-week build season begins',
+            location: 'Virtual Broadcast'
+        },
+        {
+            month: 'FEB',
+            day: '18',
+            title: 'Stop Build Day',
+            description: 'End of build season, robot must be sealed for competition',
+            location: 'Team Workshop'
+        },
+        {
+            month: 'MAR',
+            day: '15-17',
+            title: 'Los Angeles Regional',
+            description: 'Our primary regional competition',
+            location: 'El Segundo, CA'
+        },
+        {
+            month: 'APR',
+            day: '17-20',
+            title: 'FIRST Championship',
+            description: 'World championship competition (qualification required)',
+            location: 'Houston, TX'
+        }
+    ];
+
     return (
-        <div id={`${styles.frc}`}>
-            <Navbar/>
-            <Title
-                title={"FIRST Robotics Competition"}
-                description={"Team 4079 - Quantum Leap: Engineering Excellence Since 2012"}
-                img1={img1}
-                bgMoveUp={70}
-            />
-
-            {/* Team Overview Section */}
-            <section className={styles.teamOverview}>
-                <div className={styles.container}>
-                    <div className={styles.overviewContent}>
-                        <div className={styles.overviewText}>
-                            <h1>About Team 4079 &ldquo;Quantum Leap&rdquo;</h1>
-                            <p>
-                                Team 4079, also known as &ldquo;Quantum Leap&rdquo;, represents Oxford Academy&apos;s flagship robotics program 
-                                in the FIRST Robotics Competition. Founded in 2012, our team has grown from a small group of 
-                                passionate students into one of Southern California&apos;s most respected FRC teams.
-                            </p>
-                            <p>
-                                We compete annually in the FIRST Robotics Competition, where teams have six weeks to design, 
-                                build, and program industrial-sized robots weighing up to 125 pounds. Our robots must complete 
-                                complex tasks in a fast-paced alliance-based competition format.
-                            </p>
-                            <div className={styles.highlights}>
-                                <div className={styles.highlight}>
-                                    <h3>🎯 Our Mission</h3>
-                                    <p>To inspire students to pursue STEM careers while building innovative robots and fostering gracious professionalism.</p>
-                                </div>
-                                <div className={styles.highlight}>
-                                    <h3>⚙️ What We Do</h3>
-                                    <p>Design and build competition robots, mentor younger teams, and engage in community STEM outreach programs.</p>
-                                </div>
-                                <div className={styles.highlight}>
-                                    <h3>🏆 Our Values</h3>
-                                    <p>Excellence in engineering, collaborative teamwork, gracious professionalism, and continuous learning.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={styles.overviewImage}>
-                            <img src="/images/robotics/robotics_working.jpg" alt="FRC Team 4079 working on robot" />
-                            <div className={styles.imageCaption}>
-                                Team 4079 members working on our 2024 competition robot
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Team Statistics */}
+        <TeamPageLayout 
+            title="FIRST Robotics Competition"
+            description="Team 4079 - Quantum Leap: Engineering Excellence Since 2012"
+            bannerImage={img1}
+            bgMoveUp={40}
+            bgShift={125}
+        >
+            <TeamOverviewSection {...teamOverviewData} />
+            
             <Stats 
                 stats={frcStats}
                 title="FRC Team 4079 by the Numbers" 
             />
 
-            {/* Robot Gallery Section */}
-            <section className={styles.robotGallery}>
-                <div className={styles.container}>
-                    <h1>Our Competition Robots</h1>
-                    <div className={styles.robotGrid}>
-                        <div className={styles.robotCard}>
-                            <div className={styles.robotImage}>
-                                <img src="/images/comp/FRC_1.jpg" alt="2024 Robot - Quantum Surge" />
-                            </div>
-                            <div className={styles.robotInfo}>
-                                <h3>2024 - &ldquo;Quantum Surge&rdquo;</h3>
-                                <p>Featured innovative climbing mechanism and precision note shooting for the CRESCENDO game.</p>
-                                <div className={styles.robotSpecs}>
-                                    <span>Weight: 120 lbs</span>
-                                    <span>Height: 4&apos;8&rdquo;</span>
-                                    <span>Programming: Java</span>
-                                </div>
-                            </div>
-                        </div>
+            <RobotGallery 
+                title="Our Competition Robots"
+                robots={robots}
+            />
 
-                        <div className={styles.robotCard}>
-                            <div className={styles.robotImage}>
-                                <img src="/images/robotics/competition_working.jpg" alt="2023 Robot" />
-                            </div>
-                            <div className={styles.robotInfo}>
-                                <h3>2023 - &ldquo;Charge Forward&rdquo;</h3>
-                                <p>Designed for CHARGED UP with advanced autonomous balancing and cone/cube manipulation.</p>
-                                <div className={styles.robotSpecs}>
-                                    <span>Weight: 118 lbs</span>
-                                    <span>Height: 4&apos;6&rdquo;</span>
-                                    <span>Programming: Java</span>
-                                </div>
-                            </div>
-                        </div>
+            <TeamStructure 
+                title="Team Structure & Subteams"
+                subteams={subteams}
+            />
 
-                        <div className={styles.robotCard}>
-                            <div className={styles.robotImage}>
-                                <img src="/images/robotics/marketing_working.jpg" alt="2022 Robot" />
-                            </div>
-                            <div className={styles.robotInfo}>
-                                <h3>2022 - &ldquo;Rapid React&rdquo;</h3>
-                                <p>Built for RAPID REACT with high-speed ball shooting and climbing capabilities.</p>
-                                <div className={styles.robotSpecs}>
-                                    <span>Weight: 115 lbs</span>
-                                    <span>Height: 4&apos;10&rdquo;</span>
-                                    <span>Programming: Java</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Team Structure Section */}
-            <section className={styles.teamStructure}>
-                <div className={styles.container}>
-                    <h1>Team Structure & Subteams</h1>
-                    <div className={styles.subteamsGrid}>
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>⚙️</div>
-                            <h3>Mechanical Team</h3>
-                            <p>Designs and builds the physical robot structure, mechanisms, and moving parts using CAD software and manufacturing tools.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>SolidWorks</span>
-                                <span>Machining</span>
-                                <span>3D Printing</span>
-                                <span>Fabrication</span>
-                            </div>
-                        </div>
-
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>💻</div>
-                            <h3>Programming Team</h3>
-                            <p>Develops robot control software, autonomous routines, and driver assistance systems using Java and advanced algorithms.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>Java</span>
-                                <span>Git/GitHub</span>
-                                <span>Sensors</span>
-                                <span>Computer Vision</span>
-                            </div>
-                        </div>
-
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>🔌</div>
-                            <h3>Electrical Team</h3>
-                            <p>Handles robot wiring, control systems, sensor integration, and ensures reliable electrical connections.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>Circuit Design</span>
-                                <span>Wiring</span>
-                                <span>Sensors</span>
-                                <span>Troubleshooting</span>
-                            </div>
-                        </div>
-
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>📊</div>
-                            <h3>Strategy & Scouting</h3>
-                            <p>Analyzes competition data, develops match strategies, and coordinates alliance selections at competitions.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>Data Analysis</span>
-                                <span>Statistics</span>
-                                <span>Strategy</span>
-                                <span>Scouting Apps</span>
-                            </div>
-                        </div>
-
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>📢</div>
-                            <h3>Media & Outreach</h3>
-                            <p>Manages team branding, documentation, social media, and community engagement initiatives.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>Photography</span>
-                                <span>Social Media</span>
-                                <span>Public Speaking</span>
-                                <span>Documentation</span>
-                            </div>
-                        </div>
-
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>💰</div>
-                            <h3>Business Team</h3>
-                            <p>Handles team finances, sponsor relations, fundraising, and ensures team sustainability.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>Fundraising</span>
-                                <span>Sponsorship</span>
-                                <span>Budgeting</span>
-                                <span>Presentations</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Team Members */}
             <TeamMembers 
                 showFilter={false}
                 title="Meet Our FRC Team"
             />
 
-            {/* News Section */}
             <NewsSection 
                 articles={frcNews}
                 title="Latest FRC Updates"
@@ -325,69 +284,15 @@ export default async function FRC(): Promise<React.ReactElement> {
                 maxArticles={3}
             />
 
-            {/* Achievements */}
             <Achievements 
                 achievements={frcAchievements}
                 title="FRC Team 4079 Achievements"
             />
 
-            {/* Competition Schedule */}
-            <section className={styles.competitionSchedule}>
-                <div className={styles.container}>
-                    <h1>2024-2025 Competition Schedule</h1>
-                    <div className={styles.scheduleGrid}>
-                        <div className={styles.eventCard}>
-                            <div className={styles.eventDate}>
-                                <div className={styles.month}>JAN</div>
-                                <div className={styles.day}>06</div>
-                            </div>
-                            <div className={styles.eventInfo}>
-                                <h3>Kickoff & Game Release</h3>
-                                <p>Official game reveal and 6-week build season begins</p>
-                                <div className={styles.eventLocation}>Virtual Broadcast</div>
-                            </div>
-                        </div>
-
-                        <div className={styles.eventCard}>
-                            <div className={styles.eventDate}>
-                                <div className={styles.month}>FEB</div>
-                                <div className={styles.day}>18</div>
-                            </div>
-                            <div className={styles.eventInfo}>
-                                <h3>Stop Build Day</h3>
-                                <p>End of build season, robot must be sealed for competition</p>
-                                <div className={styles.eventLocation}>Team Workshop</div>
-                            </div>
-                        </div>
-
-                        <div className={styles.eventCard}>
-                            <div className={styles.eventDate}>
-                                <div className={styles.month}>MAR</div>
-                                <div className={styles.day}>15-17</div>
-                            </div>
-                            <div className={styles.eventInfo}>
-                                <h3>Los Angeles Regional</h3>
-                                <p>Our primary regional competition</p>
-                                <div className={styles.eventLocation}>El Segundo, CA</div>
-                            </div>
-                        </div>
-
-                        <div className={styles.eventCard}>
-                            <div className={styles.eventDate}>
-                                <div className={styles.month}>APR</div>
-                                <div className={styles.day}>17-20</div>
-                            </div>
-                            <div className={styles.eventInfo}>
-                                <h3>FIRST Championship</h3>
-                                <p>World championship competition (qualification required)</p>
-                                <div className={styles.eventLocation}>Houston, TX</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <Footer/>
-        </div>
+            <CompetitionSchedule 
+                title="2024-2025 Competition Schedule"
+                events={events}
+            />
+        </TeamPageLayout>
     )
 }

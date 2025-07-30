@@ -186,7 +186,7 @@ export default async function Contact(): Promise<React.ReactElement> {
                         
                         <div className={styles.teamCard}>
                             <div className={styles.teamHeader}>
-                                <img src="/public/logos/VEXLogo.jpg" alt="VEX Logo" className={styles.teamLogo} />
+                                <img src="/public/logos/VEXLogo.png" alt="VEX Logo" className={styles.teamLogo} />
                                 <div>
                                     <h3>VEX Teams 1108A & 1108B</h3>
                                     <p>Competitive Robotics</p>

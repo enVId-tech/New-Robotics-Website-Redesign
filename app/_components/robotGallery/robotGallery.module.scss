@@ -1,0 +1,120 @@
+.robotGallery {
+  padding: 8vh 0;
+  background: #0a0a0a;
+  color: white;
+
+  .container {
+    max-width: 1400px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 2vw;
+  }
+
+  h1 {
+    font-size: 4rem;
+    color: red;
+    text-align: center;
+    margin-bottom: 5rem;
+    font-weight: 900;
+  }
+
+  .robotGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+
+    .robotCard {
+      background: #111111;
+      border: 2px solid #333;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+      &:hover {
+        transform: translateY(-10px);
+        border-color: red;
+        box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
+        background: #1a1a1a;
+      }
+
+      .robotImage {
+        height: 250px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover img {
+          transform: scale(1.05);
+        }
+      }
+
+      .robotInfo {
+        padding: 2rem;
+
+        h3 {
+          font-size: 1.5rem;
+          color: red;
+          margin-bottom: 1rem;
+          font-weight: 700;
+        }
+
+        p {
+          font-size: 1rem;
+          color: #ccc;
+          line-height: 1.6;
+          margin-bottom: 1.5rem;
+        }
+
+        .robotSpecs {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+
+          span {
+            background: #222;
+            color: #999;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+
+            &:hover {
+              border-color: red;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .robotGallery {
+    .container {
+      width: 95%;
+      padding: 0 1vw;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .robotGrid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+
+      .robotCard .robotInfo {
+        padding: 1.5rem;
+      }
+    }
+  }
+}

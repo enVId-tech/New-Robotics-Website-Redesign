@@ -113,7 +113,7 @@ export default async function About(): Promise<React.ReactElement> {
                         </div>
                         <div className={styles.programCard}>
                             <div className={styles.programHeader}>
-                                <img src="/logos/VEXLogo.jpg" alt="VEX Logo" className={styles.programLogo} />
+                                <img src="/logos/VEXLogo.png" alt="VEX Logo" className={styles.programLogo} />
                                 <h3>VEX Robotics Competition</h3>
                             </div>
                             <p>

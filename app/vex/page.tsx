@@ -1,13 +1,15 @@
 import React from "react";
 import { Metadata } from "next";
-import styles from "@/app/vex/vex.module.scss";
-import Navbar from "@/app/_components/navbar/navbar";
-import Footer from "@/app/_components/footer/footer";
-import Title from "@/app/_components/title/title";
-import TeamMembers from "@/app/_components/teamMembers/teamMembers";
-import Achievements from "@/app/_components/achievements/achievements";
-import Stats from "@/app/_components/stats/stats";
-import NewsSection from "@/app/_components/newsSection/newsSection";
+import img1 from "../../public/images/robotics/vexbg_main.jpg";
+import TeamMembers from "../_components/teamMembers/teamMembers";
+import Achievements from "../_components/achievements/achievements";
+import NewsSection from "../_components/newsSection/newsSection";
+import Stats from "../_components/stats/stats";
+import TeamPageLayout from "../_components/teamPageLayout/teamPageLayout";
+import TeamOverviewSection from "../_components/teamOverviewSection/teamOverviewSection";
+import RobotGallery from "../_components/robotGallery/robotGallery";
+import TeamStructure from "../_components/teamStructure/teamStructure";
+import CompetitionSchedule from "../_components/competitionSchedule/competitionSchedule";
 
 export const metadata: Metadata = {
     title: 'VEX Teams 1108A & 1108B - OA Robotics',
@@ -140,290 +142,196 @@ export default async function Vex(): Promise<React.ReactElement> {
         }
     ];
 
+    // Team overview data
+    const teamOverviewData = {
+        teamName: 'Oxford Academy VEX Teams',
+        teamDescription: [
+            'Our VEX Robotics Competition teams, 1108A and 1108B, represent the cutting edge of high school robotics engineering. These teams design and build robots using the VEX platform to compete in challenging game scenarios that test autonomous programming, precise control, and strategic thinking.',
+            'VEX teams work with metal construction systems and advanced programming environments to create sophisticated robots capable of complex tasks. Our teams have consistently excelled in both robot skills challenges and alliance-based tournament competitions.'
+        ],
+        highlights: [
+            {
+                icon: '🎯',
+                title: 'Skills Excellence',
+                description: 'State champions in programming and driver skills competitions'
+            },
+            {
+                icon: '🏗️',
+                title: 'Advanced Engineering',
+                description: 'Innovative mechanical designs pushing the limits of VEX components'
+            },
+            {
+                icon: '💻',
+                title: 'Programming Mastery',
+                description: 'Complex autonomous routines using C++ and advanced PID control'
+            },
+            {
+                icon: '🌟',
+                title: 'Competition Success',
+                description: 'Multiple tournament wins and World Championship qualifications'
+            }
+        ],
+        image: '/images/robotics/group.jpeg',
+        imageCaption: 'VEX teams collaborating on robot design'
+    };
+
+    // Robot gallery data
+    const robots = [
+        {
+            name: 'Over Under Robot',
+            year: '2023-24',
+            description: 'Advanced catapult system with precise trajectory control for triball scoring. Features innovative intake mechanism and reliable elevation system.',
+            image: '/images/comp/FRC_1.jpg',
+            specs: ['Catapult Launch', 'Triball Intake', 'Elevation System', 'Autonomous Scoring']
+        },
+        {
+            name: 'Spin Up Robot',
+            year: '2022-23',
+            description: 'Dual flywheel system optimized for disc launching with variable velocity control. Championship-winning design with exceptional accuracy and speed.',
+            image: '/images/robotics/robotics_working.jpg',
+            specs: ['Dual Flywheel', 'Disc Launcher', 'Roller Spinner', 'Expansion Wings']
+        },
+        {
+            name: 'Tipping Point Robot',
+            year: '2021-22',
+            description: 'Mobile goal specialist with four-bar lift system and ring scoring capabilities. First design to achieve consistent autonomous goal navigation.',
+            image: '/images/robotics/marketing_working.jpg',
+            specs: ['Mobile Goal Lift', 'Ring Scoring', 'Four-Bar System', 'Platform Balance']
+        }
+    ];
+
+    // Team structure data
+    const subteams = [
+        {
+            icon: '🔧',
+            name: 'Mechanical Design',
+            description: 'Engineer and fabricate robot mechanisms using VEX metal components, focusing on durability, precision, and competitive performance.',
+            skills: ['Autodesk Inventor', 'Metal Fabrication', 'Mechanism Design', 'Assembly']
+        },
+        {
+            icon: '💻',
+            name: 'Programming',
+            description: 'Develop autonomous routines and teleop control systems using C++ and VEXcode Pro for optimal robot performance.',
+            skills: ['C++', 'VEXcode Pro', 'PID Control', 'Autonomous Programming']
+        },
+        {
+            icon: '📊',
+            name: 'Skills Challenge',
+            description: 'Specialize in programming and driver skills competitions, optimizing robot performance for maximum scoring potential.',
+            skills: ['Skills Programming', 'Driver Training', 'Score Optimization', 'Route Planning']
+        },
+        {
+            icon: '⚙️',
+            name: 'Build Quality',
+            description: 'Ensure structural integrity, reliability, and maintenance of robot systems throughout the competitive season.',
+            skills: ['Quality Control', 'System Testing', 'Maintenance', 'Troubleshooting']
+        },
+        {
+            icon: '🎯',
+            name: 'Strategy & Scouting',
+            description: 'Analyze game mechanics, develop competitive strategies, and coordinate alliance selections for tournament success.',
+            skills: ['Game Analysis', 'Match Strategy', 'Alliance Selection', 'Data Analysis']
+        },
+        {
+            icon: '📝',
+            name: 'Documentation',
+            description: 'Maintain engineering notebooks, document design processes, and prepare award submissions for competitions.',
+            skills: ['Engineering Notebook', 'Design Documentation', 'Award Preparation', 'Process Recording']
+        }
+    ];
+
+    // Competition schedule data
+    const events = [
+        {
+            month: 'NOV',
+            day: '18',
+            title: 'Season Opener Tournament',
+            description: 'First tournament of the Over Under season featuring preliminary alliance competitions.',
+            location: 'Local High School, Orange County CA'
+        },
+        {
+            month: 'DEC',
+            day: '16',
+            title: 'Holiday Tournament',
+            description: 'Mid-season tournament with refined robots and advanced autonomous programming.',
+            location: 'Oxford Academy, Cypress CA'
+        },
+        {
+            month: 'JAN',
+            day: '20',
+            title: 'Skills Challenge Championship',
+            description: 'Regional skills competition featuring programming and driver skills challenges.',
+            location: 'Skills Venue, Southern California'
+        },
+        {
+            month: 'FEB',
+            day: '17',
+            title: 'Regional Championship',
+            description: 'High-stakes regional competition with top teams vying for state advancement.',
+            location: 'Regional Center, Orange County CA'
+        },
+        {
+            month: 'MAR',
+            day: '23',
+            title: 'State Championship',
+            description: 'California State VEX Championship with qualification opportunities for Worlds.',
+            location: 'State Venue, California'
+        },
+        {
+            month: 'MAY',
+            day: '8',
+            title: 'VEX World Championship',
+            description: 'Ultimate global competition featuring the world\'s best VEX teams.',
+            location: 'Dallas, Texas'
+        }
+    ];
+
     return (
-        <div className={styles.vex}>
-            <Navbar />
-            <Title
-                title={"VEX Robotics Competition"}
-                description={"VEX Teams 1108A & 1108B"}
-                bgMoveUp={5}
-            />
+        <TeamPageLayout 
+            title="VEX Robotics Competition"
+            description="VEX Teams 1108A & 1108B"
+            bannerImage={img1}
+            bgMoveUp={5}
+            bgShift={150}
+        >
+            <TeamOverviewSection {...teamOverviewData} />
             
-            {/* Team Overview Section */}
-            <section className={styles.teamOverview}>
-                <div className={styles.container}>
-                    <div className={styles.overviewContent}>
-                        <div className={styles.overviewText}>
-                            <h1>Oxford Academy VEX Teams</h1>
-                            <p>
-                                Our VEX Robotics Competition teams, 1108A and 1108B, represent the cutting edge of high school 
-                                robotics engineering. These teams design and build robots using the VEX platform to compete 
-                                in challenging game scenarios that test autonomous programming, precise control, and strategic thinking.
-                            </p>
-                            <p>
-                                VEX teams work with metal construction systems and advanced programming environments to create 
-                                sophisticated robots capable of complex tasks. Our teams have consistently excelled in both 
-                                robot skills challenges and alliance-based tournament competitions.
-                            </p>
-                            
-                            <div className={styles.highlights}>
-                                <div className={styles.highlight}>
-                                    <h3>🎯 Skills Excellence</h3>
-                                    <p>State champions in programming and driver skills competitions</p>
-                                </div>
-                                <div className={styles.highlight}>
-                                    <h3>🏗️ Advanced Engineering</h3>
-                                    <p>Innovative mechanical designs pushing the limits of VEX components</p>
-                                </div>
-                                <div className={styles.highlight}>
-                                    <h3>💻 Programming Mastery</h3>
-                                    <p>Complex autonomous routines using C++ and advanced PID control</p>
-                                </div>
-                                <div className={styles.highlight}>
-                                    <h3>🌟 Competition Success</h3>
-                                    <p>Multiple tournament wins and World Championship qualifications</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.overviewImage}>
-                            <img src="/images/robotics/group.jpeg" alt="VEX Team Working" />
-                            <p className={styles.imageCaption}>VEX teams collaborating on robot design</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <Stats 
+                stats={vexStats}
+                title="VEX Teams by the Numbers" 
+            />
 
-            {/* Robot Gallery Section */}
-            <section className={styles.robotGallery}>
-                <div className={styles.container}>
-                    <h1>Robot Evolution</h1>
-                    <div className={styles.robotGrid}>
-                        <div className={styles.robotCard}>
-                            <div className={styles.robotImage}>
-                                <img src="/images/comp/FRC_1.jpg" alt="2023-24 Over Under Robot" />
-                            </div>
-                            <div className={styles.robotInfo}>
-                                <h3>Over Under Robot (2023-24)</h3>
-                                <p>
-                                    Advanced catapult system with precise trajectory control for triball scoring. 
-                                    Features innovative intake mechanism and reliable elevation system.
-                                </p>
-                                <div className={styles.robotSpecs}>
-                                    <span>Catapult Launch</span>
-                                    <span>Triball Intake</span>
-                                    <span>Elevation System</span>
-                                    <span>Autonomous Scoring</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.robotCard}>
-                            <div className={styles.robotImage}>
-                                <img src="/images/robotics/robotics_working.jpg" alt="2022-23 Spin Up Robot" />
-                            </div>
-                            <div className={styles.robotInfo}>
-                                <h3>Spin Up Robot (2022-23)</h3>
-                                <p>
-                                    Dual flywheel system optimized for disc launching with variable velocity control. 
-                                    Championship-winning design with exceptional accuracy and speed.
-                                </p>
-                                <div className={styles.robotSpecs}>
-                                    <span>Dual Flywheel</span>
-                                    <span>Disc Launcher</span>
-                                    <span>Roller Spinner</span>
-                                    <span>Expansion Wings</span>
-                                </div>
-                            </div>
-                        </div>
+            <RobotGallery 
+                title="Robot Evolution"
+                robots={robots}
+            />
 
-                        <div className={styles.robotCard}>
-                            <div className={styles.robotImage}>
-                                <img src="/images/robotics/marketing_working.jpg" alt="2021-22 Tipping Point Robot" />
-                            </div>
-                            <div className={styles.robotInfo}>
-                                <h3>Tipping Point Robot (2021-22)</h3>
-                                <p>
-                                    Mobile goal specialist with four-bar lift system and ring scoring capabilities. 
-                                    First design to achieve consistent autonomous goal navigation.
-                                </p>
-                                <div className={styles.robotSpecs}>
-                                    <span>Mobile Goal Lift</span>
-                                    <span>Ring Scoring</span>
-                                    <span>Four-Bar System</span>
-                                    <span>Platform Balance</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <TeamStructure 
+                title="Team Specializations"
+                subteams={subteams}
+            />
 
-            {/* Team Structure Section */}
-            <section className={styles.teamStructure}>
-                <div className={styles.container}>
-                    <h1>Team Specializations</h1>
-                    <div className={styles.subteamsGrid}>
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>🔧</div>
-                            <h3>Mechanical Design</h3>
-                            <p>Engineer and fabricate robot mechanisms using VEX metal components, focusing on durability, precision, and competitive performance.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>Autodesk Inventor</span>
-                                <span>Metal Fabrication</span>
-                                <span>Mechanism Design</span>
-                                <span>Assembly</span>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>💻</div>
-                            <h3>Programming</h3>
-                            <p>Develop autonomous routines and teleop control systems using C++ and VEXcode Pro for optimal robot performance.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>C++</span>
-                                <span>VEXcode Pro</span>
-                                <span>PID Control</span>
-                                <span>Autonomous Programming</span>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>📊</div>
-                            <h3>Skills Challenge</h3>
-                            <p>Specialize in programming and driver skills competitions, optimizing robot performance for maximum scoring potential.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>Skills Programming</span>
-                                <span>Driver Training</span>
-                                <span>Score Optimization</span>
-                                <span>Route Planning</span>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>⚙️</div>
-                            <h3>Build Quality</h3>
-                            <p>Ensure structural integrity, reliability, and maintenance of robot systems throughout the competitive season.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>Quality Control</span>
-                                <span>System Testing</span>
-                                <span>Maintenance</span>
-                                <span>Troubleshooting</span>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>🎯</div>
-                            <h3>Strategy & Scouting</h3>
-                            <p>Analyze game mechanics, develop competitive strategies, and coordinate alliance selections for tournament success.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>Game Analysis</span>
-                                <span>Match Strategy</span>
-                                <span>Alliance Selection</span>
-                                <span>Data Analysis</span>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.subteam}>
-                            <div className={styles.subteamIcon}>📝</div>
-                            <h3>Documentation</h3>
-                            <p>Maintain engineering notebooks, document design processes, and prepare award submissions for competitions.</p>
-                            <div className={styles.subteamSkills}>
-                                <span>Engineering Notebook</span>
-                                <span>Design Documentation</span>
-                                <span>Award Preparation</span>
-                                <span>Process Recording</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <CompetitionSchedule 
+                title="2024 Competition Season"
+                events={events}
+            />
 
-            {/* Competition Schedule Section */}
-            <section className={styles.competitionSchedule}>
-                <div className={styles.container}>
-                    <h1>2024 Competition Season</h1>
-                    <div className={styles.scheduleGrid}>
-                        <div className={styles.eventCard}>
-                            <div className={styles.eventDate}>
-                                <div className={styles.month}>Nov</div>
-                                <div className={styles.day}>18</div>
-                            </div>
-                            <div className={styles.eventInfo}>
-                                <h3>Season Opener Tournament</h3>
-                                <p>First tournament of the Over Under season featuring preliminary alliance competitions.</p>
-                                <div className={styles.eventLocation}>📍 Local High School, Orange County CA</div>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.eventCard}>
-                            <div className={styles.eventDate}>
-                                <div className={styles.month}>Dec</div>
-                                <div className={styles.day}>16</div>
-                            </div>
-                            <div className={styles.eventInfo}>
-                                <h3>Holiday Tournament</h3>
-                                <p>Mid-season tournament with refined robots and advanced autonomous programming.</p>
-                                <div className={styles.eventLocation}>📍 Oxford Academy, Cypress CA</div>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.eventCard}>
-                            <div className={styles.eventDate}>
-                                <div className={styles.month}>Jan</div>
-                                <div className={styles.day}>20</div>
-                            </div>
-                            <div className={styles.eventInfo}>
-                                <h3>Skills Challenge Championship</h3>
-                                <p>Regional skills competition featuring programming and driver skills challenges.</p>
-                                <div className={styles.eventLocation}>📍 Skills Venue, Southern California</div>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.eventCard}>
-                            <div className={styles.eventDate}>
-                                <div className={styles.month}>Feb</div>
-                                <div className={styles.day}>17</div>
-                            </div>
-                            <div className={styles.eventInfo}>
-                                <h3>Regional Championship</h3>
-                                <p>High-stakes regional competition with top teams vying for state advancement.</p>
-                                <div className={styles.eventLocation}>📍 Regional Center, Orange County CA</div>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.eventCard}>
-                            <div className={styles.eventDate}>
-                                <div className={styles.month}>Mar</div>
-                                <div className={styles.day}>23</div>
-                            </div>
-                            <div className={styles.eventInfo}>
-                                <h3>State Championship</h3>
-                                <p>California State VEX Championship with qualification opportunities for Worlds.</p>
-                                <div className={styles.eventLocation}>📍 State Venue, California</div>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.eventCard}>
-                            <div className={styles.eventDate}>
-                                <div className={styles.month}>May</div>
-                                <div className={styles.day}>8</div>
-                            </div>
-                            <div className={styles.eventInfo}>
-                                <h3>VEX World Championship</h3>
-                                <p>Ultimate global competition featuring the world&apos;s best VEX teams.</p>
-                                <div className={styles.eventLocation}>📍 Dallas, Texas</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <Achievements 
+                achievements={vexAchievements}
+                title="VEX Team Achievements"
+            />
 
-            <Stats stats={vexStats} />
-            <Achievements achievements={vexAchievements} />
-            <TeamMembers members={vexTeamMembers} />
-            <NewsSection articles={vexNews} />
-            <Footer />
-        </div>
+            <TeamMembers 
+                showFilter={false}
+                title="Meet Our VEX Teams"
+            />
+
+            <NewsSection 
+                articles={vexNews}
+                title="Latest VEX Updates"
+                showAll={false}
+                maxArticles={3}
+            />
+        </TeamPageLayout>
     )
-};
+}

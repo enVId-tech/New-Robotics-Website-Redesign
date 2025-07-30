@@ -12,6 +12,7 @@ type TitleProps = {
     img1?: StaticImageData;
     img2?: StaticImageData;
     bgMoveUp?: number;
+    bgShift?: number;
 }
 
 export default function Title({
@@ -20,7 +21,8 @@ export default function Title({
                                   description,
                                   img1 = bannerImg,
                                   img2,
-                                  bgMoveUp = 5
+                                  bgMoveUp = 5,
+                                  bgShift = 0
                               }: TitleProps): React.ReactElement {
     const [textToType, setTextToType] = React.useState<string>("");
     const [bgParallax, setBgParallax] = React.useState<number>(0);
@@ -28,7 +30,7 @@ export default function Title({
 
     // Make a parallax effect with the background image (zoom in the background image to make it possible)
     const styleBanner: object = {
-        backgroundPosition: `center ${bgParallax * -0.3}px`,
+        backgroundPosition: `center ${bgParallax * -0.5 - bgShift}px`,
         backgroundSize: "cover",
         backgroundImage: `url(${img1.src})`,
         backgroundAttachment: "fixed",

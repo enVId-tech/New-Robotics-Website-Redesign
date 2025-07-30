@@ -1,0 +1,131 @@
+.teamOverview {
+  padding: 8vh 0;
+  background: #000000;
+  color: white;
+
+  .container {
+    max-width: 1400px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 2vw;
+  }
+
+  .overviewContent {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+
+    .overviewText {
+      h1 {
+        font-size: 3.5rem;
+        color: red;
+        margin-bottom: 2rem;
+        font-weight: 900;
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: #ccc;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+      }
+
+      .highlights {
+        display: grid;
+        gap: 2rem;
+        margin-top: 3rem;
+
+        .highlight {
+          background: #111111;
+          border: 2px solid #333;
+          border-radius: 15px;
+          padding: 2rem;
+          transition: all 0.3s ease;
+
+          &:hover {
+            border-color: red;
+            background: #1a1a1a;
+            transform: translateY(-2px);
+          }
+
+          h3 {
+            font-size: 1.4rem;
+            color: red;
+            margin-bottom: 1rem;
+            font-weight: 700;
+          }
+
+          p {
+            font-size: 1rem;
+            color: #bbb;
+            margin: 0;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+
+    .overviewImage {
+      position: relative;
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.02);
+        }
+      }
+
+      .imageCaption {
+        background: #111111;
+        border: 2px solid #333;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #999;
+        text-align: center;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 1200px) {
+  .teamOverview .overviewContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+
+    .overviewText h1 {
+      font-size: 2.8rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .teamOverview {
+    .container {
+      width: 95%;
+      padding: 0 1vw;
+    }
+
+    .overviewContent .overviewText {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .highlights {
+        gap: 1.5rem;
+
+        .highlight {
+          padding: 1.5rem;
+        }
+      }
+    }
+  }
+}
