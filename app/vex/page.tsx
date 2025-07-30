@@ -1,10 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import img1 from "../../public/images/robotics/vexbg_main.jpg";
-import TeamMembers from "../_components/teamMembers/teamMembers";
-import Achievements from "../_components/achievements/achievements";
-import NewsSection from "../_components/newsSection/newsSection";
-import Stats from "../_components/stats/stats";
+import img1 from "../../public/images/PlaceholderBanner.jpg";
 import TeamPageLayout from "../_components/teamPageLayout/teamPageLayout";
 import TeamOverviewSection from "../_components/teamOverviewSection/teamOverviewSection";
 import RobotGallery from "../_components/robotGallery/robotGallery";
@@ -292,15 +288,9 @@ export default async function Vex(): Promise<React.ReactElement> {
             description="VEX Teams 1108A & 1108B"
             bannerImage={img1}
             bgMoveUp={5}
-            bgShift={150}
         >
             <TeamOverviewSection {...teamOverviewData} />
             
-            <Stats 
-                stats={vexStats}
-                title="VEX Teams by the Numbers" 
-            />
-
             <RobotGallery 
                 title="Robot Evolution"
                 robots={robots}
@@ -314,23 +304,6 @@ export default async function Vex(): Promise<React.ReactElement> {
             <CompetitionSchedule 
                 title="2024 Competition Season"
                 events={events}
-            />
-
-            <Achievements 
-                achievements={vexAchievements}
-                title="VEX Team Achievements"
-            />
-
-            <TeamMembers 
-                showFilter={false}
-                title="Meet Our VEX Teams"
-            />
-
-            <NewsSection 
-                articles={vexNews}
-                title="Latest VEX Updates"
-                showAll={false}
-                maxArticles={3}
             />
         </TeamPageLayout>
     )

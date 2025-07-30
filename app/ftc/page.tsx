@@ -1,10 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import img1 from "../../public/images/robotics/ftcbg_main.jpg";
-import TeamMembers from "../_components/teamMembers/teamMembers";
-import Achievements from "../_components/achievements/achievements";
-import NewsSection from "../_components/newsSection/newsSection";
-import Stats from "../_components/stats/stats";
+import img1 from "../../public/images/FTCBanner.jpg";
 import TeamPageLayout from "../_components/teamPageLayout/teamPageLayout";
 import TeamOverviewSection from "../_components/teamOverviewSection/teamOverviewSection";
 import RobotGallery from "../_components/robotGallery/robotGallery";
@@ -296,6 +292,10 @@ export default async function FTC(): Promise<React.ReactElement> {
         >
             <TeamOverviewSection {...teamOverviewData} />
             
+            <RobotGallery 
+                title="Robot Showcase"
+                robots={robots}
+            />
 
             <TeamStructure 
                 title="Team Organization"
@@ -305,11 +305,6 @@ export default async function FTC(): Promise<React.ReactElement> {
             <CompetitionSchedule 
                 title="2024 Season Schedule"
                 events={events}
-            />
-
-            <Achievements 
-                achievements={ftcAchievements}
-                title="FTC Team Achievements"
             />
         </TeamPageLayout>
     )

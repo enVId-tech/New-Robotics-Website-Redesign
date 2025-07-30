@@ -1,10 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import img1 from "../../public/images/comp/BB2024.jpg";
-import TeamMembers from "../_components/teamMembers/teamMembers";
-import Achievements from "../_components/achievements/achievements";
-import NewsSection from "../_components/newsSection/newsSection";
-import Stats from "../_components/stats/stats";
+import img1 from "../../public/images/FRCBanner.jpg";
 import TeamPageLayout from "../_components/teamPageLayout/teamPageLayout";
 import TeamOverviewSection from "../_components/teamOverviewSection/teamOverviewSection";
 import RobotGallery from "../_components/robotGallery/robotGallery";
@@ -252,10 +248,14 @@ export default async function FRC(): Promise<React.ReactElement> {
             title="FIRST Robotics Competition"
             description="Team 4079 - Quantum Leap: Engineering Excellence Since 2012"
             bannerImage={img1}
-            bgMoveUp={40}
-            bgShift={125}
+            bgMoveUp={70}
         >
             <TeamOverviewSection {...teamOverviewData} />
+            
+            <RobotGallery 
+                title="Our Competition Robots"
+                robots={robots}
+            />
 
             <TeamStructure 
                 title="Team Structure & Subteams"
