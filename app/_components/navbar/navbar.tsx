@@ -5,6 +5,7 @@ import image1 from "@/public/logos/OARoboticsLogo_24-25.webp";
 import Link from "next/link";
 import Image from "next/image";
 import {M_300, M_500} from "@/utils/globalFonts";
+import { useContent } from "@/hooks/useContent";
 
 type NavbarProps = {
     children?: React.ReactNode;
@@ -17,6 +18,8 @@ type DynamicLink = {
 }
 
 export default function Navbar({ children, isFixed = true }: NavbarProps): React.ReactElement {
+    const { content } = useContent();
+    
     const styleFixed: object = {
         position: "fixed",
         top: 0,
@@ -33,7 +36,9 @@ export default function Navbar({ children, isFixed = true }: NavbarProps): React
         zIndex: 1000,
     }
 
-    const dynamicLinks: DynamicLink[] = [
+    // Use navigation from CMS or fallback to default
+    const dynamicLinks: DynamicLink[] = content?.navigation?.items?.filter(item => item.visible)
+        .sort((a, b) => a.order - b.order) || [
         {
             name: "Home",
             href: "/"

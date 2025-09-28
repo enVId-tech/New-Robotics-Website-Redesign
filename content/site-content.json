@@ -1,0 +1,215 @@
+{
+  "site": {
+    "title": "Oxford Academy Robotics",
+    "tagline": "Learn. Compete. Thrive.",
+    "description": "Oxford Academy Robotics - Excellence in FRC, FTC, and VEX robotics competitions. Join our award-winning STEM education programs.",
+    "keywords": "Oxford Academy Robotics, FRC Team 4079, FTC Teams, VEX Teams, STEM Education, Robotics Competition"
+  },
+  "homepage": {
+    "hero": {
+      "title": "OXFORD ACADEMY ROBOTICS",
+      "subtitle": "Learn. Compete. Thrive.",
+      "backgroundImage": "/images/FrontPageBanner.png",
+      "overlayImage": "/handmade/FrontPageDesign.webp"
+    },
+    "aboutBrief": {
+      "title": "About Us",
+      "description": "Oxford Academy Robotics is a student-run organization that competes in the FIRST Robotics Competition (FRC), FIRST Tech Challenge (FTC), and VEX Robotics Competition. Our mission is to inspire students to pursue careers in STEM fields by providing them with the opportunity to learn, compete, and thrive in a supportive environment.",
+      "image": "/images/comp/BB2024_2.jpg"
+    },
+    "stats": {
+      "title": "Our Impact by the Numbers",
+      "items": [
+        {
+          "id": "1",
+          "label": "Years Active",
+          "value": "12+",
+          "description": "Since 2012",
+          "icon": "🏆"
+        },
+        {
+          "id": "2",
+          "label": "Team Members",
+          "value": "60+",
+          "description": "Active students",
+          "icon": "👥"
+        },
+        {
+          "id": "3",
+          "label": "Competitions",
+          "value": "30+",
+          "description": "Participated in",
+          "icon": "🤖"
+        },
+        {
+          "id": "4",
+          "label": "Awards Won",
+          "value": "10+",
+          "description": "Regional, On-season & Off-season",
+          "icon": "🥇"
+        }
+      ]
+    },
+    "goals": {
+      "title": "Our Goals",
+      "description": "We are Oxford Academy Robotics, a high school robotics team based in Cypress, California. We are dedicated to inspiring students to pursue careers in STEM fields through hands-on experience in robotics.",
+      "images": [
+        "/images/robotics/contact_bg.jpg",
+        "/images/comp/FRC_1.jpg",
+        "/images/comp/BB2024.jpg"
+      ]
+    }
+  },
+  "navigation": {
+    "items": [
+      {
+        "name": "Home",
+        "href": "/",
+        "visible": true,
+        "order": 1
+      },
+      {
+        "name": "About",
+        "href": "/about",
+        "visible": true,
+        "order": 2
+      },
+      {
+        "name": "Sponsors",
+        "href": "/sponsors",
+        "visible": true,
+        "order": 3
+      },
+      {
+        "name": "FRC",
+        "href": "/frc",
+        "visible": true,
+        "order": 4
+      },
+      {
+        "name": "FTC",
+        "href": "/ftc",
+        "visible": true,
+        "order": 5
+      },
+      {
+        "name": "VEX",
+        "href": "/vex",
+        "visible": true,
+        "order": 6
+      },
+      {
+        "name": "Contact",
+        "href": "/contact",
+        "visible": true,
+        "order": 7
+      }
+    ]
+  },
+  "about": {
+    "hero": {
+      "title": "About Oxford Academy Robotics",
+      "subtitle": "Building the future through innovation and teamwork",
+      "backgroundImage": "/images/AboutBanner.jpg"
+    },
+    "sections": [
+      {
+        "id": "mission",
+        "title": "Our Mission",
+        "content": "To inspire students to pursue careers in STEM fields by providing hands-on experience in robotics, engineering, and innovation while fostering teamwork, leadership, and problem-solving skills.",
+        "type": "text"
+      },
+      {
+        "id": "history",
+        "title": "Our History",
+        "content": "Founded in 2012, Oxford Academy Robotics has grown from a small group of passionate students to one of California's premier high school robotics programs, competing successfully in FRC, FTC, and VEX competitions.",
+        "type": "text"
+      }
+    ]
+  },
+  "contact": {
+    "hero": {
+      "title": "Get in Touch",
+      "subtitle": "Ready to join our robotics family?",
+      "backgroundImage": "/images/PlaceholderBanner.jpg"
+    },
+    "form": {
+      "title": "Contact Us",
+      "subtitle": "Have questions? Want to join? We'd love to hear from you!",
+      "fields": [
+        {
+          "name": "name",
+          "label": "Full Name",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter your full name"
+        },
+        {
+          "name": "email",
+          "label": "Email Address",
+          "type": "email",
+          "required": true,
+          "placeholder": "your.email@example.com"
+        },
+        {
+          "name": "subject",
+          "label": "Subject",
+          "type": "text",
+          "required": true,
+          "placeholder": "What's this about?"
+        },
+        {
+          "name": "message",
+          "label": "Message",
+          "type": "textarea",
+          "required": true,
+          "placeholder": "Tell us more..."
+        }
+      ],
+      "submitText": "Send Message"
+    },
+    "info": {
+      "address": "Oxford Academy\n5172 Orange Ave\nCypress, CA 90630",
+      "email": "contact@oarobotics.org",
+      "meetingTimes": "Mondays & Wednesdays\n3:30 PM - 5:30 PM"
+    }
+  },
+  "teams": {
+    "frc": {
+      "title": "FIRST Robotics Competition",
+      "subtitle": "Team 4079 - The Nuclear Knights",
+      "description": "Our FRC team competes in the most challenging high school robotics competition, building 120+ pound robots to compete in dynamic games.",
+      "backgroundImage": "/images/FRCBanner.jpg",
+      "stats": {
+        "teamNumber": "4079",
+        "founded": "2012",
+        "robotWeight": "120+ lbs",
+        "buildSeason": "6 weeks"
+      }
+    },
+    "ftc": {
+      "title": "FIRST Tech Challenge",
+      "subtitle": "Building Innovation Together",
+      "description": "Our FTC teams focus on designing, building, and programming robots to compete in alliance-based competitions.",
+      "backgroundImage": "/images/FTCBanner.jpg",
+      "stats": {
+        "teams": "3",
+        "robotWeight": "42 lbs max",
+        "programmingLanguage": "Java/Blocks",
+        "teamSize": "15 max"
+      }
+    },
+    "vex": {
+      "title": "VEX Robotics Competition",
+      "subtitle": "Precision Engineering",
+      "description": "VEX Robotics allows students to design and build robots using the VEX platform, emphasizing mechanical design and programming skills.",
+      "backgroundImage": "/images/PlaceholderBanner.jpg",
+      "stats": {
+        "teams": "2",
+        "platform": "VEX V5",
+        "maxSize": "18x18x18 inches",
+        "programmingLanguage": "C++/Python"
+      }
+    }
+  }
+}

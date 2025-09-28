@@ -18,6 +18,9 @@ export default function AdminLayout({
             <Link href="/admin" className={styles.navLink}>
               Media Manager
             </Link>
+            <Link href="/admin/content" className={styles.navLink}>
+              Content Manager
+            </Link>
           </div>
         </div>
       </nav>

@@ -8,11 +8,15 @@ import AboutBrief from "@/app/_components/aboutbrief/aboutbrief";
 import Slogan from "@/app/_components/slogan/slogan";
 import Stats from "@/app/_components/stats/stats";
 import TeamsOverview from "@/app/_components/teamsOverview/teamsOverview";
+import { getServerContent } from "@/utils/content";
 
-export const metadata: Metadata = {
-    title: 'Home - OA Robotics',
-    description: 'Oxford Academy Robotics - Excellence in FRC, FTC, and VEX robotics competitions. Join our award-winning STEM education programs.',
-    keywords: 'Oxford Academy Robotics, FRC Team 4079, FTC Teams, VEX Teams, STEM Education, Robotics Competition'
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getServerContent();
+    return {
+        title: `Home - ${content?.site?.title || 'OA Robotics'}`,
+        description: content?.site?.description || 'Oxford Academy Robotics - Excellence in FRC, FTC, and VEX robotics competitions. Join our award-winning STEM education programs.',
+        keywords: content?.site?.keywords || 'Oxford Academy Robotics, FRC Team 4079, FTC Teams, VEX Teams, STEM Education, Robotics Competition'
+    };
 }
 
 // Images
@@ -25,20 +29,22 @@ import img2 from "@/public/images/comp/FRC_1.jpg";
 import img3 from "@/public/images/comp/BB2024.jpg";
 
 export default async function Home(): Promise<React.ReactElement> {
+    const content = await getServerContent();
+    
     return (
         <div className={`${styles.homepage}`}>
             <Navbar isFixed={true}/>
             <Title
-                title={"OXFORD ACADEMY ROBOTICS"}
-                description={"Learn. Compete. Thrive."}
+                title={content?.homepage?.hero?.title || "OXFORD ACADEMY ROBOTICS"}
+                description={content?.homepage?.hero?.subtitle || "Learn. Compete. Thrive."}
                 img1={frontBannerImg}
                 img2={designImg}
             />
             <AboutBrief
                 img={collage2Img}
-                description={"Oxford Academy Robotics is a student-run organization that competes in the FIRST Robotics Competition (FRC), FIRST Tech Challenge (FTC), and VEX Robotics Competition. Our mission is to inspire students to pursue careers in STEM fields by providing them with the opportunity to learn, compete, and thrive in a supportive environment."}
+                description={content?.homepage?.aboutBrief?.description || "Oxford Academy Robotics is a student-run organization that competes in the FIRST Robotics Competition (FRC), FIRST Tech Challenge (FTC), and VEX Robotics Competition. Our mission is to inspire students to pursue careers in STEM fields by providing them with the opportunity to learn, compete, and thrive in a supportive environment."}
             />
-            <Stats title="Our Impact by the Numbers" />
+            <Stats />
             {/* <NewsSection 
                 title="Latest News"
                 maxArticles={3}
@@ -46,8 +52,8 @@ export default async function Home(): Promise<React.ReactElement> {
             /> */}
             <Slogan
                 img={[img1, img2, img3]}
-                description={"We are Oxford Academy Robotics, a high school robotics team based in Cypress, California. We are dedicated to inspiring students to pursue careers in STEM fields through hands-on experience in robotics."}
-                title={"Our Goals"}
+                description={content?.homepage?.goals?.description || "We are Oxford Academy Robotics, a high school robotics team based in Cypress, California. We are dedicated to inspiring students to pursue careers in STEM fields through hands-on experience in robotics."}
+                title={content?.homepage?.goals?.title || "Our Goals"}
             />
 
             <TeamsOverview />

@@ -2,6 +2,7 @@
 import React from 'react';
 import styles from './stats.module.scss';
 import { TW_900 } from '@/utils/globalFonts';
+import { useContent } from '@/hooks/useContent';
 
 type Stat = {
     id: string;
@@ -17,43 +18,46 @@ type StatsProps = {
     title?: string;
 }
 
-const defaultStats: Stat[] = [
-    {
-        id: '1',
-        label: 'Years Active',
-        value: '12+',
-        description: 'Since 2012',
-        icon: '🏆'
-    },
-    {
-        id: '2',
-        label: 'Team Members',
-        value: '45+',
-        description: 'Active students',
-        icon: '👥'
-    },
-    {
-        id: '3',
-        label: 'Competitions',
-        value: '30+',
-        description: 'Participated in',
-        icon: '🤖'
-    },
-    {
-        id: '4',
-        label: 'Awards Won',
-        value: '10+',
-        description: 'Regional, On-season & Off-season',
-        icon: '🥇'
-    }
-];
-
 export default function Stats({ 
     children, 
-    stats = defaultStats, 
-    title = "Our Impact" 
+    stats, 
+    title 
 }: StatsProps): React.ReactElement {
+    const { content, loading } = useContent();
     const [animatedStats, setAnimatedStats] = React.useState<boolean>(false);
+    
+    // Use content from CMS or fallback to props or default values
+    const displayStats = stats || content?.homepage?.stats?.items || [
+        {
+            id: '1',
+            label: 'Years Active',
+            value: '12+',
+            description: 'Since 2012',
+            icon: '🏆'
+        },
+        {
+            id: '2',
+            label: 'Team Members',
+            value: '60+',
+            description: 'Active students',
+            icon: '👥'
+        },
+        {
+            id: '3',
+            label: 'Competitions',
+            value: '30+',
+            description: 'Participated in',
+            icon: '🤖'
+        },
+        {
+            id: '4',
+            label: 'Awards Won',
+            value: '10+',
+            description: 'Regional, On-season & Off-season',
+            icon: '🥇'
+        }
+    ];
+    const displayTitle = title || content?.homepage?.stats?.title || "Our Impact by the Numbers";
 
     React.useEffect(() => {
         const observer = new IntersectionObserver(
@@ -78,10 +82,10 @@ export default function Stats({
     return (
         <section id="stats-section" className={`${styles.stats} ${TW_900}`}>
             <div className={styles.container}>
-                <h1 className={styles.title}>{title}</h1>
+                <h1 className={styles.title}>{displayTitle}</h1>
                 
                 <div className={styles.statsGrid}>
-                    {stats.map((stat, index) => (
+                    {displayStats.map((stat, index) => (
                         <div 
                             key={stat.id} 
                             className={`${styles.statCard} ${animatedStats ? styles.animate : ''}`}
