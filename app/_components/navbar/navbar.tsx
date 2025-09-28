@@ -71,6 +71,7 @@ export default function Navbar({ children, isFixed = true }: NavbarProps): React
                     <div className={styles.left} onClick={(): string => window.location.href = "/"}>
                         <Image src={image1.src} alt={"Oxford Academy Robotics Logo"} width={50} height={50}/>
                         <h1 className={M_500}>OA Robotics</h1>
+                        <Link href="/admin" className={styles.adminLink} title="Admin Panel">⚙️</Link>
                     </div>
                     {children}
                     <div className={`${styles.right} ${M_300}`}>
