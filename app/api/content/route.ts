@@ -36,7 +36,10 @@ export async function POST(request: NextRequest) {
   try {
     const { section, data } = await request.json();
     
-    if (!section || !data) {
+    console.log('API received:', { section, data });
+    
+    if (!section || data === undefined) {
+      console.log('Missing section or data');
       return NextResponse.json(
         { success: false, error: 'Section and data are required' },
         { status: 400 }
@@ -48,31 +51,69 @@ export async function POST(request: NextRequest) {
     if (existsSync(CONTENT_FILE_PATH)) {
       const contentData = await readFile(CONTENT_FILE_PATH, 'utf-8');
       content = JSON.parse(contentData);
+      console.log('Current content loaded');
+    } else {
+      console.log('Content file does not exist, creating new');
     }
 
     // Update specific section
     if (section === 'full') {
       // Replace entire content (for full content updates)
       content = data;
+      console.log('Replacing full content');
     } else {
       // Update specific section
       const sectionPath = section.split('.');
+      console.log('Section path:', sectionPath);
       let current = content as any;
       
       // Navigate to the correct section
       for (let i = 0; i < sectionPath.length - 1; i++) {
-        if (!current[sectionPath[i]]) {
-          current[sectionPath[i]] = {};
+        const pathSegment = sectionPath[i];
+        
+        // Check if this segment is a number (array index)
+        if (!isNaN(Number(pathSegment))) {
+          const index = Number(pathSegment);
+          if (!Array.isArray(current)) {
+            console.error('Trying to access array index on non-array:', current);
+            return NextResponse.json(
+              { success: false, error: `Path segment ${pathSegment} expects an array but found ${typeof current}` },
+              { status: 400 }
+            );
+          }
+          current = current[index];
+        } else {
+          // Regular object property
+          if (!current[pathSegment]) {
+            current[pathSegment] = {};
+          }
+          current = current[pathSegment];
         }
-        current = current[sectionPath[i]];
       }
       
-      // Update the final section
-      current[sectionPath[sectionPath.length - 1]] = data;
+      const finalKey = sectionPath[sectionPath.length - 1];
+      console.log('Setting value at path:', finalKey, 'to:', data);
+      
+      // Handle final segment (could be array index or object key)
+      if (!isNaN(Number(finalKey))) {
+        const index = Number(finalKey);
+        if (!Array.isArray(current)) {
+          console.error('Trying to set array index on non-array:', current);
+          return NextResponse.json(
+            { success: false, error: `Final path segment ${finalKey} expects an array but found ${typeof current}` },
+            { status: 400 }
+          );
+        }
+        current[index] = data;
+      } else {
+        current[finalKey] = data;
+      }
     }
 
+    console.log('Writing content to file...');
     // Write updated content back to file
     await writeFile(CONTENT_FILE_PATH, JSON.stringify(content, null, 2));
+    console.log('Content written successfully');
     
     return NextResponse.json({
       success: true,

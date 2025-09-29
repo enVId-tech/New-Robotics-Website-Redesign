@@ -60,6 +60,8 @@ export default function ContentManager() {
   const handleSave = async () => {
     if (!editingField) return;
 
+    console.log('Saving field:', editingField);
+
     let processedValue = editingField.value;
     
     // Process value based on type
@@ -76,7 +78,12 @@ export default function ContentManager() {
       }
     }
 
+    console.log('Processed value:', processedValue);
+    console.log('Updating path:', editingField.path);
+
     const result = await updateContent(editingField.path, processedValue);
+    console.log('Update result:', result);
+    
     if (result.success) {
       setEditingField(null);
       alert('Content updated successfully!');
@@ -244,7 +251,17 @@ export default function ContentManager() {
                     </button>
                   )}
                 </div>
-                {renderValue(item, section, `${path ? path + '.' : ''}${key}.${index}`, '')}
+                {typeof item === 'object' && item !== null ? (
+                  <div className={styles.objectContent}>
+                    {Object.entries(item).map(([subKey, subValue]) => (
+                      <div key={subKey}>
+                        {renderValue(subValue, section, `${path ? path + '.' : ''}${key}.${index}`, subKey)}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  renderValue(item, section, `${path ? path + '.' : ''}${key}`, String(index))
+                )}
               </div>
             ))}
           </div>

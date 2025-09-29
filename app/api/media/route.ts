@@ -54,14 +54,29 @@ export async function POST(request: NextRequest) {
       await mkdir(uploadDir, { recursive: true });
     }
 
-    // Generate unique filename to avoid conflicts
-    const timestamp = Date.now();
+    // Use original filename, replace if exists
     const originalName = file.name;
-    const extension = path.extname(originalName);
-    const baseName = path.basename(originalName, extension);
-    const fileName = `${baseName}-${timestamp}${extension}`;
+    const fileName = originalName;
     
     const filePath = path.join(uploadDir, fileName);
+    
+    // Create backup if file already exists
+    if (existsSync(filePath)) {
+      const backupDir = path.join(process.cwd(), 'public', '.backups');
+      if (!existsSync(backupDir)) {
+        await mkdir(backupDir, { recursive: true });
+      }
+      
+      const timestamp = Date.now();
+      const backupPath = path.join(backupDir, `${timestamp}-${fileName}`);
+      
+      try {
+        await require('fs/promises').copyFile(filePath, backupPath);
+        console.log(`Backup created: ${backupPath}`);
+      } catch (backupError) {
+        console.warn('Could not create backup:', backupError);
+      }
+    }
     
     // Convert file to buffer and save
     const bytes = await file.arrayBuffer();

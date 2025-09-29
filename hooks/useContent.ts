@@ -34,6 +34,8 @@ export function useContent() {
 
   const updateContent = async (section: string, data: any) => {
     try {
+      console.log('updateContent called with:', { section, data });
+      
       const response = await fetch('/api/content', {
         method: 'POST',
         headers: {
@@ -43,6 +45,8 @@ export function useContent() {
       });
 
       const result = await response.json();
+      console.log('API response:', result);
+      
       if (result.success) {
         await fetchContent(); // Refresh content
         return { success: true };
@@ -50,6 +54,7 @@ export function useContent() {
         return { success: false, error: result.error };
       }
     } catch (err) {
+      console.error('updateContent error:', err);
       return { success: false, error: 'Failed to update content' };
     }
   };
