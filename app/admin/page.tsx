@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './media.module.scss';
 
 interface MediaFile {
@@ -26,6 +27,7 @@ interface ReplaceModalState {
 }
 
 export default function MediaManager() {
+  const router = useRouter();
   const [mediaStructure, setMediaStructure] = useState<MediaStructure>({});
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('images');
@@ -37,6 +39,17 @@ export default function MediaManager() {
     filePath: '',
     fileName: ''
   });
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/logout', { method: 'POST' });
+      router.push('/');
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Fallback: redirect anyway
+      router.push('/');
+    }
+  };
 
   // Fetch media files
   const fetchMedia = useCallback(async () => {
@@ -255,8 +268,15 @@ export default function MediaManager() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>Media Manager</h1>
-        <p>Upload and manage images and media files for your robotics website</p>
+        <div className={styles.headerContent}>
+          <div>
+            <h1>Media Manager</h1>
+            <p>Upload and manage images and media files for your robotics website</p>
+          </div>
+          <button className={styles.logoutButton} onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
       </header>
 
       <div className={styles.controls}>
