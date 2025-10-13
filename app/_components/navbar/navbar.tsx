@@ -20,7 +20,7 @@ type DynamicLink = {
 
 export default function Navbar({ children, isFixed = true }: NavbarProps): React.ReactElement {
     const { content } = useContent();
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, logout } = useAuth();
     const { isEditMode, enableEditMode } = useEditMode();
     
     const styleFixed: object = {
@@ -102,6 +102,15 @@ export default function Navbar({ children, isFixed = true }: NavbarProps): React
                                 onClick={enableEditMode}
                             >
                                 ✏️ Edit Mode
+                            </button>
+                        )}
+                        {isAuthenticated && (
+                            <button 
+                                className={styles.logoutButton}
+                                onClick={logout}
+                                title="Logout"
+                            >
+                                🚪 Logout
                             </button>
                         )}
                     </div>

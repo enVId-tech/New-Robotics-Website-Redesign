@@ -60,14 +60,20 @@ export default function EditableText({
   const handleClick = () => {
     if (isEditMode && !isEditing) {
       setIsEditing(true);
+      // Clear placeholder on first click
+      if (editRef.current && !localValue) {
+        editRef.current.textContent = '';
+      }
     }
   };
 
   const handleBlur = () => {
     setIsEditing(false);
-    if (localValue !== value) {
-      addPendingChange(path, localValue);
-      onChange?.(localValue);
+    const currentText = editRef.current?.textContent || '';
+    if (currentText !== value) {
+      setLocalValue(currentText);
+      addPendingChange(path, currentText);
+      onChange?.(currentText);
     }
   };
 
@@ -109,14 +115,19 @@ export default function EditableText({
   useEffect(() => {
     if (isEditing && editRef.current) {
       editRef.current.focus();
-      // Select all text
-      const range = document.createRange();
-      range.selectNodeContents(editRef.current);
-      const selection = window.getSelection();
-      selection?.removeAllRanges();
-      selection?.addRange(range);
+      // Only select text if there's actual content (not placeholder)
+      if (localValue) {
+        const range = document.createRange();
+        range.selectNodeContents(editRef.current);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+      } else {
+        // Clear placeholder text when entering edit mode
+        editRef.current.textContent = '';
+      }
     }
-  }, [isEditing]);
+  }, [isEditing, localValue]);
 
   const combinedClassName = `
     ${className}
@@ -147,9 +158,10 @@ export default function EditableText({
           onKeyDown={handleKeyDown}
           data-path={path}
           data-editable="text"
+          data-placeholder={!localValue && isEditMode ? placeholder : undefined}
           style={inlineStyle}
         >
-          {localValue || placeholder}
+          {localValue}
         </Component>
 
         {isEditMode && !isEditing && (

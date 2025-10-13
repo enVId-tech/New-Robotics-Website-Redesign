@@ -26,6 +26,15 @@
   &:hover::after {
     opacity: 1;
   }
+
+  // Placeholder styling - only show when empty and in edit mode
+  &:empty[data-placeholder]::before {
+    content: attr(data-placeholder);
+    color: #9ca3af;
+    font-style: italic;
+    opacity: 0.6;
+    pointer-events: none;
+  }
 }
 
 .editing {

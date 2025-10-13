@@ -30,8 +30,8 @@ export default function AdminLogin() {
       const data = await response.json();
 
       if (data.success) {
-        // Redirect to admin panel
-        router.push('/admin');
+        // Redirect to homepage - Edit Mode button will now be visible
+        router.push('/');
         router.refresh();
       } else {
         setError(data.error || 'Login failed');

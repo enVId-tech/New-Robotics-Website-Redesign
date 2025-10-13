@@ -17,13 +17,21 @@ export default function AdminLayout({
 
   useEffect(() => {
     const checkAuth = async () => {
-      // Skip authentication check for login page
+      // Allow access to login page
       if (pathname === '/admin/login') {
         setIsAuthenticated(true);
         setLoading(false);
         return;
       }
 
+      // Redirect from old admin pages to homepage
+      // The new inline editing system replaces these pages
+      if (pathname === '/admin' || pathname === '/admin/content') {
+        router.push('/');
+        return;
+      }
+
+      // For any other /admin/* routes, check authentication
       try {
         const response = await fetch('/api/auth/session');
         const data = await response.json();
