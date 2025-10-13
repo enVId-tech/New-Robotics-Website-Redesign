@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useEditMode } from '@/contexts/EditModeContext';
 import styles from './EditableImage.module.scss';
 import Image from 'next/image';
@@ -42,9 +43,55 @@ export default function EditableImage({
   const [showStyleEditor, setShowStyleEditor] = useState(false);
   const [styleEditorPosition, setStyleEditorPosition] = useState({ x: 0, y: 0 });
   const [localStyle, setLocalStyle] = useState<ImageStyle>(initialStyle);
+  const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
+  const [mounted, setMounted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const hasChanges = pendingChanges.has(path) || pendingChanges.has(`${path}.style`);
+
+  // Track if component is mounted for portal
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  // Update button position when hovering
+  useEffect(() => {
+    if (isEditMode && isHovered && imageRef.current) {
+      let rafId: number | null = null;
+      
+      const updateButtonPosition = () => {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+        }
+        
+        rafId = requestAnimationFrame(() => {
+          if (imageRef.current) {
+            const rect = imageRef.current.getBoundingClientRect();
+            // Position button below and to the right to never overlap
+            setButtonPosition({
+              x: rect.right + 8,   // 8px to the right
+              y: rect.bottom + 4   // 4px below the image
+            });
+          }
+        });
+      };
+      
+      updateButtonPosition();
+      
+      // Use passive listeners and throttle with RAF
+      window.addEventListener('scroll', updateButtonPosition, { passive: true, capture: true });
+      window.addEventListener('resize', updateButtonPosition, { passive: true });
+      
+      return () => {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+        }
+        window.removeEventListener('scroll', updateButtonPosition, true);
+        window.removeEventListener('resize', updateButtonPosition);
+      };
+    }
+  }, [isEditMode, isHovered]);
 
   const handleReplaceClick = () => {
     if (isEditMode) {
@@ -85,7 +132,13 @@ export default function EditableImage({
       }
 
       const data = await response.json();
-      const newSrc = data.url;
+      
+      if (!data.success) {
+        throw new Error(data.error || 'Upload failed');
+      }
+      
+      // API returns filePath, not url
+      const newSrc = data.filePath;
 
       // Update local state
       setLocalSrc(newSrc);
@@ -107,10 +160,29 @@ export default function EditableImage({
     e.stopPropagation();
     if (!showStyleEditor && imageRef.current) {
       const rect = imageRef.current.getBoundingClientRect();
-      setStyleEditorPosition({
-        x: rect.right + 10,
-        y: rect.top
-      });
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate initial position to the right of the element
+      let x = rect.right + 10;
+      let y = rect.top;
+      
+      // If element is too far right, try placing it to the left instead
+      if (x + 320 > viewportWidth) { // 320px is approximate editor width
+        x = rect.left - 330;
+      }
+      
+      // If still off screen, just use a safe default
+      if (x < 0) {
+        x = 10;
+      }
+      
+      // Ensure y is within reasonable bounds
+      if (y < 0) {
+        y = 10;
+      }
+      
+      setStyleEditorPosition({ x, y });
     }
     setShowStyleEditor(!showStyleEditor);
   };
@@ -213,14 +285,15 @@ export default function EditableImage({
         )}
       </div>
 
-      {showStyleEditor && (
+      {mounted && showStyleEditor && createPortal(
         <StyleEditor
           type="image"
           currentStyles={localStyle}
           onStyleChange={handleStyleChange}
           onClose={() => setShowStyleEditor(false)}
           position={styleEditorPosition}
-        />
+        />,
+        document.body
       )}
     </>
   );

@@ -135,9 +135,18 @@
       "description": "Since 2012, we've been empowering students through competitive robotics, building not just robots, but future engineers, innovators, and leaders who will shape tomorrow's world.",
       "backgroundImage": "/images/AboutBanner.jpg",
       "stats": [
-        { "number": "12+", "label": "Years Strong" },
-        { "number": "60+", "label": "Students Impacted" },
-        { "number": "3", "label": "Competition Leagues" }
+        {
+          "number": "12+",
+          "label": "Years Strong"
+        },
+        {
+          "number": "60+",
+          "label": "Students Impacted"
+        },
+        {
+          "number": "3",
+          "label": "Competition Leagues"
+        }
       ]
     },
     "mission": {
@@ -167,19 +176,31 @@
           "logo": "/logos/FRCLogo.png",
           "title": "FIRST Robotics Competition",
           "description": "Our flagship program where students design, build, and compete with 120-pound robots in an international competition that combines the excitement of sport with the rigors of science and technology.",
-          "features": ["Team 4079", "120lb Robots", "6-Week Build Season"]
+          "features": [
+            "Team 4079",
+            "120lb Robots",
+            "6-Week Build Season"
+          ]
         },
         {
           "logo": "/logos/FTCLogo.png",
           "title": "FIRST Tech Challenge",
           "description": "Students design, build, and program robots to compete in an alliance format against other teams. FTC is designed for those who want to compete head to head, using a robotics platform.",
-          "features": ["Multiple Teams", "Android Programming", "Strategic Alliances"]
+          "features": [
+            "Multiple Teams",
+            "Android Programming",
+            "Strategic Alliances"
+          ]
         },
         {
           "logo": "/logos/VEXLogo.png",
           "title": "VEX Robotics Competition",
           "description": "Where our journey began! Students work in teams to design and build a robot to play against other teams in a game-based engineering challenge.",
-          "features": ["Our Origins", "Metal Construction", "Programming Skills"]
+          "features": [
+            "Our Origins",
+            "Metal Construction",
+            "Programming Skills"
+          ]
         }
       ]
     },
@@ -333,7 +354,12 @@
       "role": "Programs Director",
       "grade": "12th Grade",
       "bio": "Rishi has been with the team for 4 years and leads our strategic planning and outreach initiatives. He's passionate about making STEM accessible to all students.",
-      "skills": ["Leadership", "Strategic Planning", "Public Speaking", "Project Management"],
+      "skills": [
+        "Leadership",
+        "Strategic Planning",
+        "Public Speaking",
+        "Project Management"
+      ],
       "team": "Student Leadership",
       "image": "/images/robotics/group.jpeg"
     },
@@ -343,7 +369,12 @@
       "role": "FRC Team Captain",
       "grade": "11th Grade",
       "bio": "Aaron leads our FRC team with exceptional technical and leadership skills. He specializes in mechanical design and team coordination.",
-      "skills": ["Mechanical Design", "CAD", "Team Leadership", "Problem Solving"],
+      "skills": [
+        "Mechanical Design",
+        "CAD",
+        "Team Leadership",
+        "Problem Solving"
+      ],
       "team": "FRC",
       "image": "/images/robotics/group.jpeg"
     }
@@ -365,7 +396,11 @@
         "publishDate": "2024-03-15",
         "category": "Achievement",
         "image": "/images/comp/FRC_1.jpg",
-        "tags": ["FRC", "Championship", "Regional"],
+        "tags": [
+          "FRC",
+          "Championship",
+          "Regional"
+        ],
         "link": "",
         "linkText": "Read More"
       },
@@ -378,7 +413,11 @@
         "publishDate": "2024-03-10",
         "category": "Competition",
         "image": "",
-        "tags": ["VEX", "Season", "Design"],
+        "tags": [
+          "VEX",
+          "Season",
+          "Design"
+        ],
         "link": "",
         "linkText": "Learn More"
       },
@@ -391,7 +430,11 @@
         "publishDate": "2024-03-05",
         "category": "Event",
         "image": "",
-        "tags": ["Outreach", "STEM", "Community"],
+        "tags": [
+          "Outreach",
+          "STEM",
+          "Community"
+        ],
         "link": "",
         "linkText": "View Details"
       },
@@ -404,7 +447,11 @@
         "publishDate": "2024-02-28",
         "category": "Achievement",
         "image": "/images/robotics/competition_working.jpg",
-        "tags": ["FTC", "State", "Qualification"],
+        "tags": [
+          "FTC",
+          "State",
+          "Qualification"
+        ],
         "link": "",
         "linkText": "Read More"
       },
@@ -417,7 +464,11 @@
         "publishDate": "2024-02-20",
         "category": "General",
         "image": "",
-        "tags": ["Team", "Members", "Welcome"],
+        "tags": [
+          "Team",
+          "Members",
+          "Welcome"
+        ],
         "link": "",
         "linkText": "Meet the Team"
       }
@@ -472,7 +523,7 @@
     "legal": {
       "copyright": "© 2025 OA Robotics. All rights reserved.",
       "websiteDeveloper": "Website by Erick Tran",
-      "betaNotice": "Website in BETA - Bugs Beware!"
+      "betaNotice": "Oxford Academy"
     }
   }
 }

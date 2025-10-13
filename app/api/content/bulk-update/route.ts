@@ -47,7 +47,38 @@ export async function POST(request: NextRequest) {
 
       // Set the value
       const lastKey = keys[keys.length - 1];
-      current[lastKey] = value;
+      
+      // Special handling for style properties
+      if (lastKey === 'style') {
+        // Get the parent property (one level up)
+        const parentKey = keys[keys.length - 2];
+        const parentValue = current[parentKey];
+        
+        // If parent is a string, convert it to an object with value and style
+        if (typeof parentValue === 'string') {
+          current[parentKey] = {
+            value: parentValue,
+            style: value
+          };
+        } else if (typeof parentValue === 'object' && parentValue !== null) {
+          // Parent is already an object, just set the style
+          current[parentKey].style = value;
+        } else {
+          // Parent doesn't exist or is null, create new object
+          current[parentKey] = {
+            value: '',
+            style: value
+          };
+        }
+      } else {
+        // Regular value update
+        // If we're updating a value that has a style, preserve the style
+        if (typeof current[lastKey] === 'object' && current[lastKey] !== null && 'style' in current[lastKey]) {
+          current[lastKey].value = value;
+        } else {
+          current[lastKey] = value;
+        }
+      }
     });
 
     // Write updated content

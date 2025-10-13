@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useEditMode } from '@/contexts/EditModeContext';
 import styles from './EditableText.module.scss';
 import StyleEditor from './StyleEditor';
@@ -35,9 +36,17 @@ export default function EditableText({
   const [showStyleEditor, setShowStyleEditor] = useState(false);
   const [styleEditorPosition, setStyleEditorPosition] = useState({ x: 0, y: 0 });
   const [localStyle, setLocalStyle] = useState<TextStyle>(initialStyle);
+  const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
+  const [mounted, setMounted] = useState(false);
   const editRef = useRef<HTMLDivElement>(null);
   const prevStyleRef = useRef<string>('');
   const isFirstFocusRef = useRef(false);
+
+  // Track if component is mounted for portal
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   // Update local value when prop changes (only when not editing)
   useEffect(() => {
@@ -59,6 +68,44 @@ export default function EditableText({
   useEffect(() => {
     setHasChanges(pendingChanges.has(path) || pendingChanges.has(`${path}.style`));
   }, [pendingChanges, path]);
+
+  // Update button position when in edit mode and not editing
+  useEffect(() => {
+    if (isEditMode && !isEditing && editRef.current) {
+      let rafId: number | null = null;
+      
+      const updateButtonPosition = () => {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+        }
+        
+        rafId = requestAnimationFrame(() => {
+          if (editRef.current) {
+            const rect = editRef.current.getBoundingClientRect();
+            // Position button to the right and below the element to never overlap
+            setButtonPosition({
+              x: rect.right + 8,  // 8px spacing to the right
+              y: rect.bottom + 4  // 4px below the element (changed from top)
+            });
+          }
+        });
+      };
+      
+      updateButtonPosition();
+      
+      // Use passive listeners and throttle with RAF
+      window.addEventListener('scroll', updateButtonPosition, { passive: true, capture: true });
+      window.addEventListener('resize', updateButtonPosition, { passive: true });
+      
+      return () => {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+        }
+        window.removeEventListener('scroll', updateButtonPosition, true);
+        window.removeEventListener('resize', updateButtonPosition);
+      };
+    }
+  }, [isEditMode, isEditing]);
 
   const handleClick = () => {
     if (isEditMode && !isEditing) {
@@ -97,10 +144,29 @@ export default function EditableText({
     e.stopPropagation();
     if (!showStyleEditor && editRef.current) {
       const rect = editRef.current.getBoundingClientRect();
-      setStyleEditorPosition({
-        x: rect.right + 10,
-        y: rect.top
-      });
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate initial position to the right of the element
+      let x = rect.right + 10;
+      let y = rect.top;
+      
+      // If element is too far right, try placing it to the left instead
+      if (x + 320 > viewportWidth) { // 320px is approximate editor width
+        x = rect.left - 330;
+      }
+      
+      // If still off screen, just use a safe default
+      if (x < 0) {
+        x = 10;
+      }
+      
+      // Ensure y is within reasonable bounds
+      if (y < 0) {
+        y = 10;
+      }
+      
+      setStyleEditorPosition({ x, y });
     }
     setShowStyleEditor(!showStyleEditor);
   };
@@ -167,26 +233,36 @@ export default function EditableText({
         >
           {localValue}
         </Component>
-
-        {isEditMode && !isEditing && (
-          <button
-            className={styles.styleButton}
-            onClick={handleStyleButtonClick}
-            title="Edit styles"
-          >
-            🎨
-          </button>
-        )}
       </div>
 
-      {showStyleEditor && (
+      {mounted && isEditMode && !isEditing && createPortal(
+        <button
+          className={styles.styleButton}
+          onClick={handleStyleButtonClick}
+          title="Edit styles"
+          style={{
+            position: 'fixed',
+            left: `${buttonPosition.x}px`,
+            top: `${buttonPosition.y}px`,
+            opacity: buttonPosition.x === 0 && buttonPosition.y === 0 ? 0 : 1,
+            transition: 'none',  // Disable all transitions
+            transform: 'none'     // No transform by default
+          }}
+        >
+          🎨
+        </button>,
+        document.body
+      )}
+
+      {mounted && showStyleEditor && createPortal(
         <StyleEditor
           type="text"
           currentStyles={localStyle}
           onStyleChange={handleStyleChange}
           onClose={() => setShowStyleEditor(false)}
           position={styleEditorPosition}
-        />
+        />,
+        document.body
       )}
     </>
   );

@@ -71,9 +71,7 @@
 }
 
 .styleButton {
-  position: absolute;
-  top: -12px;
-  right: -12px;
+  position: fixed; // Changed from absolute since it's in a portal
   width: 28px;
   height: 28px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -84,22 +82,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: all 0.2s ease;
   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
-  z-index: 100;
+  z-index: 10001; // Higher than StyleEditor to appear on top
+  pointer-events: auto;
+  transition: none !important; // Completely disable all transitions
+  transform: none !important;  // No transforms by default
 
   &:hover {
-    transform: scale(1.1) rotate(15deg);
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.6);
   }
 
   &:active {
-    transform: scale(0.95);
+    opacity: 0.8;
   }
-}
-
-.editableTextWrapper:hover .styleButton,
-.editable:hover + .styleButton {
-  opacity: 1;
 }

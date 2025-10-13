@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import styles from './StyleEditor.module.scss';
 import { ImageStyle, TextStyle } from '@/utils/content';
 
@@ -19,10 +19,54 @@ export default function StyleEditor({
   position
 }: StyleEditorProps) {
   const [localStyles, setLocalStyles] = useState(currentStyles);
+  const [adjustedPosition, setAdjustedPosition] = useState(position);
+  const editorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setLocalStyles(currentStyles);
   }, [currentStyles]);
+
+  // Adjust position to keep editor within viewport bounds
+  // Use useLayoutEffect for immediate measurement before paint
+  useLayoutEffect(() => {
+    if (!editorRef.current) return;
+
+    const editor = editorRef.current;
+    const editorRect = editor.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    let { x, y } = position;
+
+    // Ensure we have valid starting position
+    if (x === 0 && y === 0) {
+      // Center it if no valid position was provided
+      x = (viewportWidth - editorRect.width) / 2;
+      y = (viewportHeight - editorRect.height) / 2;
+    }
+
+    // Check if editor goes off the right edge
+    if (x + editorRect.width > viewportWidth) {
+      x = viewportWidth - editorRect.width - 10; // 10px margin
+    }
+
+    // Check if editor goes off the left edge
+    if (x < 10) {
+      x = 10;
+    }
+
+    // Check if editor goes off the bottom edge
+    if (y + editorRect.height > viewportHeight) {
+      y = viewportHeight - editorRect.height - 10; // 10px margin
+    }
+
+    // Check if editor goes off the top edge
+    if (y < 10) {
+      y = 10;
+    }
+
+    setAdjustedPosition({ x, y });
+  }, [position]);
 
   const handleChange = (property: string, value: string) => {
     const updated = { ...localStyles, [property]: value };
@@ -39,10 +83,11 @@ export default function StyleEditor({
 
   return (
     <div 
+      ref={editorRef}
       className={styles.styleEditor}
       style={{ 
-        left: `${position.x}px`, 
-        top: `${position.y}px` 
+        left: `${adjustedPosition.x}px`, 
+        top: `${adjustedPosition.y}px` 
       }}
     >
       <div className={styles.header}>

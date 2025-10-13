@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './stats.module.scss';
 import { TW_900 } from '@/utils/globalFonts';
 import { useContent } from '@/hooks/useContent';
+import { getContentValue, getContentStyle } from '@/utils/contentHelpers';
 import EditableText from '@/components/editable/EditableText';
 
 type Stat = {
@@ -100,32 +101,36 @@ export default function Stats({
                             {stat.icon && (
                                 <div className={styles.statIcon}>
                                     <EditableText
-                                        value={stat.icon}
+                                        value={getContentValue(stat.icon)}
                                         path={`homepage.stats.items.${index}.icon`}
                                         as="span"
+                                        style={getContentStyle(stat.icon)}
                                     />
                                 </div>
                             )}
                             <div className={styles.statValue}>
                                 <EditableText
-                                    value={stat.value}
+                                    value={getContentValue(stat.value)}
                                     path={`homepage.stats.items.${index}.value`}
                                     as="span"
+                                    style={getContentStyle(stat.value)}
                                 />
                             </div>
                             <div className={styles.statLabel}>
                                 <EditableText
-                                    value={stat.label}
+                                    value={getContentValue(stat.label)}
                                     path={`homepage.stats.items.${index}.label`}
                                     as="span"
+                                    style={getContentStyle(stat.label)}
                                 />
                             </div>
                             {stat.description && (
                                 <div className={styles.statDescription}>
                                     <EditableText
-                                        value={stat.description}
+                                        value={getContentValue(stat.description)}
                                         path={`homepage.stats.items.${index}.description`}
                                         as="span"
+                                        style={getContentStyle(stat.description)}
                                     />
                                 </div>
                             )}
