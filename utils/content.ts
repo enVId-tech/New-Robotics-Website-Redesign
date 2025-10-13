@@ -2,6 +2,23 @@ import { readFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
 
+// Style properties for images
+export interface ImageStyle {
+  width?: string;
+  height?: string;
+  borderRadius?: string;
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+}
+
+// Style properties for text
+export interface TextStyle {
+  fontSize?: string;
+  fontFamily?: 'Titillium Web' | 'Montserrat' | 'Arial' | 'Helvetica' | 'sans-serif';
+  fontWeight?: '300' | '400' | '500' | '600' | '700' | '900';
+  lineHeight?: string;
+  whiteSpace?: 'normal' | 'pre-line' | 'pre-wrap';
+}
+
 export interface SiteContent {
   site: {
     title: string;
@@ -31,6 +48,8 @@ export interface SiteContent {
       title: string;
       description: string;
       image: string;
+      imageStyle?: ImageStyle;
+      textStyle?: TextStyle;
     };
     stats: {
       title: string;

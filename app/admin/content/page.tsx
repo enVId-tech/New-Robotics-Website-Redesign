@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { useContent } from '@/hooks/useContent';
-import { SiteContent } from '@/utils/content';
+import { SiteContent, ImageStyle, TextStyle } from '@/utils/content';
 import styles from './content.module.scss';
 
 interface EditingField {
   section: string;
   path: string;
   value: any;
-  type: 'text' | 'textarea' | 'array' | 'object' | 'number' | 'boolean' | 'image';
+  type: 'text' | 'textarea' | 'array' | 'object' | 'number' | 'boolean' | 'image' | 'imageStyle' | 'textStyle';
 }
 
 export default function ContentManager() {
@@ -25,6 +25,18 @@ export default function ContentManager() {
     routePath: '',
     content: '<h2>Welcome to the new page!</h2><p>Add your content here...</p>'
   });
+  const [editingImageStyle, setEditingImageStyle] = useState<{
+    section: string;
+    parentPath: string;
+    fieldName: string;
+    style: ImageStyle;
+  } | null>(null);
+  const [editingTextStyle, setEditingTextStyle] = useState<{
+    section: string;
+    parentPath: string;
+    fieldName: string;
+    style: TextStyle;
+  } | null>(null);
 
   if (loading) {
     return <div className={styles.loading}>Loading content...</div>;
@@ -174,12 +186,86 @@ export default function ContentManager() {
     }
   };
 
+  const handleEditImageStyle = (section: string, parentPath: string, fieldName: string) => {
+    // Get current style or create default
+    const currentContent = getNestedValue(content, parentPath);
+    const currentStyle: ImageStyle = currentContent?.[`${fieldName}Style`] || {
+      width: 'auto',
+      height: 'auto',
+      borderRadius: '0px',
+      objectFit: 'cover'
+    };
+    
+    setEditingImageStyle({
+      section,
+      parentPath,
+      fieldName,
+      style: currentStyle
+    });
+  };
+
+  const handleEditTextStyle = (section: string, parentPath: string, fieldName: string) => {
+    // Get current style or create default
+    const currentContent = getNestedValue(content, parentPath);
+    const currentStyle: TextStyle = currentContent?.[`${fieldName}Style`] || {
+      fontSize: '16px',
+      fontFamily: 'Titillium Web',
+      fontWeight: '400',
+      lineHeight: 'normal',
+      whiteSpace: 'normal'
+    };
+    
+    setEditingTextStyle({
+      section,
+      parentPath,
+      fieldName,
+      style: currentStyle
+    });
+  };
+
+  const handleSaveImageStyle = async () => {
+    if (!editingImageStyle) return;
+
+    const stylePath = `${editingImageStyle.parentPath}.${editingImageStyle.fieldName}Style`;
+    const result = await updateContent(stylePath, editingImageStyle.style);
+    
+    if (result.success) {
+      setEditingImageStyle(null);
+      alert('Image style updated successfully!');
+    } else {
+      alert('Failed to update image style: ' + result.error);
+    }
+  };
+
+  const handleSaveTextStyle = async () => {
+    if (!editingTextStyle) return;
+
+    const stylePath = `${editingTextStyle.parentPath}.${editingTextStyle.fieldName}Style`;
+    const result = await updateContent(stylePath, editingTextStyle.style);
+    
+    if (result.success) {
+      setEditingTextStyle(null);
+      alert('Text style updated successfully!');
+    } else {
+      alert('Failed to update text style: ' + result.error);
+    }
+  };
+
+  const getNestedValue = (obj: any, path: string) => {
+    return path.split('.').reduce((current, key) => current?.[key], obj);
+  };
+
   const renderValue = (value: any, section: string, path: string, key: string) => {
     const fullPath = `${section}.${path ? path + '.' : ''}${key}`;
     
     if (typeof value === 'string') {
       const isImage = value.includes('/images/') || value.includes('/logos/') || value.includes('/handmade/');
       const isLongText = value.length > 100;
+      
+      // Check if this field has associated style properties
+      const pathParts = fullPath.split('.');
+      const parentPath = pathParts.slice(0, -1).join('.');
+      const fieldName = pathParts[pathParts.length - 1];
       
       return (
         <div className={styles.fieldRow}>
@@ -189,12 +275,33 @@ export default function ContentManager() {
               <img src={value} alt={key} className={styles.previewImage} />
             )}
             <span className={isLongText ? styles.longText : ''}>{value}</span>
-            <button 
-              onClick={() => handleEdit(section, fullPath, value, isLongText ? 'textarea' : 'text')}
-              className={styles.editBtn}
-            >
-              ✏️
-            </button>
+            <div className={styles.fieldActions}>
+              <button 
+                onClick={() => handleEdit(section, fullPath, value, isLongText ? 'textarea' : 'text')}
+                className={styles.editBtn}
+                title="Edit content"
+              >
+                ✏️
+              </button>
+              {isImage && (
+                <button 
+                  onClick={() => handleEditImageStyle(section, parentPath, fieldName)}
+                  className={styles.styleBtn}
+                  title="Edit image style"
+                >
+                  🎨
+                </button>
+              )}
+              {!isImage && (fieldName === 'description' || fieldName === 'content' || fieldName === 'title' || fieldName === 'subtitle') && (
+                <button 
+                  onClick={() => handleEditTextStyle(section, parentPath, fieldName)}
+                  className={styles.styleBtn}
+                  title="Edit text style"
+                >
+                  📝
+                </button>
+              )}
+            </div>
           </div>
         </div>
       );
@@ -520,6 +627,219 @@ export default function ContentManager() {
                 </button>
                 <button 
                   onClick={() => setShowPageBuilder(false)}
+                  className={styles.cancelBtn}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Image Style Modal */}
+      {editingImageStyle && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <div className={styles.modalHeader}>
+              <h3>Edit Image Style</h3>
+              <button 
+                onClick={() => setEditingImageStyle(null)}
+                className={styles.closeBtn}
+              >
+                ×
+              </button>
+            </div>
+            
+            <div className={styles.modalBody}>
+              <div className={styles.styleForm}>
+                <div className={styles.formField}>
+                  <label>Width:</label>
+                  <input
+                    type="text"
+                    value={editingImageStyle.style.width || 'auto'}
+                    onChange={(e) => setEditingImageStyle({
+                      ...editingImageStyle,
+                      style: { ...editingImageStyle.style, width: e.target.value }
+                    })}
+                    placeholder="e.g., 300px, 50%, auto"
+                    className={styles.editInput}
+                  />
+                  <small>Examples: 300px, 50%, 100%, auto</small>
+                </div>
+                
+                <div className={styles.formField}>
+                  <label>Height:</label>
+                  <input
+                    type="text"
+                    value={editingImageStyle.style.height || 'auto'}
+                    onChange={(e) => setEditingImageStyle({
+                      ...editingImageStyle,
+                      style: { ...editingImageStyle.style, height: e.target.value }
+                    })}
+                    placeholder="e.g., 300px, 50%, auto"
+                    className={styles.editInput}
+                  />
+                  <small>Examples: 300px, 50%, 100%, auto</small>
+                </div>
+                
+                <div className={styles.formField}>
+                  <label>Border Radius (Roundness):</label>
+                  <input
+                    type="text"
+                    value={editingImageStyle.style.borderRadius || '0px'}
+                    onChange={(e) => setEditingImageStyle({
+                      ...editingImageStyle,
+                      style: { ...editingImageStyle.style, borderRadius: e.target.value }
+                    })}
+                    placeholder="e.g., 8px, 50%, 0px"
+                    className={styles.editInput}
+                  />
+                  <small>Examples: 8px (rounded corners), 50% (circular), 0px (square)</small>
+                </div>
+                
+                <div className={styles.formField}>
+                  <label>Object Fit:</label>
+                  <select
+                    value={editingImageStyle.style.objectFit || 'cover'}
+                    onChange={(e) => setEditingImageStyle({
+                      ...editingImageStyle,
+                      style: { ...editingImageStyle.style, objectFit: e.target.value as any }
+                    })}
+                    className={styles.editInput}
+                  >
+                    <option value="cover">Cover (fills area, may crop)</option>
+                    <option value="contain">Contain (fits within area)</option>
+                    <option value="fill">Fill (stretches to fill)</option>
+                    <option value="none">None (original size)</option>
+                    <option value="scale-down">Scale Down (smaller of none or contain)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div className={styles.modalActions}>
+                <button onClick={handleSaveImageStyle} className={styles.saveBtn}>
+                  Save Style
+                </button>
+                <button 
+                  onClick={() => setEditingImageStyle(null)}
+                  className={styles.cancelBtn}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Text Style Modal */}
+      {editingTextStyle && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <div className={styles.modalHeader}>
+              <h3>Edit Text Style</h3>
+              <button 
+                onClick={() => setEditingTextStyle(null)}
+                className={styles.closeBtn}
+              >
+                ×
+              </button>
+            </div>
+            
+            <div className={styles.modalBody}>
+              <div className={styles.styleForm}>
+                <div className={styles.formField}>
+                  <label>Font Size:</label>
+                  <input
+                    type="text"
+                    value={editingTextStyle.style.fontSize || '16px'}
+                    onChange={(e) => setEditingTextStyle({
+                      ...editingTextStyle,
+                      style: { ...editingTextStyle.style, fontSize: e.target.value }
+                    })}
+                    placeholder="e.g., 16px, 1.5rem, 1.2em"
+                    className={styles.editInput}
+                  />
+                  <small>Examples: 16px, 1.5rem, 1.2em</small>
+                </div>
+                
+                <div className={styles.formField}>
+                  <label>Font Family:</label>
+                  <select
+                    value={editingTextStyle.style.fontFamily || 'Titillium Web'}
+                    onChange={(e) => setEditingTextStyle({
+                      ...editingTextStyle,
+                      style: { ...editingTextStyle.style, fontFamily: e.target.value as any }
+                    })}
+                    className={styles.editInput}
+                  >
+                    <option value="Titillium Web">Titillium Web (Default)</option>
+                    <option value="Montserrat">Montserrat</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Helvetica">Helvetica</option>
+                    <option value="sans-serif">Sans Serif</option>
+                  </select>
+                </div>
+                
+                <div className={styles.formField}>
+                  <label>Font Weight:</label>
+                  <select
+                    value={editingTextStyle.style.fontWeight || '400'}
+                    onChange={(e) => setEditingTextStyle({
+                      ...editingTextStyle,
+                      style: { ...editingTextStyle.style, fontWeight: e.target.value as any }
+                    })}
+                    className={styles.editInput}
+                  >
+                    <option value="300">Light (300)</option>
+                    <option value="400">Normal (400)</option>
+                    <option value="500">Medium (500)</option>
+                    <option value="600">Semi-Bold (600)</option>
+                    <option value="700">Bold (700)</option>
+                    <option value="900">Black (900)</option>
+                  </select>
+                </div>
+                
+                <div className={styles.formField}>
+                  <label>Line Height:</label>
+                  <input
+                    type="text"
+                    value={editingTextStyle.style.lineHeight || 'normal'}
+                    onChange={(e) => setEditingTextStyle({
+                      ...editingTextStyle,
+                      style: { ...editingTextStyle.style, lineHeight: e.target.value }
+                    })}
+                    placeholder="e.g., 1.5, 24px, normal"
+                    className={styles.editInput}
+                  />
+                  <small>Examples: 1.5 (multiplier), 24px (fixed), normal</small>
+                </div>
+                
+                <div className={styles.formField}>
+                  <label>Text Formatting:</label>
+                  <select
+                    value={editingTextStyle.style.whiteSpace || 'normal'}
+                    onChange={(e) => setEditingTextStyle({
+                      ...editingTextStyle,
+                      style: { ...editingTextStyle.style, whiteSpace: e.target.value as any }
+                    })}
+                    className={styles.editInput}
+                  >
+                    <option value="normal">Normal (collapses whitespace)</option>
+                    <option value="pre-line">Preserve Line Breaks</option>
+                    <option value="pre-wrap">Preserve All Formatting</option>
+                  </select>
+                  <small>Use "Preserve Line Breaks" for paragraph formatting</small>
+                </div>
+              </div>
+              
+              <div className={styles.modalActions}>
+                <button onClick={handleSaveTextStyle} className={styles.saveBtn}>
+                  Save Style
+                </button>
+                <button 
+                  onClick={() => setEditingTextStyle(null)}
                   className={styles.cancelBtn}
                 >
                   Cancel
