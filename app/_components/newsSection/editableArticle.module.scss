@@ -12,6 +12,10 @@
   flex-direction: column;
   backdrop-filter: blur(10px);
 
+  &.clickable {
+    cursor: pointer;
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -324,6 +328,64 @@
   }
 }
 
+.contentEditor {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.toggleContent {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.fullContentEditor {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  border: 2px solid rgba(102, 126, 234, 0.3);
+
+  label {
+    display: block;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05rem;
+  }
+
+  > div {
+    min-height: 200px;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
 @media (max-width: 992px) {
   .articleCard.featured {
     flex-direction: column;
@@ -350,5 +412,9 @@
 
   .articleCard.featured .articleImage {
     height: 250px;
+  }
+  
+  .fullContentEditor {
+    padding: 1rem;
   }
 }

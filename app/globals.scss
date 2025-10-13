@@ -19,3 +19,10 @@ html {
   margin: 0;
   padding: 0;
 }
+
+// Account for fixed/absolute navbar height
+// Add this class to main content containers
+.page-content {
+  padding-top: 7vh;
+  min-height: 100vh;
+}

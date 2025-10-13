@@ -5,6 +5,7 @@
   font-family: 'Roboto', sans-serif;
   overflow-x: hidden;
   background: linear-gradient(180deg, #000000 0%, #111111 100%);
+  padding-top: 7vh; // Account for fixed navbar
 
   .container {
     max-width: 1400px;

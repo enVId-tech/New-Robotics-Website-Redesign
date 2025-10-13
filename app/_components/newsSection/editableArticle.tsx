@@ -38,6 +38,16 @@ export default function EditableArticle({
     const { isEditMode } = useEditMode();
     const [showFullContent, setShowFullContent] = useState(false);
 
+    const handleCardClick = (e: React.MouseEvent) => {
+        // Don't navigate if in edit mode or clicking on editable elements
+        if (isEditMode) return;
+        
+        const target = e.target as HTMLElement;
+        if (target.closest('a') || target.closest('button')) return;
+        
+        window.location.href = `/news/${article.id}`;
+    };
+
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', { 
@@ -60,7 +70,10 @@ export default function EditableArticle({
     const articlePath = `${basePath}[${index}]`;
 
     return (
-        <article className={`${styles.articleCard} ${isFeatured ? styles.featured : ''}`}>
+        <article 
+            className={`${styles.articleCard} ${isFeatured ? styles.featured : ''} ${!isEditMode ? styles.clickable : ''}`}
+            onClick={handleCardClick}
+        >
             {isEditMode && (
                 <button
                     className={styles.deleteButton}

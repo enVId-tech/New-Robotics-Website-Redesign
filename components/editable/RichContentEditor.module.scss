@@ -1,0 +1,148 @@
+.richContent {
+  color: white;
+  line-height: 1.8;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  p {
+    margin: 16px 0;
+  }
+}
+
+.richContentEditor {
+  .block {
+    position: relative;
+    margin: 12px 0;
+
+    .textBlock {
+      position: relative;
+
+      .textArea {
+        width: 100%;
+        min-height: 100px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: white;
+        padding: 12px;
+        font-family: inherit;
+        font-size: 16px;
+        line-height: 1.8;
+        resize: vertical;
+        transition: all 0.2s ease;
+
+        &:focus {
+          outline: none;
+          border-color: rgba(255, 0, 0, 0.5);
+          background: rgba(255, 255, 255, 0.08);
+        }
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      .insertImageButton {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        background: rgba(255, 0, 0, 0.1);
+        border: 1px solid rgba(255, 0, 0, 0.3);
+        color: white;
+        padding: 6px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        opacity: 0.6;
+
+        &:hover {
+          opacity: 1;
+          background: rgba(255, 0, 0, 0.2);
+          border-color: rgba(255, 0, 0, 0.5);
+          transform: translateY(-1px);
+        }
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
+    .imageBlock {
+      position: relative;
+      padding: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: rgba(255, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .imageControls {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+        align-items: center;
+
+        .widthSelector,
+        .alignmentSelector {
+          flex: 1;
+          background: rgba(0, 0, 0, 0.5);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: white;
+          padding: 6px 8px;
+          border-radius: 4px;
+          font-size: 12px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            border-color: rgba(255, 0, 0, 0.3);
+          }
+
+          &:focus {
+            outline: none;
+            border-color: rgba(255, 0, 0, 0.5);
+          }
+        }
+
+        .deleteButton {
+          background: rgba(255, 0, 0, 0.2);
+          border: 1px solid rgba(255, 0, 0, 0.3);
+          color: white;
+          padding: 4px 10px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 18px;
+          font-weight: bold;
+          transition: all 0.2s ease;
+          line-height: 1;
+
+          &:hover {
+            background: rgba(255, 0, 0, 0.4);
+            border-color: rgba(255, 0, 0, 0.5);
+          }
+        }
+      }
+    }
+  }
+}
