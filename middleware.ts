@@ -1,15 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(req: NextRequest) {
-  // Only run for /admin route
+  // Only run for /admin routes (but not /admin/login)
   if (req.nextUrl.pathname.startsWith('/admin')) {
-    // Check for a simple login cookie
-    const isLoggedIn = req.cookies.get('isLoggedIn')?.value === 'true';
-    if (!isLoggedIn) {
-      // Redirect to home if not logged in
-      return NextResponse.redirect(new URL('/', req.url));
+    // Allow access to login page without authentication
+    if (req.nextUrl.pathname === '/admin/login') {
+      return NextResponse.next();
+    }
+    
+    // Check for admin session cookie
+    const hasSession = req.cookies.get('admin_session');
+    
+    if (!hasSession) {
+      // Redirect to login page if not authenticated
+      return NextResponse.redirect(new URL('/admin/login', req.url));
     }
   }
+  
   return NextResponse.next();
 }
 
