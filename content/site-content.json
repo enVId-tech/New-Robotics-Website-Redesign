@@ -91,34 +91,40 @@
         "order": 2
       },
       {
+        "name": "News",
+        "href": "/news",
+        "visible": true,
+        "order": 3
+      },
+      {
         "name": "Sponsors",
         "href": "/sponsors",
         "visible": true,
-        "order": 3
+        "order": 4
       },
       {
         "name": "FRC",
         "href": "/frc",
         "visible": true,
-        "order": 4
+        "order": 5
       },
       {
         "name": "FTC",
         "href": "/ftc",
         "visible": true,
-        "order": 5
+        "order": 6
       },
       {
         "name": "VEX",
         "href": "/vex",
         "visible": true,
-        "order": 6
+        "order": 7
       },
       {
         "name": "Contact",
         "href": "/contact",
         "visible": true,
-        "order": 7
+        "order": 8
       }
     ]
   },
@@ -276,6 +282,81 @@
       "image": "/images/robotics/group.jpeg"
     }
   ],
+  "news": {
+    "hero": {
+      "title": "Latest News & Updates",
+      "subtitle": "Stay informed with our team's achievements",
+      "description": "Stay up to date with our team's achievements and activities",
+      "backgroundImage": "/images/FrontPageBanner.png"
+    },
+    "articles": [
+      {
+        "id": "1",
+        "title": "FRC Team 4079 Wins Regional Championship",
+        "excerpt": "Our FRC team achieved first place at the Los Angeles Regional, securing a spot at the World Championships.",
+        "content": "After months of preparation and hard work, FRC Team 4079 'Quantum Leap' has won the Los Angeles Regional Championship...",
+        "author": "Erick Tran",
+        "publishDate": "2024-03-15",
+        "category": "Achievement",
+        "image": "/images/comp/FRC_1.jpg",
+        "tags": ["FRC", "Championship", "Regional"],
+        "link": "",
+        "linkText": "Read More"
+      },
+      {
+        "id": "2",
+        "title": "New VEX Season Kicks Off",
+        "excerpt": "Our VEX teams are ready for the new competitive season with innovative robot designs.",
+        "content": "The new VEX season brings exciting challenges and our teams have been working hard on their robot designs...",
+        "author": "Erick Tran",
+        "publishDate": "2024-03-10",
+        "category": "Competition",
+        "image": "",
+        "tags": ["VEX", "Season", "Design"],
+        "link": "",
+        "linkText": "Learn More"
+      },
+      {
+        "id": "3",
+        "title": "STEM Outreach Program Reaches 500 Students",
+        "excerpt": "Our community outreach program has successfully engaged over 500 local students in STEM activities.",
+        "content": "Through various workshops and presentations, our team has inspired hundreds of students to explore STEM fields...",
+        "author": "Erick Tran",
+        "publishDate": "2024-03-05",
+        "category": "Event",
+        "image": "",
+        "tags": ["Outreach", "STEM", "Community"],
+        "link": "",
+        "linkText": "View Details"
+      },
+      {
+        "id": "4",
+        "title": "FTC Teams Advance to State Championship",
+        "excerpt": "Both of our FTC teams have qualified for the state championship tournament.",
+        "content": "After impressive performances at regionals, teams 19812 and 23796 are heading to state championships...",
+        "author": "Erick Tran",
+        "publishDate": "2024-02-28",
+        "category": "Achievement",
+        "image": "/images/robotics/competition_working.jpg",
+        "tags": ["FTC", "State", "Qualification"],
+        "link": "",
+        "linkText": "Read More"
+      },
+      {
+        "id": "5",
+        "title": "Meet Our New Team Members",
+        "excerpt": "We welcome several new talented students to our robotics family this semester.",
+        "content": "This semester brings fresh faces and new perspectives to our robotics teams...",
+        "author": "Erick Tran",
+        "publishDate": "2024-02-20",
+        "category": "General",
+        "image": "",
+        "tags": ["Team", "Members", "Welcome"],
+        "link": "",
+        "linkText": "Meet the Team"
+      }
+    ]
+  },
   "footer": {
     "branding": {
       "logo": "/logos/OARoboticsLogo_24-25.webp",

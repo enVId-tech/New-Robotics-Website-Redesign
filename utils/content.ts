@@ -346,6 +346,28 @@ export interface SiteContent {
       }>;
     };
   };
+  news: {
+    hero: {
+      title: string;
+      subtitle: string;
+      description: string;
+      backgroundImage?: string;
+    };
+    articles: Array<{
+      id: string;
+      title: string;
+      excerpt: string;
+      content: string;
+      author: string;
+      publishDate: string;
+      category: 'Competition' | 'Achievement' | 'Event' | 'General';
+      image?: string;
+      imageStyle?: ImageStyle;
+      tags: string[];
+      link?: string;
+      linkText?: string;
+    }>;
+  };
   footer: {
     branding: {
       logo: string;

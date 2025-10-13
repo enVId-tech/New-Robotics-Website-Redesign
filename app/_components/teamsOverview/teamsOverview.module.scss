@@ -1,12 +1,21 @@
 .teamsOverviewSection {
     margin: 2rem auto;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+
+    .sectionTitle {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
     h2 {
         color: red;
         text-align: center;
         font-weight: 900;
         font-size: 2.5rem;
         margin-bottom: 2rem;
+        
     }
 
     .teamsGrid {

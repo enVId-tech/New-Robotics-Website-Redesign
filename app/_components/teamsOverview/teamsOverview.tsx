@@ -39,6 +39,7 @@ export default function TeamsOverview() {
   return (
     <section className={styles.teamsOverviewSection}>
       <EditableText 
+        className={styles.sectionTitle}
         value="Meet Our Teams"
         path="teamsOverview.sectionTitle"
         as="h2"
