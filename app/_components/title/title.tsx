@@ -44,19 +44,61 @@ export default function Title({
         bannerValue = bannerValue?.[part];
     }
     
-    // If bannerValue is an object with src, use it; otherwise use default
-    const bannerSrc = (bannerValue && typeof bannerValue === 'object' && 'src' in bannerValue) 
-        ? bannerValue.src 
-        : img1.src;
+    // Extract src and style from bannerValue
+    let bannerSrc = img1.src;
+    let bannerStyle: any = {};
+    
+    if (bannerValue) {
+        if (typeof bannerValue === 'string') {
+            bannerSrc = bannerValue;
+        } else if (typeof bannerValue === 'object') {
+            bannerSrc = bannerValue.src || img1.src;
+            bannerStyle = bannerValue.style || {};
+        }
+    }
+
+    // Convert objectPosition style to backgroundPosition
+    let backgroundPosition = `center ${bgParallax * -0.5 - bgShift}px`;
+    if (bannerStyle.objectPosition) {
+        // objectPosition format: "50% 50%" or "center center"
+        // Extract just the position values without parallax for styled banners
+        backgroundPosition = bannerStyle.objectPosition;
+    } else if (!isEditMode) {
+        // Only apply parallax if no custom position is set and not in edit mode
+        backgroundPosition = `center ${bgParallax * -0.5 - bgShift}px`;
+    }
+
+    // Map objectFit to backgroundSize
+    let backgroundSize = "cover";
+    if (bannerStyle.objectFit) {
+        switch (bannerStyle.objectFit) {
+            case 'contain':
+                backgroundSize = 'contain';
+                break;
+            case 'fill':
+                backgroundSize = '100% 100%';
+                break;
+            case 'none':
+                backgroundSize = 'auto';
+                break;
+            case 'scale-down':
+                backgroundSize = 'contain';
+                break;
+            default:
+                backgroundSize = 'cover';
+        }
+    }
 
     // Make a parallax effect with the background image (zoom in the background image to make it possible)
-    const styleBanner: object = {
-        backgroundPosition: `center ${bgParallax * -0.5 - bgShift}px`,
-        backgroundSize: "cover",
+    const styleBanner: React.CSSProperties = {
+        backgroundPosition: backgroundPosition,
+        backgroundSize: backgroundSize,
         backgroundImage: `url(${bannerSrc})`,
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
     }
+
+    console.log('[Title] Banner style applied:', { bannerSrc, bannerStyle, styleBanner });
 
     const handleBannerUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -135,6 +177,19 @@ export default function Title({
                             </svg>
                             <span>Change Banner</span>
                         </button>
+                        
+                        {/* Small preview for style editing */}
+                        <div className={styles.bannerPreview}>
+                            <EditableImage
+                                src={bannerSrc}
+                                alt="Banner Background"
+                                path={bannerPath}
+                                width={80}
+                                height={50}
+                                className={styles.previewImage}
+                            />
+                            <span className={styles.previewLabel}>Edit Style</span>
+                        </div>
                     </div>
                 )}
                 {

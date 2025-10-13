@@ -2,10 +2,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useEditMode } from '@/contexts/EditModeContext';
+import { useContent } from '@/hooks/useContent';
 import styles from './EditableImage.module.scss';
 import Image from 'next/image';
 import StyleEditor from './StyleEditor';
 import { ImageStyle } from '@/utils/content';
+import { getContentImageStyle } from '@/utils/contentHelpers';
 
 interface EditableImageProps {
   src: string;
@@ -33,21 +35,52 @@ export default function EditableImage({
   fill,
   objectFit = 'cover',
   useNextImage = false,
-  style: initialStyle = {},
+  style: initialStyle,
   onStyleChange,
 }: EditableImageProps) {
   const { isEditMode, addPendingChange, pendingChanges } = useEditMode();
+  const { content } = useContent();
   const [localSrc, setLocalSrc] = useState(src);
   const [isHovered, setIsHovered] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [showStyleEditor, setShowStyleEditor] = useState(false);
   const [styleEditorPosition, setStyleEditorPosition] = useState({ x: 0, y: 0 });
-  const [localStyle, setLocalStyle] = useState<ImageStyle>(initialStyle);
+  const [localStyle, setLocalStyle] = useState<ImageStyle>(initialStyle || {});
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
   const [mounted, setMounted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const hasChanges = pendingChanges.has(path) || pendingChanges.has(`${path}.style`);
+
+  // Load style from content JSON using the path
+  useEffect(() => {
+    if (!initialStyle && content && path) {
+      // Navigate through the content object using the path
+      const keys = path.split('.').flatMap(key => {
+        const arrayMatch = key.match(/^([^\[]+)\[(\d+)\]$/);
+        if (arrayMatch) {
+          return [arrayMatch[1], arrayMatch[2]];
+        }
+        return key;
+      });
+      
+      let current: any = content;
+      for (const key of keys) {
+        if (current && typeof current === 'object' && key in current) {
+          current = current[key];
+        } else {
+          current = null;
+          break;
+        }
+      }
+      
+      // Extract style from the value
+      const style = getContentImageStyle(current);
+      if (style) {
+        setLocalStyle(style);
+      }
+    }
+  }, [content, path, initialStyle]);
 
   // Track if component is mounted for portal
   useEffect(() => {

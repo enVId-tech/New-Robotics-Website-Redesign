@@ -2,9 +2,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useEditMode } from '@/contexts/EditModeContext';
+import { useContent } from '@/hooks/useContent';
 import styles from './EditableText.module.scss';
 import StyleEditor from './StyleEditor';
 import { TextStyle } from '@/utils/content';
+import { getContentStyle } from '@/utils/contentHelpers';
 
 interface EditableTextProps {
   value: string;
@@ -26,22 +28,55 @@ export default function EditableText({
   multiline = false,
   placeholder = 'Click to edit...',
   as: Component = 'div',
-  style: initialStyle = {},
+  style: initialStyle,
   onStyleChange,
 }: EditableTextProps) {
   const { isEditMode, addPendingChange, pendingChanges } = useEditMode();
+  const { content } = useContent();
   const [isEditing, setIsEditing] = useState(false);
   const [localValue, setLocalValue] = useState(value);
   const [hasChanges, setHasChanges] = useState(false);
   const [showStyleEditor, setShowStyleEditor] = useState(false);
   const [styleEditorPosition, setStyleEditorPosition] = useState({ x: 0, y: 0 });
-  const [localStyle, setLocalStyle] = useState<TextStyle>(initialStyle);
+  const [localStyle, setLocalStyle] = useState<TextStyle>(initialStyle || {});
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
   const [mounted, setMounted] = useState(false);
   const editRef = useRef<HTMLDivElement>(null);
   const prevStyleRef = useRef<string>('');
   const prevValueRef = useRef<string>(value);
   const isFirstFocusRef = useRef(false);
+
+  // Load style from content JSON using the path
+  useEffect(() => {
+    if (!initialStyle && content && path) {
+      // Navigate through the content object using the path
+      const keys = path.split('.').flatMap(key => {
+        const arrayMatch = key.match(/^([^\[]+)\[(\d+)\]$/);
+        if (arrayMatch) {
+          return [arrayMatch[1], arrayMatch[2]];
+        }
+        return key;
+      });
+      
+      let current: any = content;
+      for (const key of keys) {
+        if (current && typeof current === 'object' && key in current) {
+          current = current[key];
+        } else {
+          current = null;
+          break;
+        }
+      }
+      
+      // Extract style from the value
+      const style = getContentStyle(current);
+      if (style) {
+        console.log(`[EditableText] Loading style for path "${path}":`, style);
+        setLocalStyle(style);
+        prevStyleRef.current = JSON.stringify(style);
+      }
+    }
+  }, [content, path, initialStyle]);
 
   // Track if component is mounted for portal
   useEffect(() => {
@@ -60,10 +95,12 @@ export default function EditableText({
 
   // Update local style when prop changes (use JSON comparison to avoid infinite loops)
   useEffect(() => {
-    const styleString = JSON.stringify(initialStyle);
-    if (styleString !== prevStyleRef.current) {
-      setLocalStyle(initialStyle);
-      prevStyleRef.current = styleString;
+    if (initialStyle) {
+      const styleString = JSON.stringify(initialStyle);
+      if (styleString !== prevStyleRef.current) {
+        setLocalStyle(initialStyle);
+        prevStyleRef.current = styleString;
+      }
     }
   }, [initialStyle]);
 
