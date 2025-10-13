@@ -37,11 +37,14 @@ export default function EditableText({
   const [localStyle, setLocalStyle] = useState<TextStyle>(initialStyle);
   const editRef = useRef<HTMLDivElement>(null);
   const prevStyleRef = useRef<string>('');
+  const isFirstFocusRef = useRef(false);
 
-  // Update local value when prop changes
+  // Update local value when prop changes (only when not editing)
   useEffect(() => {
-    setLocalValue(value);
-  }, [value]);
+    if (!isEditing) {
+      setLocalValue(value);
+    }
+  }, [value, isEditing]);
 
   // Update local style when prop changes (use JSON comparison to avoid infinite loops)
   useEffect(() => {
@@ -59,11 +62,8 @@ export default function EditableText({
 
   const handleClick = () => {
     if (isEditMode && !isEditing) {
+      isFirstFocusRef.current = true;
       setIsEditing(true);
-      // Clear placeholder on first click
-      if (editRef.current && !localValue) {
-        editRef.current.textContent = '';
-      }
     }
   };
 
@@ -78,8 +78,8 @@ export default function EditableText({
   };
 
   const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
-    const newValue = e.currentTarget.textContent || '';
-    setLocalValue(newValue);
+    // Don't update localValue during input to avoid re-renders
+    // The actual value is stored in the contentEditable element
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -113,10 +113,12 @@ export default function EditableText({
 
   // Focus when entering edit mode and position cursor at the end
   useEffect(() => {
-    if (isEditing && editRef.current) {
+    if (isEditing && editRef.current && isFirstFocusRef.current) {
+      isFirstFocusRef.current = false;
       editRef.current.focus();
       
-      if (!localValue) {
+      const currentValue = editRef.current.textContent || '';
+      if (!currentValue) {
         // Clear placeholder text when entering edit mode
         editRef.current.textContent = '';
       } else {
@@ -129,7 +131,7 @@ export default function EditableText({
         selection?.addRange(range);
       }
     }
-  }, [isEditing, localValue]);
+  }, [isEditing]);
 
   const combinedClassName = `
     ${className}
