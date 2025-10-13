@@ -111,20 +111,22 @@ export default function EditableText({
     onStyleChange?.(newStyle);
   };
 
-  // Focus and select all text when entering edit mode
+  // Focus when entering edit mode and position cursor at the end
   useEffect(() => {
     if (isEditing && editRef.current) {
       editRef.current.focus();
-      // Only select text if there's actual content (not placeholder)
-      if (localValue) {
-        const range = document.createRange();
-        range.selectNodeContents(editRef.current);
-        const selection = window.getSelection();
-        selection?.removeAllRanges();
-        selection?.addRange(range);
-      } else {
+      
+      if (!localValue) {
         // Clear placeholder text when entering edit mode
         editRef.current.textContent = '';
+      } else {
+        // Move cursor to the end of the text instead of selecting all
+        const range = document.createRange();
+        const selection = window.getSelection();
+        range.selectNodeContents(editRef.current);
+        range.collapse(false); // Collapse to end (true = start, false = end)
+        selection?.removeAllRanges();
+        selection?.addRange(range);
       }
     }
   }, [isEditing, localValue]);
