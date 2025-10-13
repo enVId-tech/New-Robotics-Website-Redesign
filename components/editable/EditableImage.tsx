@@ -93,16 +93,15 @@ export default function EditableImage({
     }
   };
 
-  const combinedClassName = `
+  const wrapperClassName = `
     ${styles.editableImage}
-    ${className}
     ${isEditMode ? styles.editable : ''}
     ${hasChanges ? styles.hasChanges : ''}
   `.trim();
 
   return (
     <div
-      className={combinedClassName}
+      className={wrapperClassName}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       data-path={path}

@@ -51,10 +51,18 @@
       align-items: flex-start;
       background-color: black;
 
-      .sloganImage {
+      .sloganImage,
+      > div img {
         width: 90%;
         height: auto;
         border-radius: 25px;
+      }
+      
+      // Make EditableImage wrapper fit the layout
+      > div:has(img) {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
       }
 
       .sloganTitle {
@@ -68,6 +76,7 @@
         width: min-content;
         margin-left: 0.9vw;
         letter-spacing: 0.1rem;
+        z-index: 10;
       }
     }
   }
