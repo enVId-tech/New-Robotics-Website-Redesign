@@ -204,6 +204,7 @@ export default function EditableImage({
     height: localStyle.height || (height ? `${height}px` : 'auto'),
     borderRadius: localStyle.borderRadius,
     objectFit: localStyle.objectFit || objectFit,
+    objectPosition: localStyle.objectPosition,
   };
 
   return (
@@ -222,7 +223,11 @@ export default function EditableImage({
               src={localSrc}
               alt={alt}
               fill
-              style={{ objectFit: imageStyle.objectFit as any, borderRadius: imageStyle.borderRadius }}
+              style={{ 
+                objectFit: imageStyle.objectFit as any, 
+                objectPosition: imageStyle.objectPosition,
+                borderRadius: imageStyle.borderRadius 
+              }}
               className={className}
             />
           ) : (
@@ -231,7 +236,11 @@ export default function EditableImage({
               alt={alt}
               width={width || 500}
               height={height || 300}
-              style={{ objectFit: imageStyle.objectFit as any, borderRadius: imageStyle.borderRadius }}
+              style={{ 
+                objectFit: imageStyle.objectFit as any, 
+                objectPosition: imageStyle.objectPosition,
+                borderRadius: imageStyle.borderRadius 
+              }}
               className={className}
             />
           )

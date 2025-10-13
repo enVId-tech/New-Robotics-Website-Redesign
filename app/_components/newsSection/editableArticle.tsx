@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import EditableText from '@/components/editable/EditableText';
 import EditableImage from '@/components/editable/EditableImage';
 import { useEditMode } from '@/contexts/EditModeContext';
@@ -36,6 +36,7 @@ export default function EditableArticle({
     onDelete
 }: EditableArticleProps): React.ReactElement {
     const { isEditMode } = useEditMode();
+    const [showFullContent, setShowFullContent] = useState(false);
 
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
@@ -139,6 +140,30 @@ export default function EditableArticle({
                         multiline
                     />
                 </div>
+                
+                {isEditMode && (
+                    <div className={styles.contentEditor}>
+                        <button
+                            className={styles.toggleContent}
+                            onClick={() => setShowFullContent(!showFullContent)}
+                        >
+                            {showFullContent ? '📝 Hide Full Content' : '📝 Edit Full Content'}
+                        </button>
+                        
+                        {showFullContent && (
+                            <div className={styles.fullContentEditor}>
+                                <label>Full Article Content:</label>
+                                <EditableText
+                                    value={article.content}
+                                    path={`${articlePath}.content`}
+                                    as="div"
+                                    multiline
+                                    placeholder="Write the full article content here..."
+                                />
+                            </div>
+                        )}
+                    </div>
+                )}
                 
                 <div className={styles.articleTags}>
                     {article.tags.slice(0, 3).map((tag, tagIndex) => (

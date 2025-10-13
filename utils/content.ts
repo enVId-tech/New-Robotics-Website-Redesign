@@ -8,6 +8,7 @@ export interface ImageStyle {
   height?: string;
   borderRadius?: string;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  objectPosition?: string; // e.g., 'center', 'top', 'bottom', 'left', 'right', '50% 50%'
 }
 
 // Style properties for text

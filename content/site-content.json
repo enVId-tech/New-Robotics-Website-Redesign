@@ -18,11 +18,11 @@
     },
     "aboutBrief": {
       "title": "About Us",
-      "description": "Oxford Academy Robotics is a student-run organization that competes in the FIRST Robotics Competition (FRC), FIRST Tech Challenge (FTC), and VEX Robotics Competition. Our mission is to inspire students to pursue careers in STEM fields by providing them with the opportunity to learn, compete, and thrive in a supportive environment.",
-      "image": "/images/comp/BB2024_2.jpg"
+      "description": "Oxford Academy Robotics is a student-run organization that competes in the FIRST Robotics Competition (FRC), FIRST Tech Challenge (FTC), and VEX Robotics Competition. Our mission is to inspire students to pursue careers in STEM fields by providing them with the opportunity to learn, compete, and thrive in a supportive environm",
+      "image": "/images/638764193529945765_Screenshot2025-02-26112950.png"
     },
     "stats": {
-      "title": "Our Impact by the Numbers",
+      "title": "Our Impact by the Numers",
       "items": [
         {
           "id": "1",
@@ -91,7 +91,7 @@
         "order": 2
       },
       {
-        "name": "News",
+        "name": "Media",
         "href": "/news",
         "visible": true,
         "order": 3
@@ -343,7 +343,7 @@
       "logo": "/logos/VEXLogo.png",
       "name": "VEX Robotics",
       "description": "VEX teams focus on rapid prototyping and strategic gameplay with standardized robot kits.",
-      "founded": "2009",
+      "founded": "2012",
       "link": "/vex"
     }
   ],

@@ -40,6 +40,7 @@ export default function EditableText({
   const [mounted, setMounted] = useState(false);
   const editRef = useRef<HTMLDivElement>(null);
   const prevStyleRef = useRef<string>('');
+  const prevValueRef = useRef<string>(value);
   const isFirstFocusRef = useRef(false);
 
   // Track if component is mounted for portal
@@ -48,10 +49,12 @@ export default function EditableText({
     return () => setMounted(false);
   }, []);
 
-  // Update local value when prop changes (only when not editing)
+  // Update local value when prop changes
   useEffect(() => {
-    if (!isEditing) {
+    // Always update if the value from props changes and we're not currently editing
+    if (!isEditing && value !== prevValueRef.current) {
       setLocalValue(value);
+      prevValueRef.current = value;
     }
   }, [value, isEditing]);
 

@@ -244,6 +244,77 @@ export default function StyleEditor({
                 <button onClick={() => handleReset('objectFit')} title="Reset">↺</button>
               </div>
             </div>
+
+            {/* Object Position */}
+            <div className={styles.property}>
+              <label>Object Position</label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {/* Horizontal Position */}
+                <div className={styles.inputGroup}>
+                  <select
+                    value={(() => {
+                      const pos = (localStyles as ImageStyle).objectPosition || 'center center';
+                      const parts = pos.split(' ');
+                      return parts[0] || 'center';
+                    })()}
+                    onChange={(e) => {
+                      const currentPos = (localStyles as ImageStyle).objectPosition || 'center center';
+                      const parts = currentPos.split(' ');
+                      const vertical = parts[1] || 'center';
+                      handleChange('objectPosition', `${e.target.value} ${vertical}`);
+                    }}
+                  >
+                    <option value="left">Left</option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                    <option value="0%">0%</option>
+                    <option value="25%">25%</option>
+                    <option value="50%">50%</option>
+                    <option value="75%">75%</option>
+                    <option value="100%">100%</option>
+                  </select>
+                  <span style={{ padding: '0 8px', color: '#666' }}>Horizontal</span>
+                </div>
+                
+                {/* Vertical Position */}
+                <div className={styles.inputGroup}>
+                  <select
+                    value={(() => {
+                      const pos = (localStyles as ImageStyle).objectPosition || 'center center';
+                      const parts = pos.split(' ');
+                      return parts[1] || 'center';
+                    })()}
+                    onChange={(e) => {
+                      const currentPos = (localStyles as ImageStyle).objectPosition || 'center center';
+                      const parts = currentPos.split(' ');
+                      const horizontal = parts[0] || 'center';
+                      handleChange('objectPosition', `${horizontal} ${e.target.value}`);
+                    }}
+                  >
+                    <option value="top">Top</option>
+                    <option value="center">Center</option>
+                    <option value="bottom">Bottom</option>
+                    <option value="0%">0%</option>
+                    <option value="25%">25%</option>
+                    <option value="50%">50%</option>
+                    <option value="75%">75%</option>
+                    <option value="100%">100%</option>
+                  </select>
+                  <span style={{ padding: '0 8px', color: '#666' }}>Vertical</span>
+                </div>
+                
+                {/* Custom Input */}
+                <div className={styles.inputGroup}>
+                  <input
+                    type="text"
+                    value={(localStyles as ImageStyle).objectPosition || ''}
+                    onChange={(e) => handleChange('objectPosition', e.target.value)}
+                    placeholder="Custom: e.g., 50% 25%"
+                  />
+                  <button onClick={() => handleReset('objectPosition')} title="Reset">↺</button>
+                </div>
+              </div>
+            </div>
           </>
         )}
       </div>
