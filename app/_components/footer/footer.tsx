@@ -1,24 +1,49 @@
-"use client";
 import React from "react";
 import styles from "@/app/_components/footer/footer.module.scss";
-import OARoboticsLogo from "@/public/logos/OARoboticsLogo_24-25.webp";
 import {TW_600} from "@/utils/globalFonts";
+import { getServerContent } from "@/utils/content";
 
 type FooterProps = {
     children?: React.ReactNode;
 }
 
-export default function Footer({children}: FooterProps): React.ReactElement {
+export default async function Footer({children}: FooterProps): Promise<React.ReactElement> {
+    const content = await getServerContent();
+    
+    // Fallback to defaults if CMS content not available
+    const footerData = content?.footer || {
+        branding: {
+            logo: "/logos/OARoboticsLogo_24-25.webp",
+            logoAlt: "OA Robotics Logo",
+            organizationName: "OA Robotics",
+            teamName: "Quantum Leap",
+            schoolName: "Oxford Academy"
+        },
+        contact: {
+            address: "5172 Orange Avenue",
+            addressLine2: "Cypress, CA 90630"
+        },
+        quickLinks: [],
+        social: [],
+        legal: {
+            copyright: "© 2025 OA Robotics. All rights reserved."
+        }
+    };
+
     return (
         <footer className={styles.footer}>
             <div className={styles.footerContent}>
                 <div className={styles.footerTop}>
                     <div className={styles.footerDetails}>
                         <div className={`${styles.orgDetails} ${TW_600}`}>
-                            <h2><img src={OARoboticsLogo.src} alt={"OA Robotics"}/>OA Robotics</h2>
-                            <p>Quantum Leap</p>
-                            <p>Oxford Academy</p>
-                            <p>5172 Orange Avenue</p>
+                            <h2>
+                                <img src={footerData.branding.logo} alt={footerData.branding.logoAlt}/>
+                                {footerData.branding.organizationName}
+                            </h2>
+                            <p>{footerData.branding.teamName}</p>
+                            <p>{footerData.branding.schoolName}</p>
+                            <p>{footerData.contact.address}</p>
+                            {footerData.contact.addressLine2 && <p>{footerData.contact.addressLine2}</p>}
                         </div>
 
                         <div className={styles.footerSocials}>
@@ -27,31 +52,31 @@ export default function Footer({children}: FooterProps): React.ReactElement {
 
                     <div className={`${styles.footerLinks} ${TW_600}`}>
                         <h1>Quick Links</h1>
-                        <a href={"/"}>Home</a>
-                        <a href={"/about"}>About</a>
-                        {/* <a href={"/team"}>Team</a> */}
-                        {/* <a href={"/news"}>News</a> */}
-                        <a href={"/frc"}>FRC</a>
-                        <a href={"/ftc"}>FTC</a>
-                        <a href={"/vex"}>VEX</a>
-                        <a href={"/contact"}>Contact</a>
+                        {footerData.quickLinks.map((link, index) => (
+                            <a key={index} href={link.href}>{link.name}</a>
+                        ))}
                     </div>
 
                     <div className={`${styles.footerLinks} ${TW_600}`}>
                         <h1>Our Socials</h1>
-                        <a href={"https://www.instagram.com/oa_robotics/"} target="_blank">Instagram</a>
-                        <a href={"https://www.youtube.com/@Team-QuantumLeap"} target="_blank">YouTube</a>
+                        {footerData.social.map((social, index) => (
+                            <a key={index} href={social.url} target="_blank" rel="noopener noreferrer">
+                                {social.platform}
+                            </a>
+                        ))}
                     </div>
                 </div>
 
-
                 <div className={styles.footerBottom}>
                     <div className={`${styles.footerBottomLinks} ${TW_600}`}>
-                        <p>&copy; 2025 OA Robotics</p>
-                        <p>Website by <a href="https://github.com/enVId-tech" target="_blank">Erick Tran</a></p>
-                        <p>Website in BETA - Bugs Beware!</p>
+                        <p>{footerData.legal.copyright}</p>
+                        {footerData.legal.websiteDeveloper && (
+                            <p>{footerData.legal.websiteDeveloper}</p>
+                        )}
+                        {footerData.legal.betaNotice && (
+                            <p>{footerData.legal.betaNotice}</p>
+                        )}
                     </div>
-
                 </div>
             </div>
 

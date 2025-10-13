@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import styles from "@/app/_components/navbar/navbar.module.scss";
-import image1 from "@/public/logos/OARoboticsLogo_24-25.webp";
 import Link from "next/link";
 import Image from "next/image";
 import {M_300, M_500} from "@/utils/globalFonts";
@@ -35,6 +34,13 @@ export default function Navbar({ children, isFixed = true }: NavbarProps): React
         right: 0,
         zIndex: 1000,
     }
+
+    // Use branding from CMS or fallback to defaults
+    const branding = content?.site || {
+        logo: "/logos/OARoboticsLogo_24-25.webp",
+        logoAlt: "OA Robotics Logo",
+        organizationName: "OA Robotics"
+    };
 
     // Use navigation from CMS or fallback to default
     const dynamicLinks: DynamicLink[] = content?.navigation?.items?.filter(item => item.visible)
@@ -74,8 +80,8 @@ export default function Navbar({ children, isFixed = true }: NavbarProps): React
             <nav className={`${styles.navbar}`} style={isFixed ? styleFixed : {styleNotFixed}}>
                 <div className={styles.container}>
                     <div className={styles.left} onClick={(): string => window.location.href = "/"}>
-                        <Image src={image1.src} alt={"Oxford Academy Robotics Logo"} width={50} height={50}/>
-                        <h1 className={M_500}>OA Robotics</h1>
+                        <Image src={branding.logo} alt={branding.logoAlt} width={50} height={50}/>
+                        <h1 className={M_500}>{branding.organizationName}</h1>
                     </div>
                     {children}
                     <div className={`${styles.right} ${M_300}`}>

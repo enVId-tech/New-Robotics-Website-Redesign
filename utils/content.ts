@@ -25,6 +25,10 @@ export interface SiteContent {
     tagline: string;  
     description: string;
     keywords: string;
+    logo: string;
+    logoAlt: string;
+    organizationName: string;
+    organizationFullName?: string;
   };
   customPages?: {
     [key: string]: {
@@ -133,6 +137,58 @@ export interface SiteContent {
       description: string;
       backgroundImage: string;
       stats: Record<string, string>;
+    };
+  };
+  teamsOverview: Array<{
+    id: string;
+    logo: string;
+    name: string;
+    description: string;
+    founded: string;
+    link: string;
+    logoStyle?: ImageStyle;
+    nameStyle?: TextStyle;
+    descriptionStyle?: TextStyle;
+  }>;
+  teamMembers: Array<{
+    id: string;
+    name: string;
+    role: string;
+    grade: string;
+    bio: string;
+    skills: string[];
+    team: string;
+    image: string;
+    imageStyle?: ImageStyle;
+    nameStyle?: TextStyle;
+    roleStyle?: TextStyle;
+    bioStyle?: TextStyle;
+  }>;
+  footer: {
+    branding: {
+      logo: string;
+      logoAlt: string;
+      organizationName: string;
+      teamName: string;
+      schoolName: string;
+    };
+    contact: {
+      address: string;
+      addressLine2?: string;
+    };
+    quickLinks: Array<{
+      name: string;
+      href: string;
+    }>;
+    social: Array<{
+      platform: string;
+      url: string;
+      icon: string;
+    }>;
+    legal: {
+      copyright: string;
+      websiteDeveloper?: string;
+      betaNotice?: string;
     };
   };
 }

@@ -2,6 +2,7 @@
 import React from 'react';
 import styles from './teamMembers.module.scss';
 import { TW_600, TW_900 } from '@/utils/globalFonts';
+import { useContent } from '@/hooks/useContent';
 
 type TeamMember = {
     id: string;
@@ -51,12 +52,16 @@ const defaultMembers: TeamMember[] = [
 
 export default function TeamMembers({ 
     children, 
-    members = defaultMembers, 
+    members: propsMembers,
     title = "Meet Our Team",
     showFilter = true 
 }: TeamMembersProps): React.ReactElement {
+    const { content } = useContent();
     const [selectedTeam, setSelectedTeam] = React.useState<string>('All');
-    const [filteredMembers, setFilteredMembers] = React.useState<TeamMember[]>(members);
+    const [filteredMembers, setFilteredMembers] = React.useState<TeamMember[]>([]);
+
+    // Use members from props, CMS, or fallback to defaults
+    const members = propsMembers || (content?.teamMembers as TeamMember[]) || defaultMembers;
 
     const teamTypes = ['All', 'Leadership', 'FRC', 'FTC', 'VEX'];
 

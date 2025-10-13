@@ -3,7 +3,11 @@
     "title": "Oxford Academy Robotics",
     "tagline": "Learn. Compete. Thrive.",
     "description": "Oxford Academy Robotics - Excellence in FRC, FTC, and VEX robotics competitions. Join our award-winning STEM education programs.",
-    "keywords": "Oxford Academy Robotics, FRC Team 4079, FTC Teams, VEX Teams, STEM Education, Robotics Competition"
+    "keywords": "Oxford Academy Robotics, FRC Team 4079, FTC Teams, VEX Teams, STEM Education, Robotics Competition",
+    "logo": "/logos/OARoboticsLogo_24-25.webp",
+    "logoAlt": "OA Robotics Logo",
+    "organizationName": "OA Robotics",
+    "organizationFullName": "Oxford Academy Robotics"
   },
   "homepage": {
     "hero": {
@@ -210,6 +214,106 @@
         "maxSize": "18x18x18 inches",
         "programmingLanguage": "C++/Python"
       }
+    }
+  },
+  "teamsOverview": [
+    {
+      "id": "frc",
+      "logo": "/logos/FRCLogo.png",
+      "name": "FRC Team 4079",
+      "description": "Our FRC team competes in the FIRST Robotics Competition, building 120+ pound robots to play challenging games in intense competitions.",
+      "founded": "2012",
+      "link": "/frc"
+    },
+    {
+      "id": "ftc",
+      "logo": "/logos/FTCLogo.png",
+      "name": "FTC Teams 19812 & 23796",
+      "description": "Our FTC teams design, build, and program smaller robots while learning valuable engineering and teamwork skills.",
+      "founded": "2021",
+      "link": "/ftc"
+    },
+    {
+      "id": "vex",
+      "logo": "/logos/VEXLogo.png",
+      "name": "VEX Robotics",
+      "description": "VEX teams focus on rapid prototyping and strategic gameplay with standardized robot kits.",
+      "founded": "2009",
+      "link": "/vex"
+    }
+  ],
+  "teamMembers": [
+    {
+      "id": "1",
+      "name": "Rishi Mishra",
+      "role": "Programs Director",
+      "grade": "12th Grade",
+      "bio": "Rishi has been with the team for 4 years and leads our strategic planning and outreach initiatives. He's passionate about making STEM accessible to all students.",
+      "skills": ["Leadership", "Strategic Planning", "Public Speaking", "Project Management"],
+      "team": "Student Leadership",
+      "image": "/images/robotics/group.jpeg"
+    },
+    {
+      "id": "2",
+      "name": "Aaron Truong",
+      "role": "FRC Team Captain",
+      "grade": "11th Grade",
+      "bio": "Aaron leads our FRC team with exceptional technical and leadership skills. He specializes in mechanical design and team coordination.",
+      "skills": ["Mechanical Design", "CAD", "Team Leadership", "Problem Solving"],
+      "team": "FRC",
+      "image": "/images/robotics/group.jpeg"
+    }
+  ],
+  "footer": {
+    "branding": {
+      "logo": "/logos/OARoboticsLogo_24-25.webp",
+      "logoAlt": "OA Robotics Logo",
+      "organizationName": "OA Robotics",
+      "teamName": "Quantum Leap",
+      "schoolName": "Oxford Academy"
+    },
+    "contact": {
+      "address": "5172 Orange Avenue",
+      "addressLine2": "Cypress, CA 90630"
+    },
+    "quickLinks": [
+      {
+        "name": "Home",
+        "href": "/"
+      },
+      {
+        "name": "About",
+        "href": "/about"
+      },
+      {
+        "name": "Sponsors",
+        "href": "/sponsors"
+      },
+      {
+        "name": "Teams",
+        "href": "/team"
+      },
+      {
+        "name": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "social": [
+      {
+        "platform": "Instagram",
+        "url": "https://www.instagram.com/oarobotics/",
+        "icon": "instagram"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/channel/UCj9Z8Z9Z9Z9Z9Z9Z9Z9Z9ZA",
+        "icon": "youtube"
+      }
+    ],
+    "legal": {
+      "copyright": "© 2025 OA Robotics. All rights reserved.",
+      "websiteDeveloper": "Website by Erick Tran",
+      "betaNotice": "Website in BETA - Bugs Beware!"
     }
   }
 }
