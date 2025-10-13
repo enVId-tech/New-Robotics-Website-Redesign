@@ -36,15 +36,20 @@ export default function EditableText({
   const [styleEditorPosition, setStyleEditorPosition] = useState({ x: 0, y: 0 });
   const [localStyle, setLocalStyle] = useState<TextStyle>(initialStyle);
   const editRef = useRef<HTMLDivElement>(null);
+  const prevStyleRef = useRef<string>('');
 
   // Update local value when prop changes
   useEffect(() => {
     setLocalValue(value);
   }, [value]);
 
-  // Update local style when prop changes
+  // Update local style when prop changes (use JSON comparison to avoid infinite loops)
   useEffect(() => {
-    setLocalStyle(initialStyle);
+    const styleString = JSON.stringify(initialStyle);
+    if (styleString !== prevStyleRef.current) {
+      setLocalStyle(initialStyle);
+      prevStyleRef.current = styleString;
+    }
   }, [initialStyle]);
 
   // Check if this field has pending changes
