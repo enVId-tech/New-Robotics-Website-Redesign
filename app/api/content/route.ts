@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { readFile, writeFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
+import { clearContentCache } from '@/utils/content';
 
 const CONTENT_FILE_PATH = path.join(process.cwd(), 'content', 'site-content.json');
 
@@ -115,6 +116,9 @@ export async function POST(request: NextRequest) {
     await writeFile(CONTENT_FILE_PATH, JSON.stringify(content, null, 2));
     console.log('Content written successfully');
     
+    // Clear the server-side cache so next request gets fresh data
+    clearContentCache();
+    
     return NextResponse.json({
       success: true,
       message: 'Content updated successfully',
@@ -175,6 +179,9 @@ export async function PUT(request: NextRequest) {
 
     // Write updated content back to file
     await writeFile(CONTENT_FILE_PATH, JSON.stringify(content, null, 2));
+    
+    // Clear the server-side cache
+    clearContentCache();
     
     return NextResponse.json({
       success: true,
@@ -251,6 +258,9 @@ export async function DELETE(request: NextRequest) {
 
     // Write updated content back to file
     await writeFile(CONTENT_FILE_PATH, JSON.stringify(content, null, 2));
+    
+    // Clear the server-side cache
+    clearContentCache();
     
     return NextResponse.json({
       success: true,
