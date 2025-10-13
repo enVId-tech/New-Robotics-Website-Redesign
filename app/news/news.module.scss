@@ -20,7 +20,7 @@
         position: relative;
         
         &:nth-child(even) {
-            background: linear-gradient(45deg, #0f0f0f 0%, #1a1a1a 30%, #0f0f0f 70%, #000000 100%);
+            background: linear-gradient(45deg, #000000 0%, #0a0a0a 30%, #000000 70%, #000000 100%);
             
             &::before {
                 content: '';
@@ -40,13 +40,13 @@
                 left: 0;
                 right: 0;
                 height: 100px;
-                background: linear-gradient(to top, rgba(15, 15, 15, 0.7) 0%, transparent 100%);
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
                 pointer-events: none;
             }
         }
         
         &:nth-child(odd) {
-            background: linear-gradient(225deg, #1a1a1a 0%, #2a2a2a 40%, #1a1a1a 100%);
+            background: linear-gradient(225deg, #0a0a0a 0%, #121212 40%, #0a0a0a 100%);
             
             &::before {
                 content: '';
@@ -55,7 +55,7 @@
                 left: 0;
                 right: 0;
                 height: 100px;
-                background: linear-gradient(to bottom, rgba(26, 26, 26, 0.7) 0%, transparent 100%);
+                background: linear-gradient(to bottom, rgba(10, 10, 10, 0.7) 0%, transparent 100%);
                 pointer-events: none;
             }
             
@@ -66,7 +66,7 @@
                 left: 0;
                 right: 0;
                 height: 100px;
-                background: linear-gradient(to top, rgba(26, 26, 26, 0.7) 0%, transparent 100%);
+                background: linear-gradient(to top, rgba(10, 10, 10, 0.7) 0%, transparent 100%);
                 pointer-events: none;
             }
         }

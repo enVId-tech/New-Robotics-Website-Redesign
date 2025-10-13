@@ -23,6 +23,9 @@
             display: flex;
             .orgDetails {
                 text-align: left;
+                display: flex;
+                flex-direction: column;
+                
                 h2 {
                     font-size: 4rem;
                     letter-spacing: 0.05rem;
@@ -47,9 +50,17 @@
                     }
                 }
 
+                // Target EditableText wrappers containing p tags
+                > div {
+                    display: block;
+                    width: 100%;
+                }
+
                 p {
                     font-size: 2rem;
                     margin-bottom: 1vh;
+                    display: block;
+                    width: 100%;
                 }
             }
         }

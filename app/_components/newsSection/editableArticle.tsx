@@ -131,14 +131,14 @@ export default function EditableArticle({
                     />
                 </h2>
                 
-                <p className={styles.excerpt}>
+                <div className={styles.excerpt}>
                     <EditableText
                         value={article.excerpt}
                         path={`${articlePath}.excerpt`}
                         as="span"
                         multiline
                     />
-                </p>
+                </div>
                 
                 <div className={styles.articleTags}>
                     {article.tags.slice(0, 3).map((tag, tagIndex) => (
