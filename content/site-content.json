@@ -130,24 +130,90 @@
   },
   "about": {
     "hero": {
-      "title": "About Oxford Academy Robotics",
-      "subtitle": "Building the future through innovation and teamwork",
-      "backgroundImage": "/images/AboutBanner.jpg"
+      "title": "Oxford Academy Robotics",
+      "subtitle": "Inspiring the Next Generation of Innovators",
+      "description": "Since 2012, we've been empowering students through competitive robotics, building not just robots, but future engineers, innovators, and leaders who will shape tomorrow's world.",
+      "backgroundImage": "/images/AboutBanner.jpg",
+      "stats": [
+        { "number": "12+", "label": "Years Strong" },
+        { "number": "60+", "label": "Students Impacted" },
+        { "number": "3", "label": "Competition Leagues" }
+      ]
     },
-    "sections": [
-      {
-        "id": "mission",
-        "title": "Our Mission",
-        "content": "To inspire students to pursue careers in STEM fields by providing hands-on experience in robotics, engineering, and innovation while fostering teamwork, leadership, and problem-solving skills.",
-        "type": "text"
-      },
-      {
-        "id": "history",
-        "title": "Our History",
-        "content": "Founded in 2012, Oxford Academy Robotics has grown from a small group of passionate students to one of California's premier high school robotics programs, competing successfully in FRC, FTC, and VEX competitions.",
-        "type": "text"
-      }
-    ]
+    "mission": {
+      "sectionTitle": "Our Mission & Vision",
+      "cards": [
+        {
+          "icon": "🎯",
+          "title": "Mission",
+          "description": "To inspire and prepare students for careers in STEM through competitive robotics, fostering innovation, teamwork, and technical excellence."
+        },
+        {
+          "icon": "🚀",
+          "title": "Vision",
+          "description": "To be a leading robotics program that empowers students to become the next generation of engineers and innovators who will shape the future."
+        },
+        {
+          "icon": "⚡",
+          "title": "Values",
+          "description": "Excellence, Innovation, Collaboration, Integrity, and Continuous Learning drive everything we do as we build both robots and character."
+        }
+      ]
+    },
+    "programs": {
+      "sectionTitle": "Our Programs",
+      "programList": [
+        {
+          "logo": "/logos/FRCLogo.png",
+          "title": "FIRST Robotics Competition",
+          "description": "Our flagship program where students design, build, and compete with 120-pound robots in an international competition that combines the excitement of sport with the rigors of science and technology.",
+          "features": ["Team 4079", "120lb Robots", "6-Week Build Season"]
+        },
+        {
+          "logo": "/logos/FTCLogo.png",
+          "title": "FIRST Tech Challenge",
+          "description": "Students design, build, and program robots to compete in an alliance format against other teams. FTC is designed for those who want to compete head to head, using a robotics platform.",
+          "features": ["Multiple Teams", "Android Programming", "Strategic Alliances"]
+        },
+        {
+          "logo": "/logos/VEXLogo.png",
+          "title": "VEX Robotics Competition",
+          "description": "Where our journey began! Students work in teams to design and build a robot to play against other teams in a game-based engineering challenge.",
+          "features": ["Our Origins", "Metal Construction", "Programming Skills"]
+        }
+      ]
+    },
+    "impact": {
+      "sectionTitle": "Our Impact",
+      "cards": [
+        {
+          "icon": "🎓",
+          "title": "Student Success",
+          "description": "100% of our alumni go on to pursue higher education, with 85% entering STEM fields."
+        },
+        {
+          "icon": "🏆",
+          "title": "Competition Excellence",
+          "description": "Over 50 awards earned across all competition levels and multiple championship appearances."
+        },
+        {
+          "icon": "🤝",
+          "title": "Community Outreach",
+          "description": "Mentoring younger teams and promoting STEM education throughout our local community."
+        },
+        {
+          "icon": "💡",
+          "title": "Innovation Hub",
+          "description": "Students develop real-world engineering skills and innovative solutions to complex challenges."
+        }
+      ]
+    },
+    "join": {
+      "title": "Ready to Join the Future?",
+      "description": "Whether you're interested in mechanical engineering, programming, business, or design, there's a place for you on our team. Join us in building the future, one robot at a time.",
+      "primaryButton": "Get Involved",
+      "secondaryButton": "Support Us"
+    }
   },
   "contact": {
     "hero": {
