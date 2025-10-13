@@ -24,10 +24,6 @@ import frontBannerImg from "@/public/images/FrontPageBanner.png";
 import collage2Img from "@/public/images/comp/BB2024_2.jpg";
 import designImg from "@/public/handmade/FrontPageDesign.webp";
 
-import img1 from "@/public/images/robotics/contact_bg.jpg";
-import img2 from "@/public/images/comp/FRC_1.jpg";
-import img3 from "@/public/images/comp/BB2024.jpg";
-
 export default async function Home(): Promise<React.ReactElement> {
     const content = await getServerContent();
     
@@ -50,11 +46,7 @@ export default async function Home(): Promise<React.ReactElement> {
                 maxArticles={3}
                 showAll={false}
             /> */}
-            <Slogan
-                img={[img1, img2, img3]}
-                description={content?.homepage?.goals?.description || "We are Oxford Academy Robotics, a high school robotics team based in Cypress, California. We are dedicated to inspiring students to pursue careers in STEM fields through hands-on experience in robotics."}
-                title={content?.homepage?.goals?.title || "Our Goals"}
-            />
+            <Slogan />
 
             <TeamsOverview />
 

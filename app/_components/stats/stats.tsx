@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './stats.module.scss';
 import { TW_900 } from '@/utils/globalFonts';
 import { useContent } from '@/hooks/useContent';
+import EditableText from '@/components/editable/EditableText';
 
 type Stat = {
     id: string;
@@ -82,7 +83,12 @@ export default function Stats({
     return (
         <section id="stats-section" className={`${styles.stats} ${TW_900}`}>
             <div className={styles.container}>
-                <h1 className={styles.title}>{displayTitle}</h1>
+                <EditableText
+                    value={displayTitle}
+                    path="homepage.stats.title"
+                    as="h1"
+                    className={styles.title}
+                />
                 
                 <div className={styles.statsGrid}>
                     {displayStats.map((stat, index) => (
@@ -93,18 +99,34 @@ export default function Stats({
                         >
                             {stat.icon && (
                                 <div className={styles.statIcon}>
-                                    {stat.icon}
+                                    <EditableText
+                                        value={stat.icon}
+                                        path={`homepage.stats.items.${index}.icon`}
+                                        as="span"
+                                    />
                                 </div>
                             )}
                             <div className={styles.statValue}>
-                                {stat.value}
+                                <EditableText
+                                    value={stat.value}
+                                    path={`homepage.stats.items.${index}.value`}
+                                    as="span"
+                                />
                             </div>
                             <div className={styles.statLabel}>
-                                {stat.label}
+                                <EditableText
+                                    value={stat.label}
+                                    path={`homepage.stats.items.${index}.label`}
+                                    as="span"
+                                />
                             </div>
                             {stat.description && (
                                 <div className={styles.statDescription}>
-                                    {stat.description}
+                                    <EditableText
+                                        value={stat.description}
+                                        path={`homepage.stats.items.${index}.description`}
+                                        as="span"
+                                    />
                                 </div>
                             )}
                         </div>

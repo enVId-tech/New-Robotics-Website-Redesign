@@ -57,10 +57,22 @@
     "goals": {
       "title": "Our Goals",
       "description": "We are Oxford Academy Robotics, a high school robotics team based in Cypress, California. We are dedicated to inspiring students to pursue careers in STEM fields through hands-on experience in robotics.",
-      "images": [
-        "/images/robotics/contact_bg.jpg",
-        "/images/comp/FRC_1.jpg",
-        "/images/comp/BB2024.jpg"
+      "slogans": [
+        {
+          "id": "learn",
+          "text": "Learn",
+          "image": "/images/robotics/contact_bg.jpg"
+        },
+        {
+          "id": "compete",
+          "text": "Compete",
+          "image": "/images/comp/FRC_1.jpg"
+        },
+        {
+          "id": "thrive",
+          "text": "Thrive",
+          "image": "/images/comp/BB2024.jpg"
+        }
       ]
     }
   },

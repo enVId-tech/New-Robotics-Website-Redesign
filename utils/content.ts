@@ -68,7 +68,11 @@ export interface SiteContent {
     goals: {
       title: string;
       description: string;
-      images: string[];
+      slogans: Array<{
+        id: string;
+        text: string;
+        image: string;
+      }>;
     };
   };
   navigation: {

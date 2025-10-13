@@ -1,36 +1,64 @@
-"use server";
+"use client";
 import React from "react";
 import styles from "@/app/_components/slogan/slogan.module.scss";
-import {StaticImageData} from "next/image";
 import {TW_300, TW_600, TW_900} from "@/utils/globalFonts";
+import EditableText from "@/components/editable/EditableText";
+import EditableImage from "@/components/editable/EditableImage";
+import { useContent } from "@/hooks/useContent";
 
 type SloganProps = {
     children?: React.ReactNode;
-    img: StaticImageData[];
-    description?: string;
-    title: string;
+    goalsPath?: string;
 }
 
-export default async function Slogan({ children, img, description, title }: SloganProps): Promise<React.ReactElement> {
+export default function Slogan({ children, goalsPath = "homepage.goals" }: SloganProps) {
+    const { content, loading } = useContent();
+    
+    const goals = content?.homepage?.goals;
+    const displayTitle = goals?.title || "Our Goals";
+    const displayDescription = goals?.description || "We are Oxford Academy Robotics...";
+    const displaySlogans = goals?.slogans || [
+        { id: "learn", text: "Learn", image: "/images/robotics/contact_bg.jpg" },
+        { id: "compete", text: "Compete", image: "/images/comp/FRC_1.jpg" },
+        { id: "thrive", text: "Thrive", image: "/images/comp/BB2024.jpg" }
+    ];
+
     return (
         <section className={`${styles.slogan} ${TW_300}`}>
             <div className={styles.containerHeader}>
-                <h1 className={`${styles.headTitle} ${TW_600}`}>{title}</h1>
-                <h2 className={`${styles.headDescription} ${TW_300}`}>{description}</h2>
+                <EditableText 
+                    value={displayTitle}
+                    path={`${goalsPath}.title`}
+                    as="h1"
+                    className={`${styles.headTitle} ${TW_600}`}
+                />
+                <EditableText 
+                    value={displayDescription}
+                    path={`${goalsPath}.description`}
+                    as="h2"
+                    className={`${styles.headDescription} ${TW_300}`}
+                />
             </div>
             <div className={styles.container}>
-                <div className={styles.sloganContent}>
-                    <img className={styles.sloganImage} src={img[0].src} alt="Oxford Academy Robotics"/>
-                    <h1 className={`${styles.sloganTitle} ${TW_900}`}>Learn</h1>
-                </div>
-                <div className={styles.sloganContent}>
-                    <img className={styles.sloganImage} src={img[1].src} alt="Oxford Academy Robotics"/>
-                    <h1 className={`${styles.sloganTitle} ${TW_900}`}>Compete</h1>
-                </div>
-                <div className={styles.sloganContent}>
-                    <img className={styles.sloganImage} src={img[2].src} alt="Oxford Academy Robotics"/>
-                    <h1 className={`${styles.sloganTitle} ${TW_900}`}>Thrive</h1>
-                </div>
+                {displaySlogans.map((slogan: { id: string; text: string; image: string }, index: number) => (
+                    <div key={slogan.id} className={styles.sloganContent}>
+                        <EditableImage
+                            src={slogan.image}
+                            alt="Oxford Academy Robotics"
+                            path={`${goalsPath}.slogans.${index}.image`}
+                            className={styles.sloganImage}
+                            width={400}
+                            height={300}
+                            objectFit="cover"
+                        />
+                        <EditableText
+                            value={slogan.text}
+                            path={`${goalsPath}.slogans.${index}.text`}
+                            as="h1"
+                            className={`${styles.sloganTitle} ${TW_900}`}
+                        />
+                    </div>
+                ))}
             </div>
             { children }
         </section>

@@ -4,6 +4,8 @@ import styles from "@/app/_components/title/title.module.scss";
 import {StaticImageData} from "next/image";
 import bannerImg from "@/public/images/PlaceholderBanner.jpg";
 import {TW_900} from "@/utils/globalFonts";
+import EditableText from "@/components/editable/EditableText";
+import EditableImage from "@/components/editable/EditableImage";
 
 type TitleProps = {
     children?: React.ReactNode;
@@ -13,6 +15,7 @@ type TitleProps = {
     img2?: StaticImageData;
     bgMoveUp?: number;
     bgShift?: number;
+    heroPath?: string; // Base path for editable content (e.g., "homepage.hero")
 }
 
 export default function Title({
@@ -22,7 +25,8 @@ export default function Title({
                                   img1 = bannerImg,
                                   img2,
                                   bgMoveUp = 5,
-                                  bgShift = 0
+                                  bgShift = 0,
+                                  heroPath = "homepage.hero"
                               }: TitleProps): React.ReactElement {
     const [textToType, setTextToType] = React.useState<string>("");
     const [bgParallax, setBgParallax] = React.useState<number>(0);
@@ -69,10 +73,25 @@ export default function Title({
             <div className={styles.overlay}>
                 {
                     img2 !== undefined &&
-                    <img src={img2.src} alt="Oxford Academy Robotics"/>
+                    <EditableImage
+                        src={img2.src}
+                        alt="Oxford Academy Robotics Overlay Design"
+                        path={`${heroPath}.overlayImage`}
+                        className={styles.overlayImage}
+                    />
                 }
-                <h1 className={TW_900}>{title}</h1>
-                <p className={TW_900}>{textToType}</p>
+                <EditableText
+                    value={title || "OXFORD ACADEMY ROBOTICS"}
+                    path={`${heroPath}.title`}
+                    as="h1"
+                    className={TW_900}
+                />
+                <EditableText
+                    value={textToType}
+                    path={`${heroPath}.subtitle`}
+                    as="p"
+                    className={TW_900}
+                />
                 <h2 className={TW_900}>{children}</h2>
             </div>
         </div>

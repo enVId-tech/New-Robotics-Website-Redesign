@@ -1,9 +1,12 @@
+"use client";
 import React from "react";
 import styles from "./teamsOverview.module.scss";
-import { getServerContent } from "@/utils/content";
+import { useContent } from "@/hooks/useContent";
+import EditableText from "@/components/editable/EditableText";
+import EditableImage from "@/components/editable/EditableImage";
 
-export default async function TeamsOverview(): Promise<React.ReactElement> {
-  const content = await getServerContent();
+export default function TeamsOverview() {
+  const { content, loading } = useContent();
   
   // Use CMS data or fallback to defaults
   const teams = content?.teamsOverview || [
@@ -35,15 +38,46 @@ export default async function TeamsOverview(): Promise<React.ReactElement> {
 
   return (
     <section className={styles.teamsOverviewSection}>
-      <h2>Meet Our Teams</h2>
+      <EditableText 
+        value="Meet Our Teams"
+        path="teamsOverview.sectionTitle"
+        as="h2"
+      />
       <div className={styles.teamsGrid}>
-        {teams.map((team) => (
+        {teams.map((team: { id: string; logo: string; name: string; description: string; founded: string; link: string }, index: number) => (
           <div className={styles.teamCard} key={team.id}>
-            <img src={team.logo} alt={team.name + " Logo"} />
-            <h3>{team.name}</h3>
-            <p>{team.description}</p>
-            <div className={styles.founded}>Founded: {team.founded}</div>
-            <a href={team.link} className={styles.teamLink}>Learn More</a>
+            <EditableImage
+              src={team.logo}
+              alt={team.name + " Logo"}
+              path={`teamsOverview.${index}.logo`}
+              width={150}
+              height={150}
+              objectFit="contain"
+            />
+            <EditableText 
+              value={team.name}
+              path={`teamsOverview.${index}.name`}
+              as="h3"
+            />
+            <EditableText 
+              value={team.description}
+              path={`teamsOverview.${index}.description`}
+              as="p"
+            />
+            <div className={styles.founded}>
+              Founded: <EditableText 
+                value={team.founded}
+                path={`teamsOverview.${index}.founded`}
+                as="span"
+              />
+            </div>
+            <a href={team.link} className={styles.teamLink}>
+              <EditableText 
+                value="Learn More"
+                path={`teamsOverview.${index}.linkText`}
+                as="span"
+              />
+            </a>
           </div>
         ))}
       </div>

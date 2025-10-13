@@ -1,14 +1,17 @@
+"use client";
 import React from "react";
 import styles from "@/app/_components/footer/footer.module.scss";
 import {TW_600} from "@/utils/globalFonts";
-import { getServerContent } from "@/utils/content";
+import { useContent } from "@/hooks/useContent";
+import EditableText from "@/components/editable/EditableText";
+import EditableImage from "@/components/editable/EditableImage";
 
 type FooterProps = {
     children?: React.ReactNode;
 }
 
-export default async function Footer({children}: FooterProps): Promise<React.ReactElement> {
-    const content = await getServerContent();
+export default function Footer({children}: FooterProps) {
+    const { content, loading } = useContent();
     
     // Fallback to defaults if CMS content not available
     const footerData = content?.footer || {
@@ -37,13 +40,42 @@ export default async function Footer({children}: FooterProps): Promise<React.Rea
                     <div className={styles.footerDetails}>
                         <div className={`${styles.orgDetails} ${TW_600}`}>
                             <h2>
-                                <img src={footerData.branding.logo} alt={footerData.branding.logoAlt}/>
-                                {footerData.branding.organizationName}
+                                <EditableImage
+                                    src={footerData.branding.logo}
+                                    alt={footerData.branding.logoAlt}
+                                    path="footer.branding.logo"
+                                    width={50}
+                                    height={50}
+                                    objectFit="contain"
+                                />
+                                <EditableText
+                                    value={footerData.branding.organizationName}
+                                    path="footer.branding.organizationName"
+                                    as="span"
+                                />
                             </h2>
-                            <p>{footerData.branding.teamName}</p>
-                            <p>{footerData.branding.schoolName}</p>
-                            <p>{footerData.contact.address}</p>
-                            {footerData.contact.addressLine2 && <p>{footerData.contact.addressLine2}</p>}
+                            <EditableText
+                                value={footerData.branding.teamName}
+                                path="footer.branding.teamName"
+                                as="p"
+                            />
+                            <EditableText
+                                value={footerData.branding.schoolName}
+                                path="footer.branding.schoolName"
+                                as="p"
+                            />
+                            <EditableText
+                                value={footerData.contact.address}
+                                path="footer.contact.address"
+                                as="p"
+                            />
+                            {footerData.contact.addressLine2 && (
+                                <EditableText
+                                    value={footerData.contact.addressLine2}
+                                    path="footer.contact.addressLine2"
+                                    as="p"
+                                />
+                            )}
                         </div>
 
                         <div className={styles.footerSocials}>
@@ -51,17 +83,35 @@ export default async function Footer({children}: FooterProps): Promise<React.Rea
                     </div>
 
                     <div className={`${styles.footerLinks} ${TW_600}`}>
-                        <h1>Quick Links</h1>
-                        {footerData.quickLinks.map((link, index) => (
-                            <a key={index} href={link.href}>{link.name}</a>
+                        <EditableText
+                            value="Quick Links"
+                            path="footer.quickLinks.title"
+                            as="h1"
+                        />
+                        {footerData.quickLinks.map((link: { href: string; name: string }, index: number) => (
+                            <a key={index} href={link.href}>
+                                <EditableText
+                                    value={link.name}
+                                    path={`footer.quickLinks.${index}.name`}
+                                    as="span"
+                                />
+                            </a>
                         ))}
                     </div>
 
                     <div className={`${styles.footerLinks} ${TW_600}`}>
-                        <h1>Our Socials</h1>
-                        {footerData.social.map((social, index) => (
+                        <EditableText
+                            value="Our Socials"
+                            path="footer.social.title"
+                            as="h1"
+                        />
+                        {footerData.social.map((social: { url: string; platform: string }, index: number) => (
                             <a key={index} href={social.url} target="_blank" rel="noopener noreferrer">
-                                {social.platform}
+                                <EditableText
+                                    value={social.platform}
+                                    path={`footer.social.${index}.platform`}
+                                    as="span"
+                                />
                             </a>
                         ))}
                     </div>
@@ -69,12 +119,24 @@ export default async function Footer({children}: FooterProps): Promise<React.Rea
 
                 <div className={styles.footerBottom}>
                     <div className={`${styles.footerBottomLinks} ${TW_600}`}>
-                        <p>{footerData.legal.copyright}</p>
+                        <EditableText
+                            value={footerData.legal.copyright}
+                            path="footer.legal.copyright"
+                            as="p"
+                        />
                         {footerData.legal.websiteDeveloper && (
-                            <p>{footerData.legal.websiteDeveloper}</p>
+                            <EditableText
+                                value={footerData.legal.websiteDeveloper}
+                                path="footer.legal.websiteDeveloper"
+                                as="p"
+                            />
                         )}
                         {footerData.legal.betaNotice && (
-                            <p>{footerData.legal.betaNotice}</p>
+                            <EditableText
+                                value={footerData.legal.betaNotice}
+                                path="footer.legal.betaNotice"
+                                as="p"
+                            />
                         )}
                     </div>
                 </div>
