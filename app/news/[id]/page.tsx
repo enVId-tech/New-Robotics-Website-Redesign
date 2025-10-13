@@ -65,26 +65,78 @@ export default function ArticlePage() {
     };
 
     const articlePath = `news.articles[${articleIndex}]`;
+    
+    // Get article image and style for banner
+    const articleImagePath = `${articlePath}.image`;
+    let articleImageSrc = '/images/PlaceholderBanner.jpg';
+    let articleImageStyle: any = {};
+    
+    if (article?.image) {
+        const imageValue: any = article.image;
+        if (typeof imageValue === 'string') {
+            articleImageSrc = imageValue;
+        } else if (typeof imageValue === 'object' && imageValue !== null) {
+            articleImageSrc = imageValue.src || imageValue.value || '/images/PlaceholderBanner.jpg';
+            articleImageStyle = imageValue.style || {};
+        }
+    }
+
+    // Map image styles to CSS background properties
+    let backgroundPosition = 'center center';
+    if (articleImageStyle.objectPosition) {
+        backgroundPosition = articleImageStyle.objectPosition;
+    }
+
+    let backgroundSize = 'cover';
+    if (articleImageStyle.objectFit) {
+        switch (articleImageStyle.objectFit) {
+            case 'contain':
+                backgroundSize = 'contain';
+                break;
+            case 'fill':
+                backgroundSize = '100% 100%';
+                break;
+            case 'none':
+                backgroundSize = 'auto';
+                break;
+            case 'scale-down':
+                backgroundSize = 'contain';
+                break;
+            default:
+                backgroundSize = 'cover';
+        }
+    }
+
+    const bannerStyle: React.CSSProperties = {
+        backgroundImage: `url(${articleImageSrc})`,
+        backgroundPosition: backgroundPosition,
+        backgroundSize: backgroundSize,
+        backgroundRepeat: 'no-repeat',
+    };
 
     return (
         <div className={styles.articlePage}>
             <Navbar />
-            <div className={styles.articleContainer}>
-                <div className={styles.articleHeader}>
-                    {article?.image && (
-                        <div className={styles.heroImage}>
+            {article?.image && (
+                <div className={styles.articleBanner} style={bannerStyle}>
+                    {isEditMode && (
+                        <div className={styles.bannerControls}>
                             <EditableImage
-                                src={getContentValue(article.image)}
-                                alt={getContentValue(article.title)}
-                                path={`${articlePath}.image`}
-                                className={styles.image}
-                                fill
-                                useNextImage
-                                style={getContentImageStyle(article.image)}
+                                src={articleImageSrc}
+                                alt="Article Banner"
+                                path={articleImagePath}
+                                width={120}
+                                height={80}
+                                className={styles.bannerPreview}
                             />
+                            <span className={styles.bannerLabel}>Edit Banner</span>
                         </div>
                     )}
-                    
+                    <div className={styles.bannerOverlay} />
+                </div>
+            )}
+            <div className={styles.articleContainer}>
+                <div className={styles.articleHeader}>
                     <div className={styles.headerContent}>
                         <div className={styles.breadcrumb}>
                             <a href="/news">← Back to News</a>
