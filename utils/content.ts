@@ -87,9 +87,45 @@ export interface SiteContent {
     hero: {
       title: string;
       subtitle: string;
-      backgroundImage: string;
+      description: string;
+      backgroundImage?: string;
+      stats: Array<{
+        number: string;
+        label: string;
+      }>;
     };
-    sections: Array<{
+    mission: {
+      sectionTitle: string;
+      cards: Array<{
+        icon: string;
+        title: string;
+        description: string;
+      }>;
+    };
+    programs: {
+      sectionTitle: string;
+      programList: Array<{
+        logo: string;
+        title: string;
+        description: string;
+        features: string[];
+      }>;
+    };
+    impact: {
+      sectionTitle: string;
+      cards: Array<{
+        icon: string;
+        title: string;
+        description: string;
+      }>;
+    };
+    join: {
+      title: string;
+      description: string;
+      primaryButton: string;
+      secondaryButton: string;
+    };
+    sections?: Array<{
       id: string;
       title: string;
       content: string;
@@ -101,6 +137,33 @@ export interface SiteContent {
       title: string;
       subtitle: string;
       backgroundImage: string;
+    };
+    mainTitle: string;
+    mainDescription: string;
+    highlights: Array<{
+      icon: string;
+      title: string;
+      description: string;
+    }>;
+    stats: Array<{
+      label: string;
+      value: string;
+    }>;
+    contactMethods: {
+      title: string;
+      methods: Array<{
+        icon: string;
+        title: string;
+        description: string;
+        link?: string;
+        linkType?: string;
+        address?: string;
+        socials?: string[];
+      }>;
+    };
+    formSection: {
+      title: string;
+      description: string;
     };
     form: {
       title: string;
@@ -126,21 +189,75 @@ export interface SiteContent {
       subtitle: string;
       description: string;
       backgroundImage: string;
-      stats: Record<string, string>;
+      stats: Array<{
+        id: string;
+        label: string;
+        value: string;
+        description: string;
+        icon: string;
+      }>;
+      achievements?: Array<{
+        id: string;
+        title: string;
+        description: string;
+        year: string;
+        type: string;
+        award: string;
+        image?: string;
+      }>;
+      news?: Array<{
+        id: string;
+        title: string;
+        excerpt: string;
+        content: string;
+        author: string;
+        publishDate: string;
+        category: string;
+        image?: string;
+        tags: string[];
+      }>;
+      teamOverview?: any;
+      robots?: any[];
+      teamStructure?: any;
+      schedule?: any[];
     };
     ftc: {
       title: string;
       subtitle: string;
       description: string;
       backgroundImage: string;
-      stats: Record<string, string>;
+      stats: Array<{
+        id: string;
+        label: string;
+        value: string;
+        description?: string;
+        icon?: string;
+      }>;
+      achievements?: any[];
+      news?: any[];
+      teamOverview?: any;
+      robots?: any[];
+      teamStructure?: any;
+      schedule?: any[];
     };
     vex: {
       title: string;
       subtitle: string;
       description: string;
       backgroundImage: string;
-      stats: Record<string, string>;
+      stats: Array<{
+        id: string;
+        label: string;
+        value: string;
+        description?: string;
+        icon?: string;
+      }>;
+      achievements?: any[];
+      news?: any[];
+      teamOverview?: any;
+      robots?: any[];
+      teamStructure?: any;
+      schedule?: any[];
     };
   };
   teamsOverview: Array<{
@@ -168,6 +285,67 @@ export interface SiteContent {
     roleStyle?: TextStyle;
     bioStyle?: TextStyle;
   }>;
+  sponsors: {
+    hero: {
+      title: string;
+      description: string;
+      stats: Array<{
+        value: string;
+        label: string;
+      }>;
+    };
+    currentSponsors: {
+      title: string;
+      intro: string;
+      tiers: Array<{
+        name: string;
+        sponsors: Array<{
+          name: string;
+          logo: string;
+          description: string;
+        }>;
+      }>;
+    };
+    howSponsorsHelp: {
+      title: string;
+      cards: Array<{
+        icon: string;
+        title: string;
+        description: string;
+      }>;
+    };
+    opportunities: {
+      title: string;
+      description: string;
+      benefits: {
+        title: string;
+        items: string[];
+      };
+      tiers: {
+        title: string;
+        levels: Array<{
+          amount: string;
+          level: string;
+        }>;
+      };
+      image: {
+        src: string;
+        alt: string;
+        caption: {
+          title: string;
+          description: string;
+        };
+      };
+    };
+    contact: {
+      title: string;
+      description: string;
+      details: Array<{
+        label: string;
+        value: string;
+      }>;
+    };
+  };
   footer: {
     branding: {
       logo: string;

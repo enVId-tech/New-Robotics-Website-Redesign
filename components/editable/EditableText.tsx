@@ -2,6 +2,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useEditMode } from '@/contexts/EditModeContext';
 import styles from './EditableText.module.scss';
+import StyleEditor from './StyleEditor';
+import { TextStyle } from '@/utils/content';
 
 interface EditableTextProps {
   value: string;
@@ -11,6 +13,8 @@ interface EditableTextProps {
   multiline?: boolean;
   placeholder?: string;
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div';
+  style?: TextStyle;
+  onStyleChange?: (style: TextStyle) => void;
 }
 
 export default function EditableText({
@@ -21,11 +25,16 @@ export default function EditableText({
   multiline = false,
   placeholder = 'Click to edit...',
   as: Component = 'div',
+  style: initialStyle = {},
+  onStyleChange,
 }: EditableTextProps) {
   const { isEditMode, addPendingChange, pendingChanges } = useEditMode();
   const [isEditing, setIsEditing] = useState(false);
   const [localValue, setLocalValue] = useState(value);
   const [hasChanges, setHasChanges] = useState(false);
+  const [showStyleEditor, setShowStyleEditor] = useState(false);
+  const [styleEditorPosition, setStyleEditorPosition] = useState({ x: 0, y: 0 });
+  const [localStyle, setLocalStyle] = useState<TextStyle>(initialStyle);
   const editRef = useRef<HTMLDivElement>(null);
 
   // Update local value when prop changes
@@ -33,9 +42,14 @@ export default function EditableText({
     setLocalValue(value);
   }, [value]);
 
+  // Update local style when prop changes
+  useEffect(() => {
+    setLocalStyle(initialStyle);
+  }, [initialStyle]);
+
   // Check if this field has pending changes
   useEffect(() => {
-    setHasChanges(pendingChanges.has(path));
+    setHasChanges(pendingChanges.has(path) || pendingChanges.has(`${path}.style`));
   }, [pendingChanges, path]);
 
   const handleClick = () => {
@@ -68,6 +82,24 @@ export default function EditableText({
     }
   };
 
+  const handleStyleButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!showStyleEditor && editRef.current) {
+      const rect = editRef.current.getBoundingClientRect();
+      setStyleEditorPosition({
+        x: rect.right + 10,
+        y: rect.top
+      });
+    }
+    setShowStyleEditor(!showStyleEditor);
+  };
+
+  const handleStyleChange = (newStyle: TextStyle) => {
+    setLocalStyle(newStyle);
+    addPendingChange(`${path}.style`, newStyle);
+    onStyleChange?.(newStyle);
+  };
+
   // Focus and select all text when entering edit mode
   useEffect(() => {
     if (isEditing && editRef.current) {
@@ -88,20 +120,53 @@ export default function EditableText({
     ${hasChanges ? styles.hasChanges : ''}
   `.trim();
 
+  const inlineStyle = {
+    fontSize: localStyle.fontSize,
+    fontFamily: localStyle.fontFamily,
+    fontWeight: localStyle.fontWeight,
+    lineHeight: localStyle.lineHeight,
+    whiteSpace: localStyle.whiteSpace,
+  };
+
   return (
-    <Component
-      ref={editRef as any}
-      className={combinedClassName}
-      contentEditable={isEditMode && isEditing}
-      suppressContentEditableWarning
-      onClick={handleClick}
-      onBlur={handleBlur}
-      onInput={handleInput}
-      onKeyDown={handleKeyDown}
-      data-path={path}
-      data-editable="text"
-    >
-      {localValue || placeholder}
-    </Component>
+    <>
+      <div className={styles.editableTextWrapper} style={{ position: 'relative', display: 'inline-block' }}>
+        <Component
+          ref={editRef as any}
+          className={combinedClassName}
+          contentEditable={isEditMode && isEditing}
+          suppressContentEditableWarning
+          onClick={handleClick}
+          onBlur={handleBlur}
+          onInput={handleInput}
+          onKeyDown={handleKeyDown}
+          data-path={path}
+          data-editable="text"
+          style={inlineStyle}
+        >
+          {localValue || placeholder}
+        </Component>
+
+        {isEditMode && !isEditing && (
+          <button
+            className={styles.styleButton}
+            onClick={handleStyleButtonClick}
+            title="Edit styles"
+          >
+            🎨
+          </button>
+        )}
+      </div>
+
+      {showStyleEditor && (
+        <StyleEditor
+          type="text"
+          currentStyles={localStyle}
+          onStyleChange={handleStyleChange}
+          onClose={() => setShowStyleEditor(false)}
+          position={styleEditorPosition}
+        />
+      )}
+    </>
   );
 }

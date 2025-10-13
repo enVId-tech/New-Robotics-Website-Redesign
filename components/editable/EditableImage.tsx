@@ -3,6 +3,8 @@ import React, { useState, useRef } from 'react';
 import { useEditMode } from '@/contexts/EditModeContext';
 import styles from './EditableImage.module.scss';
 import Image from 'next/image';
+import StyleEditor from './StyleEditor';
+import { ImageStyle } from '@/utils/content';
 
 interface EditableImageProps {
   src: string;
@@ -15,6 +17,8 @@ interface EditableImageProps {
   fill?: boolean;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
   useNextImage?: boolean;
+  style?: ImageStyle;
+  onStyleChange?: (style: ImageStyle) => void;
 }
 
 export default function EditableImage({
@@ -28,13 +32,19 @@ export default function EditableImage({
   fill,
   objectFit = 'cover',
   useNextImage = false,
+  style: initialStyle = {},
+  onStyleChange,
 }: EditableImageProps) {
   const { isEditMode, addPendingChange, pendingChanges } = useEditMode();
   const [localSrc, setLocalSrc] = useState(src);
   const [isHovered, setIsHovered] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [showStyleEditor, setShowStyleEditor] = useState(false);
+  const [styleEditorPosition, setStyleEditorPosition] = useState({ x: 0, y: 0 });
+  const [localStyle, setLocalStyle] = useState<ImageStyle>(initialStyle);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const hasChanges = pendingChanges.has(path);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const hasChanges = pendingChanges.has(path) || pendingChanges.has(`${path}.style`);
 
   const handleReplaceClick = () => {
     if (isEditMode) {
@@ -93,80 +103,125 @@ export default function EditableImage({
     }
   };
 
+  const handleStyleButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!showStyleEditor && imageRef.current) {
+      const rect = imageRef.current.getBoundingClientRect();
+      setStyleEditorPosition({
+        x: rect.right + 10,
+        y: rect.top
+      });
+    }
+    setShowStyleEditor(!showStyleEditor);
+  };
+
+  const handleStyleChange = (newStyle: ImageStyle) => {
+    setLocalStyle(newStyle);
+    addPendingChange(`${path}.style`, newStyle);
+    onStyleChange?.(newStyle);
+  };
+
   const wrapperClassName = `
     ${styles.editableImage}
     ${isEditMode ? styles.editable : ''}
     ${hasChanges ? styles.hasChanges : ''}
   `.trim();
 
+  const imageStyle = {
+    width: localStyle.width || (width ? `${width}px` : 'auto'),
+    height: localStyle.height || (height ? `${height}px` : 'auto'),
+    borderRadius: localStyle.borderRadius,
+    objectFit: localStyle.objectFit || objectFit,
+  };
+
   return (
-    <div
-      className={wrapperClassName}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      data-path={path}
-      data-editable="image"
-    >
-      {useNextImage ? (
-        fill ? (
-          <Image
-            src={localSrc}
-            alt={alt}
-            fill
-            style={{ objectFit }}
-            className={className}
-          />
+    <>
+      <div
+        ref={imageRef}
+        className={wrapperClassName}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        data-path={path}
+        data-editable="image"
+      >
+        {useNextImage ? (
+          fill ? (
+            <Image
+              src={localSrc}
+              alt={alt}
+              fill
+              style={{ objectFit: imageStyle.objectFit as any, borderRadius: imageStyle.borderRadius }}
+              className={className}
+            />
+          ) : (
+            <Image
+              src={localSrc}
+              alt={alt}
+              width={width || 500}
+              height={height || 300}
+              style={{ objectFit: imageStyle.objectFit as any, borderRadius: imageStyle.borderRadius }}
+              className={className}
+            />
+          )
         ) : (
-          <Image
+          <img
             src={localSrc}
             alt={alt}
-            width={width || 500}
-            height={height || 300}
-            style={{ objectFit }}
             className={className}
+            style={imageStyle as any}
           />
-        )
-      ) : (
-        <img
-          src={localSrc}
-          alt={alt}
-          className={className}
-          style={{ objectFit, width: width ? `${width}px` : 'auto', height: height ? `${height}px` : 'auto' }}
+        )}
+
+        {isEditMode && (
+          <>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+            
+            {(isHovered || isUploading) && (
+              <div className={styles.overlay}>
+                <button
+                  className={styles.replaceButton}
+                  onClick={handleReplaceClick}
+                  disabled={isUploading}
+                >
+                  {isUploading ? (
+                    <>
+                      <span className={styles.spinner}>⏳</span>
+                      Uploading...
+                    </>
+                  ) : (
+                    <>
+                      🖼️ Replace Image
+                    </>
+                  )}
+                </button>
+                <button
+                  className={styles.styleButton}
+                  onClick={handleStyleButtonClick}
+                  title="Edit styles"
+                >
+                  🎨 Style
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
+      {showStyleEditor && (
+        <StyleEditor
+          type="image"
+          currentStyles={localStyle}
+          onStyleChange={handleStyleChange}
+          onClose={() => setShowStyleEditor(false)}
+          position={styleEditorPosition}
         />
       )}
-
-      {isEditMode && (
-        <>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
-          
-          {(isHovered || isUploading) && (
-            <div className={styles.overlay}>
-              <button
-                className={styles.replaceButton}
-                onClick={handleReplaceClick}
-                disabled={isUploading}
-              >
-                {isUploading ? (
-                  <>
-                    <span className={styles.spinner}>⏳</span>
-                    Uploading...
-                  </>
-                ) : (
-                  <>
-                    🖼️ Replace Image
-                  </>
-                )}
-              </button>
-            </div>
-          )}
-        </>
-      )}
-    </div>
+    </>
   );
 }

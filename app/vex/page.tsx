@@ -1,20 +1,17 @@
+"use client";
 import React from "react";
-import { Metadata } from "next";
 import img1 from "../../public/images/PlaceholderBanner.jpg";
 import TeamPageLayout from "../_components/teamPageLayout/teamPageLayout";
 import TeamOverviewSection from "../_components/teamOverviewSection/teamOverviewSection";
 import RobotGallery from "../_components/robotGallery/robotGallery";
 import TeamStructure from "../_components/teamStructure/teamStructure";
 import CompetitionSchedule from "../_components/competitionSchedule/competitionSchedule";
+import { useContent } from "@/hooks/useContent";
 
-export const metadata: Metadata = {
-    title: 'VEX Teams 1108A & 1108B - OA Robotics',
-    description: 'Oxford Academy VEX Teams 1108A & 1108B - High school robotics competition excellence. Join our award-winning VEX teams.',
-    keywords: 'VEX Teams 1108A 1108B, VEX Robotics Competition, Oxford Academy VEX, High School Robotics, VEX Teams'
-}
-
-export default async function Vex(): Promise<React.ReactElement> {
-    const vexStats = [
+export default function VEX() {
+    const { content, loading } = useContent();
+    
+    const vexStats = content?.teams?.vex?.stats || [
         { id: "1", label: "Tournament Wins", value: "18" },
         { id: "2", label: "Skills Championships", value: "4" },
         { id: "3", label: "Excellence Awards", value: "7" },
@@ -23,7 +20,7 @@ export default async function Vex(): Promise<React.ReactElement> {
         { id: "6", label: "Qualification Rank", value: "#2" }
     ];
 
-    const vexAchievements = [
+    const vexAchievements = content?.teams?.vex?.achievements || [
         {
             id: "1",
             title: "State Skills Championship",
@@ -58,54 +55,7 @@ export default async function Vex(): Promise<React.ReactElement> {
         }
     ];
 
-    const vexTeamMembers = [
-        {
-            id: "1",
-            name: "Ryan Park",
-            role: "Team Captain - Team 1108A",
-            image: "/images/team/placeholder.jpg",
-            specialties: ["Robot Design", "Strategy", "Programming"],
-            grade: "12th Grade",
-            bio: "Senior team captain with expertise in robot design and competition strategy. Leads Team 1108A through complex engineering challenges.",
-            skills: ["C++", "Robot Design", "Strategy", "Leadership"],
-            team: "VEX" as const
-        },
-        {
-            id: "2",
-            name: "Jessica Liu",
-            role: "Programming Lead - Team 1108B",
-            image: "/images/team/placeholder.jpg",
-            specialties: ["C++ Programming", "Autonomous Routines", "Sensor Integration"],
-            grade: "11th Grade",
-            bio: "Expert programmer specializing in complex autonomous routines and PID control systems for precise robot movement.",
-            skills: ["C++", "PID Control", "Autonomous Programming", "Sensor Integration"],
-            team: "VEX" as const
-        },
-        {
-            id: "3",
-            name: "David Kim",
-            role: "Mechanical Lead",
-            image: "/images/team/placeholder.jpg",
-            specialties: ["CAD Design", "Mechanism Engineering", "Build Quality"],
-            grade: "11th Grade", 
-            bio: "Mechanical engineering specialist focused on innovative mechanism design and precision manufacturing.",
-            skills: ["Inventor", "Mechanism Design", "Fabrication", "Assembly"],
-            team: "VEX" as const
-        },
-        {
-            id: "4",
-            name: "Sophie Chen",
-            role: "Strategy Coordinator",
-            image: "/images/team/placeholder.jpg",
-            specialties: ["Game Analysis", "Alliance Selection", "Match Strategy"],
-            grade: "10th Grade",
-            bio: "Strategic mastermind responsible for game analysis, scouting data collection, and optimal alliance strategies.",
-            skills: ["Game Analysis", "Data Collection", "Strategy", "Communication"],
-            team: "VEX" as const
-        }
-    ];
-
-    const vexNews = [
+    const vexNews = content?.teams?.vex?.news || [
         {
             id: "1",
             title: "VEX Teams Dominate Regional Skills Challenge",
@@ -139,7 +89,7 @@ export default async function Vex(): Promise<React.ReactElement> {
     ];
 
     // Team overview data
-    const teamOverviewData = {
+    const teamOverviewData = content?.teams?.vex?.teamOverview || {
         teamName: 'Oxford Academy VEX Teams',
         teamDescription: [
             'Our VEX Robotics Competition teams, 1108A and 1108B, represent the cutting edge of high school robotics engineering. These teams design and build robots using the VEX platform to compete in challenging game scenarios that test autonomous programming, precise control, and strategic thinking.',
@@ -172,7 +122,7 @@ export default async function Vex(): Promise<React.ReactElement> {
     };
 
     // Robot gallery data
-    const robots = [
+    const robots = content?.teams?.vex?.robots || [
         {
             name: 'Over Under Robot',
             year: '2023-24',
@@ -197,7 +147,7 @@ export default async function Vex(): Promise<React.ReactElement> {
     ];
 
     // Team structure data
-    const subteams = [
+    const subteams = content?.teams?.vex?.teamStructure || [
         {
             icon: '🔧',
             name: 'Mechanical Design',
@@ -237,7 +187,7 @@ export default async function Vex(): Promise<React.ReactElement> {
     ];
 
     // Competition schedule data
-    const events = [
+    const events = content?.teams?.vex?.schedule || [
         {
             month: 'NOV',
             day: '18',
@@ -282,6 +232,8 @@ export default async function Vex(): Promise<React.ReactElement> {
         }
     ];
 
+    if (loading) return <div>Loading...</div>;
+
     return (
         <TeamPageLayout 
             title="VEX Robotics Competition"
@@ -289,22 +241,28 @@ export default async function Vex(): Promise<React.ReactElement> {
             bannerImage={img1}
             bgMoveUp={5}
         >
-            <TeamOverviewSection {...teamOverviewData} />
+            <TeamOverviewSection 
+                {...teamOverviewData} 
+                basePath="teams.vex.teamOverview"
+            />
             
             <RobotGallery 
                 title="Robot Evolution"
                 robots={robots}
+                basePath="teams.vex"
             />
 
             <TeamStructure 
                 title="Team Specializations"
                 subteams={subteams}
+                basePath="teams.vex"
             />
 
             <CompetitionSchedule 
                 title="2024 Competition Season"
                 events={events}
+                basePath="teams.vex"
             />
         </TeamPageLayout>
-    )
+    );
 }

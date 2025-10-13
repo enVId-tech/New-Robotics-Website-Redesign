@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./robotGallery.module.scss";
+import EditableText from "@/components/editable/EditableText";
+import EditableImage from "@/components/editable/EditableImage";
 
 interface Robot {
   name: string;
@@ -12,25 +14,56 @@ interface Robot {
 interface RobotGalleryProps {
   title: string;
   robots: Robot[];
+  basePath: string; // e.g., "teams.frc.robots"
 }
 
-export default function RobotGallery({ title, robots }: RobotGalleryProps): React.ReactElement {
+export default function RobotGallery({ title, robots, basePath }: RobotGalleryProps): React.ReactElement {
   return (
     <section className={styles.robotGallery}>
       <div className={styles.container}>
-        <h1>{title}</h1>
+        <EditableText
+          value={title}
+          path={`${basePath}.title`}
+          as="h1"
+        />
         <div className={styles.robotGrid}>
           {robots.map((robot, index) => (
             <div key={index} className={styles.robotCard}>
               <div className={styles.robotImage}>
-                <img src={robot.image} alt={`${robot.year} Robot - ${robot.name}`} />
+                <EditableImage
+                  src={robot.image}
+                  alt={`${robot.year} Robot - ${robot.name}`}
+                  path={`${basePath}.robots.${index}.image`}
+                />
               </div>
               <div className={styles.robotInfo}>
-                                            <h3>{robot.year} - &ldquo;{robot.name}&rdquo;</h3>
-                <p>{robot.description}</p>
+                <h3>
+                  <EditableText
+                    value={robot.year}
+                    path={`${basePath}.robots.${index}.year`}
+                    as="span"
+                  />
+                  {" - \""}
+                  <EditableText
+                    value={robot.name}
+                    path={`${basePath}.robots.${index}.name`}
+                    as="span"
+                  />
+                  {"\""}</h3>
+                <EditableText
+                  value={robot.description}
+                  path={`${basePath}.robots.${index}.description`}
+                  as="p"
+                  multiline
+                />
                 <div className={styles.robotSpecs}>
                   {robot.specs.map((spec, specIndex) => (
-                    <span key={specIndex}>{spec}</span>
+                    <EditableText
+                      key={specIndex}
+                      value={spec}
+                      path={`${basePath}.robots.${index}.specs.${specIndex}`}
+                      as="span"
+                    />
                   ))}
                 </div>
               </div>

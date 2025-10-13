@@ -1,20 +1,17 @@
+"use client";
 import React from "react";
-import { Metadata } from "next";
 import img1 from "../../public/images/FTCBanner.jpg";
 import TeamPageLayout from "../_components/teamPageLayout/teamPageLayout";
 import TeamOverviewSection from "../_components/teamOverviewSection/teamOverviewSection";
 import RobotGallery from "../_components/robotGallery/robotGallery";
 import TeamStructure from "../_components/teamStructure/teamStructure";
 import CompetitionSchedule from "../_components/competitionSchedule/competitionSchedule";
+import { useContent } from "@/hooks/useContent";
 
-export const metadata: Metadata = {
-    title: 'FTC Teams 19812 & 23796 - OA Robotics',
-    description: 'Oxford Academy FTC Teams 19812 & 23796 - Middle school robotics excellence in FIRST Tech Challenge. Join our competitive teams.',
-    keywords: 'FTC Teams 19812 23796, FIRST Tech Challenge, Oxford Academy FTC, Middle School Robotics, FTC Teams'
-}
-
-export default async function FTC(): Promise<React.ReactElement> {
-    const ftcStats = [
+export default function FTC() {
+    const { content, loading } = useContent();
+    
+    const ftcStats = content?.teams?.ftc?.stats || [
         { id: "1", label: "Regional Championships", value: "5" },
         { id: "2", label: "Tournament Wins", value: "12" },
         { id: "3", label: "Alliance Captain", value: "8x" },
@@ -290,21 +287,27 @@ export default async function FTC(): Promise<React.ReactElement> {
             bgMoveUp={50}
             bgShift={100}
         >
-            <TeamOverviewSection {...teamOverviewData} />
+            <TeamOverviewSection 
+                {...teamOverviewData} 
+                basePath="teams.ftc.teamOverview"
+            />
             
             <RobotGallery 
                 title="Robot Showcase"
                 robots={robots}
+                basePath="teams.ftc"
             />
 
             <TeamStructure 
                 title="Team Organization"
                 subteams={subteams}
+                basePath="teams.ftc"
             />
 
             <CompetitionSchedule 
                 title="2024 Season Schedule"
                 events={events}
+                basePath="teams.ftc"
             />
         </TeamPageLayout>
     )

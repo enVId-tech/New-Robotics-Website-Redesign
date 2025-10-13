@@ -1,21 +1,29 @@
+"use client";
 import React from "react";
-import { Metadata } from "next";
 import img1 from "../../public/images/FRCBanner.jpg";
 import TeamPageLayout from "../_components/teamPageLayout/teamPageLayout";
 import TeamOverviewSection from "../_components/teamOverviewSection/teamOverviewSection";
 import RobotGallery from "../_components/robotGallery/robotGallery";
 import TeamStructure from "../_components/teamStructure/teamStructure";
 import CompetitionSchedule from "../_components/competitionSchedule/competitionSchedule";
+import { useContent } from "@/hooks/useContent";
 
-export const metadata: Metadata = {
-    title: 'FRC Team 4079 - OA Robotics',
-    description: 'Oxford Academy FRC Team 4079 - High school robotics excellence in FIRST Robotics Competition. Join our award-winning team.',
-    keywords: 'FRC Team 4079, FIRST Robotics Competition, Oxford Academy FRC, High School Robotics, FRC Team'
-}
-
-export default async function FRC(): Promise<React.ReactElement> {
+export default function FRC() {
+    const { content, loading } = useContent();
+    
+    // Get FRC data from CMS or use defaults
+    const frcData = content?.teams?.frc || {
+        achievements: [],
+        news: [],
+        stats: [],
+        teamOverview: {},
+        robots: [],
+        teamStructure: {},
+        schedule: []
+    };
+    
     // FRC-specific achievements
-    const frcAchievements = [
+    const frcAchievements = frcData?.achievements && frcData.achievements.length > 0 ? frcData.achievements : [
         {
             id: '1',
             title: 'Regional Champions',
@@ -250,21 +258,27 @@ export default async function FRC(): Promise<React.ReactElement> {
             bannerImage={img1}
             bgMoveUp={70}
         >
-            <TeamOverviewSection {...teamOverviewData} />
+            <TeamOverviewSection 
+                {...teamOverviewData} 
+                basePath="teams.frc.teamOverview"
+            />
             
             <RobotGallery 
                 title="Our Competition Robots"
                 robots={robots}
+                basePath="teams.frc"
             />
 
             <TeamStructure 
                 title="Team Structure & Subteams"
                 subteams={subteams}
+                basePath="teams.frc"
             />
 
             <CompetitionSchedule 
                 title="2024-2025 Competition Schedule"
                 events={events}
+                basePath="teams.frc"
             />
         </TeamPageLayout>
     )

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./teamStructure.module.scss";
+import EditableText from "@/components/editable/EditableText";
 
 interface Subteam {
   icon: string;
@@ -11,22 +12,47 @@ interface Subteam {
 interface TeamStructureProps {
   title: string;
   subteams: Subteam[];
+  basePath: string; // e.g., "teams.frc.teamStructure"
 }
 
-export default function TeamStructure({ title, subteams }: TeamStructureProps): React.ReactElement {
+export default function TeamStructure({ title, subteams, basePath }: TeamStructureProps): React.ReactElement {
   return (
     <section className={styles.teamStructure}>
       <div className={styles.container}>
-        <h1>{title}</h1>
+        <EditableText
+          value={title}
+          path={`${basePath}.title`}
+          as="h1"
+        />
         <div className={styles.subteamsGrid}>
           {subteams.map((subteam, index) => (
             <div key={index} className={styles.subteam}>
-              <div className={styles.subteamIcon}>{subteam.icon}</div>
-              <h3>{subteam.name}</h3>
-              <p>{subteam.description}</p>
+              <div className={styles.subteamIcon}>
+                <EditableText
+                  value={subteam.icon}
+                  path={`${basePath}.subteams.${index}.icon`}
+                  as="span"
+                />
+              </div>
+              <EditableText
+                value={subteam.name}
+                path={`${basePath}.subteams.${index}.name`}
+                as="h3"
+              />
+              <EditableText
+                value={subteam.description}
+                path={`${basePath}.subteams.${index}.description`}
+                as="p"
+                multiline
+              />
               <div className={styles.subteamSkills}>
                 {subteam.skills.map((skill, skillIndex) => (
-                  <span key={skillIndex}>{skill}</span>
+                  <EditableText
+                    key={skillIndex}
+                    value={skill}
+                    path={`${basePath}.subteams.${index}.skills.${skillIndex}`}
+                    as="span"
+                  />
                 ))}
               </div>
             </div>

@@ -1,19 +1,148 @@
+"use client";
 import React from "react";
-import { Metadata } from "next";
 import styles from '@/app/sponsors/sponsors.module.scss';
 import Navbar from "@/app/_components/navbar/navbar";
 import Title from "@/app/_components/title/title";
 import Footer from "@/app/_components/footer/footer";
 import ContactForm from "@/app/_components/contactForm/contactForm";
 import img1 from "@/public/images/robotics/sponsors_bg.jpg";
+import { useContent } from "@/hooks/useContent";
+import EditableText from "@/components/editable/EditableText";
+import EditableImage from "@/components/editable/EditableImage";
 
-export const metadata: Metadata = {
-    title: 'Our Sponsors - OA Robotics',
-    description: 'Meet our amazing sponsors who support Oxford Academy Robotics. Explore partnership opportunities and learn how sponsors help our STEM programs.',
-    keywords: 'sponsors, partnerships, support, funding, STEM education, robotics sponsors, corporate partners'
-}
+export default function Sponsor() {
+    const { content, loading } = useContent();
+    
+    const sponsorsData = content?.sponsors || {
+        hero: {
+            title: "Building the Future Together",
+            description: "Our sponsors are more than funders—they are partners in our mission to inspire the next generation of innovators, engineers, and problem-solvers. Through their generous support, we can provide world-class robotics education and compete at the highest levels.",
+            stats: [
+                { value: "$50K+", label: "Annual Support" },
+                { value: "15+", label: "Corporate Partners" },
+                { value: "200+", label: "Students Impacted" }
+            ]
+        },
+        currentSponsors: {
+            title: "Our Current Sponsors",
+            intro: "We're grateful to partner with these incredible organizations who share our commitment to STEM education and innovation.",
+            tiers: [
+                {
+                    name: "Title Sponsors",
+                    sponsors: [
+                        {
+                            name: "Gene Haas Foundation",
+                            logo: "/logos/sponsors/gene-haas-foundation.png",
+                            description: "Leading supporter of STEM education and workforce development"
+                        }
+                    ]
+                },
+                {
+                    name: "Gold Sponsors",
+                    sponsors: [
+                        {
+                            name: "NASA",
+                            logo: "/logos/sponsors/nasa.png",
+                            description: "Inspiring space exploration and STEM innovation"
+                        },
+                        {
+                            name: "Disney",
+                            logo: "/logos/sponsors/disney.png",
+                            description: "Creating magical learning experiences"
+                        }
+                    ]
+                },
+                {
+                    name: "Silver Sponsors",
+                    sponsors: [
+                        {
+                            name: "SolidWorks",
+                            logo: "/logos/sponsors/solidworks.png",
+                            description: "Professional CAD software for design innovation"
+                        },
+                        {
+                            name: "JPL",
+                            logo: "/logos/sponsors/jpl.png",
+                            description: "Advancing space exploration and technology"
+                        },
+                        {
+                            name: "Emerson",
+                            logo: "/logos/sponsors/emerson.png",
+                            description: "Engineering solutions for a better world"
+                        }
+                    ]
+                }
+            ]
+        },
+        howSponsorsHelp: {
+            title: "How Our Sponsors Make a Difference",
+            cards: [
+                {
+                    icon: "🔧",
+                    title: "Equipment & Materials",
+                    description: "Sponsors provide cutting-edge tools, raw materials, and manufacturing resources that enable us to build competitive robots and prototype innovative solutions."
+                },
+                {
+                    icon: "🎯",
+                    title: "Competition Funding",
+                    description: "Travel expenses, registration fees, and competition costs are covered by our generous sponsors, allowing us to compete at regional and national levels."
+                },
+                {
+                    icon: "👨‍🔬",
+                    title: "Mentorship & Expertise",
+                    description: "Industry professionals from sponsor companies provide invaluable mentorship, sharing real-world engineering experience with our students."
+                },
+                {
+                    icon: "💡",
+                    title: "Educational Resources",
+                    description: "Sponsors provide access to professional software, online learning platforms, and educational workshops that enhance our curriculum."
+                }
+            ]
+        },
+        opportunities: {
+            title: "Partner With Us",
+            description: "Join our mission to inspire the next generation of innovators. Your support directly impacts student learning and helps build tomorrow's engineering workforce.",
+            benefits: {
+                title: "Partnership Benefits:",
+                items: [
+                    "Brand visibility at competitions and events",
+                    "Access to talented student interns",
+                    "Corporate social responsibility impact",
+                    "Networking with other industry leaders",
+                    "Tax-deductible charitable contribution"
+                ]
+            },
+            tiers: {
+                title: "Sponsorship Levels:",
+                levels: [
+                    { amount: "$10,000+", level: "Title Sponsor" },
+                    { amount: "$5,000+", level: "Gold Sponsor" },
+                    { amount: "$2,500+", level: "Silver Sponsor" },
+                    { amount: "$1,000+", level: "Bronze Sponsor" }
+                ]
+            },
+            image: {
+                src: "/images/robotics/group.jpeg",
+                alt: "Team collaboration",
+                caption: {
+                    title: "Your support in action",
+                    description: "See how sponsorship directly impacts student learning and competition success"
+                }
+            }
+        },
+        contact: {
+            title: "Ready to Partner?",
+            description: "Contact us to discuss sponsorship opportunities and learn more about how your organization can support our mission.",
+            details: [
+                { label: "Email:", value: "sponsors@oarobotics.com" },
+                { label: "Phone:", value: "(714) 220-4055" },
+                { label: "Address:", value: "5172 Orange Ave, Cypress, CA 90630" }
+            ]
+        }
+    };
 
-export default async function Sponsor(): Promise<React.ReactElement> {
+    if (loading) return <div>Loading...</div>;
+
     return (
         <div className={styles.sponsors}>
             <Navbar isFixed={true}/>
@@ -29,25 +158,32 @@ export default async function Sponsor(): Promise<React.ReactElement> {
             <section className={styles.heroSection}>
                 <div className={styles.container}>
                     <div className={styles.heroContent}>
-                        <h1>Building the Future Together</h1>
-                        <p>
-                            Our sponsors are more than funders—they are partners in our mission to inspire the next 
-                            generation of innovators, engineers, and problem-solvers. Through their generous support, 
-                            we can provide world-class robotics education and compete at the highest levels.
-                        </p>
+                        <EditableText
+                            value={sponsorsData.hero.title}
+                            path="sponsors.hero.title"
+                            as="h1"
+                        />
+                        <EditableText
+                            value={sponsorsData.hero.description}
+                            path="sponsors.hero.description"
+                            as="p"
+                            multiline
+                        />
                         <div className={styles.impactStats}>
-                            <div className={styles.stat}>
-                                <h3>$50K+</h3>
-                                <p>Annual Support</p>
-                            </div>
-                            <div className={styles.stat}>
-                                <h3>15+</h3>
-                                <p>Corporate Partners</p>
-                            </div>
-                            <div className={styles.stat}>
-                                <h3>200+</h3>
-                                <p>Students Impacted</p>
-                            </div>
+                            {sponsorsData.hero.stats.map((stat, index) => (
+                                <div key={index} className={styles.stat}>
+                                    <EditableText
+                                        value={stat.value}
+                                        path={`sponsors.hero.stats.${index}.value`}
+                                        as="h3"
+                                    />
+                                    <EditableText
+                                        value={stat.label}
+                                        path={`sponsors.hero.stats.${index}.label`}
+                                        as="p"
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -56,82 +192,55 @@ export default async function Sponsor(): Promise<React.ReactElement> {
             {/* Current Sponsors */}
             <section className={styles.currentSponsors}>
                 <div className={styles.container}>
-                    <h1>Our Current Sponsors</h1>
-                    <p className={styles.sponsorIntro}>
-                        We&apos;re grateful to partner with these incredible organizations who share our commitment to STEM education and innovation.
-                    </p>
+                    <EditableText
+                        value={sponsorsData.currentSponsors.title}
+                        path="sponsors.currentSponsors.title"
+                        as="h1"
+                    />
+                    <EditableText
+                        value={sponsorsData.currentSponsors.intro}
+                        path="sponsors.currentSponsors.intro"
+                        as="p"
+                        className={styles.sponsorIntro}
+                        multiline
+                    />
                     <div className={styles.sponsorTiers}>
-                        <div className={styles.tier}>
-                            <h2 className={styles.tierTitle}>Title Sponsors</h2>
-                            <div className={styles.sponsorGrid}>
-                                <div className={styles.sponsorCard}>
-                                    <div className={styles.sponsorLogo}>
-                                        <img src="/logos/sponsors/gene-haas-foundation.png" alt="Gene Haas Foundation" />
-                                    </div>
-                                    <div className={styles.sponsorInfo}>
-                                        <h3>Gene Haas Foundation</h3>
-                                        <p>Leading supporter of STEM education and workforce development</p>
-                                    </div>
+                        {sponsorsData.currentSponsors.tiers.map((tier, tierIndex) => (
+                            <div key={tierIndex} className={styles.tier}>
+                                <EditableText
+                                    value={tier.name}
+                                    path={`sponsors.currentSponsors.tiers.${tierIndex}.name`}
+                                    as="h2"
+                                    className={styles.tierTitle}
+                                />
+                                <div className={styles.sponsorGrid}>
+                                    {tier.sponsors.map((sponsor, sponsorIndex) => (
+                                        <div key={sponsorIndex} className={styles.sponsorCard}>
+                                            <div className={styles.sponsorLogo}>
+                                                <EditableImage
+                                                    src={sponsor.logo}
+                                                    alt={sponsor.name}
+                                                    path={`sponsors.currentSponsors.tiers.${tierIndex}.sponsors.${sponsorIndex}.logo`}
+                                                />
+                                            </div>
+                                            <div className={styles.sponsorInfo}>
+                                                <EditableText
+                                                    value={sponsor.name}
+                                                    path={`sponsors.currentSponsors.tiers.${tierIndex}.sponsors.${sponsorIndex}.name`}
+                                                    as="h3"
+                                                />
+                                                <EditableText
+                                                    value={sponsor.description}
+                                                    path={`sponsors.currentSponsors.tiers.${tierIndex}.sponsors.${sponsorIndex}.description`}
+                                                    as="p"
+                                                    multiline
+                                                />
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div className={styles.tier}>
-                            <h2 className={styles.tierTitle}>Gold Sponsors</h2>
-                            <div className={styles.sponsorGrid}>
-                                <div className={styles.sponsorCard}>
-                                    <div className={styles.sponsorLogo}>
-                                        <img src="/logos/sponsors/nasa.png" alt="NASA" />
-                                    </div>
-                                    <div className={styles.sponsorInfo}>
-                                        <h3>NASA</h3>
-                                        <p>Inspiring space exploration and STEM innovation</p>
-                                    </div>
-                                </div>
-                                <div className={styles.sponsorCard}>
-                                    <div className={styles.sponsorLogo}>
-                                        <img src="/logos/sponsors/disney.png" alt="Disney" />
-                                    </div>
-                                    <div className={styles.sponsorInfo}>
-                                        <h3>Disney</h3>
-                                        <p>Creating magical learning experiences</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className={styles.tier}>
-                            <h2 className={styles.tierTitle}>Silver Sponsors</h2>
-                            <div className={styles.sponsorGrid}>
-                                <div className={styles.sponsorCard}>
-                                    <div className={styles.sponsorLogo}>
-                                        <img src="/logos/sponsors/solidworks.png" alt="SolidWorks" />
-                                    </div>
-                                    <div className={styles.sponsorInfo}>
-                                        <h3>SolidWorks</h3>
-                                        <p>Professional CAD software for design innovation</p>
-                                    </div>
-                                </div>
-                                <div className={styles.sponsorCard}>
-                                    <div className={styles.sponsorLogo}>
-                                        <img src="/logos/sponsors/jpl.png" alt="JPL" />
-                                    </div>
-                                    <div className={styles.sponsorInfo}>
-                                        <h3>JPL</h3>
-                                        <p>Advancing space exploration and technology</p>
-                                    </div>
-                                </div>
-                                <div className={styles.sponsorCard}>
-                                    <div className={styles.sponsorLogo}>
-                                        <img src="/logos/sponsors/emerson.png" alt="Emerson" />
-                                    </div>
-                                    <div className={styles.sponsorInfo}>
-                                        <h3>Emerson</h3>
-                                        <p>Engineering solutions for a better world</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -139,40 +248,34 @@ export default async function Sponsor(): Promise<React.ReactElement> {
             {/* How Sponsors Help */}
             <section className={styles.howSponsorsHelp}>
                 <div className={styles.container}>
-                    <h1>How Our Sponsors Make a Difference</h1>
+                    <EditableText
+                        value={sponsorsData.howSponsorsHelp.title}
+                        path="sponsors.howSponsorsHelp.title"
+                        as="h1"
+                    />
                     <div className={styles.helpGrid}>
-                        <div className={styles.helpCard}>
-                            <div className={styles.helpIcon}>🔧</div>
-                            <h3>Equipment & Materials</h3>
-                            <p>
-                                Sponsors provide cutting-edge tools, raw materials, and manufacturing resources 
-                                that enable us to build competitive robots and prototype innovative solutions.
-                            </p>
-                        </div>
-                        <div className={styles.helpCard}>
-                            <div className={styles.helpIcon}>🎯</div>
-                            <h3>Competition Funding</h3>
-                            <p>
-                                Travel expenses, registration fees, and competition costs are covered by our 
-                                generous sponsors, allowing us to compete at regional and national levels.
-                            </p>
-                        </div>
-                        <div className={styles.helpCard}>
-                            <div className={styles.helpIcon}>👨‍🔬</div>
-                            <h3>Mentorship & Expertise</h3>
-                            <p>
-                                Industry professionals from sponsor companies provide invaluable mentorship, 
-                                sharing real-world engineering experience with our students.
-                            </p>
-                        </div>
-                        <div className={styles.helpCard}>
-                            <div className={styles.helpIcon}>💡</div>
-                            <h3>Educational Resources</h3>
-                            <p>
-                                Sponsors provide access to professional software, online learning platforms, 
-                                and educational workshops that enhance our curriculum.
-                            </p>
-                        </div>
+                        {sponsorsData.howSponsorsHelp.cards.map((card, index) => (
+                            <div key={index} className={styles.helpCard}>
+                                <div className={styles.helpIcon}>
+                                    <EditableText
+                                        value={card.icon}
+                                        path={`sponsors.howSponsorsHelp.cards.${index}.icon`}
+                                        as="span"
+                                    />
+                                </div>
+                                <EditableText
+                                    value={card.title}
+                                    path={`sponsors.howSponsorsHelp.cards.${index}.title`}
+                                    as="h3"
+                                />
+                                <EditableText
+                                    value={card.description}
+                                    path={`sponsors.howSponsorsHelp.cards.${index}.description`}
+                                    as="p"
+                                    multiline
+                                />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -182,52 +285,84 @@ export default async function Sponsor(): Promise<React.ReactElement> {
                 <div className={styles.container}>
                     <div className={styles.opportunityContent}>
                         <div className={styles.opportunityText}>
-                            <h1>Partner With Us</h1>
-                            <p>
-                                Join our mission to inspire the next generation of innovators. Your support directly 
-                                impacts student learning and helps build tomorrow&apos;s engineering workforce.
-                            </p>
+                            <EditableText
+                                value={sponsorsData.opportunities.title}
+                                path="sponsors.opportunities.title"
+                                as="h1"
+                            />
+                            <EditableText
+                                value={sponsorsData.opportunities.description}
+                                path="sponsors.opportunities.description"
+                                as="p"
+                                multiline
+                            />
                             
                             <div className={styles.benefitsList}>
-                                <h3>Partnership Benefits:</h3>
+                                <EditableText
+                                    value={sponsorsData.opportunities.benefits.title}
+                                    path="sponsors.opportunities.benefits.title"
+                                    as="h3"
+                                />
                                 <ul>
-                                    <li>Brand visibility at competitions and events</li>
-                                    <li>Access to talented student interns</li>
-                                    <li>Corporate social responsibility impact</li>
-                                    <li>Networking with other industry leaders</li>
-                                    <li>Tax-deductible charitable contribution</li>
+                                    {sponsorsData.opportunities.benefits.items.map((item, index) => (
+                                        <li key={index}>
+                                            <EditableText
+                                                value={item}
+                                                path={`sponsors.opportunities.benefits.items.${index}`}
+                                                as="span"
+                                            />
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                             
                             <div className={styles.sponsorshipTiers}>
-                                <h3>Sponsorship Levels:</h3>
+                                <EditableText
+                                    value={sponsorsData.opportunities.tiers.title}
+                                    path="sponsors.opportunities.tiers.title"
+                                    as="h3"
+                                />
                                 <div className={styles.tierList}>
-                                    <div className={styles.tierOption}>
-                                        <span className={styles.tierAmount}>$10,000+</span>
-                                        <span className={styles.tierLevel}>Title Sponsor</span>
-                                    </div>
-                                    <div className={styles.tierOption}>
-                                        <span className={styles.tierAmount}>$5,000+</span>
-                                        <span className={styles.tierLevel}>Gold Sponsor</span>
-                                    </div>
-                                    <div className={styles.tierOption}>
-                                        <span className={styles.tierAmount}>$2,500+</span>
-                                        <span className={styles.tierLevel}>Silver Sponsor</span>
-                                    </div>
-                                    <div className={styles.tierOption}>
-                                        <span className={styles.tierAmount}>$1,000+</span>
-                                        <span className={styles.tierLevel}>Bronze Sponsor</span>
-                                    </div>
+                                    {sponsorsData.opportunities.tiers.levels.map((tier, index) => (
+                                        <div key={index} className={styles.tierOption}>
+                                            <span className={styles.tierAmount}>
+                                                <EditableText
+                                                    value={tier.amount}
+                                                    path={`sponsors.opportunities.tiers.levels.${index}.amount`}
+                                                    as="span"
+                                                />
+                                            </span>
+                                            <span className={styles.tierLevel}>
+                                                <EditableText
+                                                    value={tier.level}
+                                                    path={`sponsors.opportunities.tiers.levels.${index}.level`}
+                                                    as="span"
+                                                />
+                                            </span>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
                         
                         <div className={styles.opportunityImage}>
                             <div className={styles.imageCard}>
-                                <img src="/images/robotics/group.jpeg" alt="Team collaboration" />
+                                <EditableImage
+                                    src={sponsorsData.opportunities.image.src}
+                                    alt={sponsorsData.opportunities.image.alt}
+                                    path="sponsors.opportunities.image.src"
+                                />
                                 <div className={styles.imageCaption}>
-                                    <h4>Your support in action</h4>
-                                    <p>See how sponsorship directly impacts student learning and competition success</p>
+                                    <EditableText
+                                        value={sponsorsData.opportunities.image.caption.title}
+                                        path="sponsors.opportunities.image.caption.title"
+                                        as="h4"
+                                    />
+                                    <EditableText
+                                        value={sponsorsData.opportunities.image.caption.description}
+                                        path="sponsors.opportunities.image.caption.description"
+                                        as="p"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -240,21 +375,35 @@ export default async function Sponsor(): Promise<React.ReactElement> {
                 <div className={styles.container}>
                     <div className={styles.contactContent}>
                         <div className={styles.contactInfo}>
-                            <h1>Ready to Partner?</h1>
-                            <p>
-                                Contact us to discuss sponsorship opportunities and learn more about how your 
-                                organization can support our mission.
-                            </p>
+                            <EditableText
+                                value={sponsorsData.contact.title}
+                                path="sponsors.contact.title"
+                                as="h1"
+                            />
+                            <EditableText
+                                value={sponsorsData.contact.description}
+                                path="sponsors.contact.description"
+                                as="p"
+                                multiline
+                            />
                             <div className={styles.contactDetails}>
-                                <div className={styles.contactItem}>
-                                    <strong>Email:</strong> sponsors@oarobotics.com
-                                </div>
-                                <div className={styles.contactItem}>
-                                    <strong>Phone:</strong> (714) 220-4055
-                                </div>
-                                <div className={styles.contactItem}>
-                                    <strong>Address:</strong> 5172 Orange Ave, Cypress, CA 90630
-                                </div>
+                                {sponsorsData.contact.details.map((detail, index) => (
+                                    <div key={index} className={styles.contactItem}>
+                                        <strong>
+                                            <EditableText
+                                                value={detail.label}
+                                                path={`sponsors.contact.details.${index}.label`}
+                                                as="span"
+                                            />
+                                        </strong>
+                                        {" "}
+                                        <EditableText
+                                            value={detail.value}
+                                            path={`sponsors.contact.details.${index}.value`}
+                                            as="span"
+                                        />
+                                    </div>
+                                ))}
                             </div>
                         </div>
                         <div className={styles.formContainer}>
@@ -266,5 +415,5 @@ export default async function Sponsor(): Promise<React.ReactElement> {
             
             <Footer/>
         </div>
-    )
+    );
 }
