@@ -1,6 +1,8 @@
 import React from "react";
 import '@/app/globals.scss';
 import img from "@/public/logos/OARoboticsLogo_24-25.webp";
+import { EditModeProvider } from '@/contexts/EditModeContext';
+import EditToolbar from '@/components/editable/EditToolbar';
 
 export const metadata = {
     title: 'OA Robotics Website',
@@ -16,7 +18,12 @@ export const metadata = {
 export default function RootLayout({children}: { children: React.ReactNode }): React.ReactElement {
     return (
         <html lang="en">
-        <body>{children}</body>
+        <body>
+            <EditModeProvider>
+                <EditToolbar />
+                {children}
+            </EditModeProvider>
+        </body>
         </html>
     )
 }

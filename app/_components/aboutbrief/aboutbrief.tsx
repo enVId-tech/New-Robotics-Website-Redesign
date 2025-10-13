@@ -3,6 +3,8 @@ import React from "react";
 import styles from '@/app/_components/aboutbrief/aboutbrief.module.scss';
 import {StaticImageData} from "next/image";
 import {TW_300, TW_600} from "@/utils/globalFonts";
+import EditableText from "@/components/editable/EditableText";
+import EditableImage from "@/components/editable/EditableImage";
 
 type AboutBriefProps = {
     children?: React.ReactNode;
@@ -27,14 +29,26 @@ export default function AboutBrief({ children, img, description }: AboutBriefPro
         <section className={`${styles.about} ${TW_300}`}>
             <div className={styles.container}>
                 <div className={styles.aboutContent}>
-                    <h1 className={`${styles.aboutTitle} ${TW_600}`}>About Us</h1>
-                    <p>
-                        {description}
-                    </p>
+                    <EditableText
+                        value="About Us"
+                        path="homepage.aboutBrief.title"
+                        as="h1"
+                        className={`${styles.aboutTitle} ${TW_600}`}
+                    />
+                    <EditableText
+                        value={description}
+                        path="homepage.aboutBrief.description"
+                        as="p"
+                        multiline={true}
+                    />
                     <button className={`${styles.aboutButton} ${TW_600}`} ref={aboutButtonRef}>Learn More</button>
                 </div>
                 <div className={styles.aboutImage}>
-                     <img src={img.src} alt="Oxford Academy Robotics"/>
+                    <EditableImage
+                        src={img.src}
+                        alt="Oxford Academy Robotics"
+                        path="homepage.aboutBrief.image"
+                    />
                 </div>
             </div>
             { children }

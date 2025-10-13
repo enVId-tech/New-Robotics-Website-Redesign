@@ -1,10 +1,12 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/app/_components/navbar/navbar.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import {M_300, M_500} from "@/utils/globalFonts";
 import { useContent } from "@/hooks/useContent";
+import { useAuth } from "@/hooks/useAuth";
+import { useEditMode } from "@/contexts/EditModeContext";
 
 type NavbarProps = {
     children?: React.ReactNode;
@@ -18,6 +20,8 @@ type DynamicLink = {
 
 export default function Navbar({ children, isFixed = true }: NavbarProps): React.ReactElement {
     const { content } = useContent();
+    const { isAuthenticated } = useAuth();
+    const { isEditMode, enableEditMode } = useEditMode();
     
     const styleFixed: object = {
         position: "fixed",
@@ -92,6 +96,14 @@ export default function Navbar({ children, isFixed = true }: NavbarProps): React
                                 );
                             })
                         }
+                        {isAuthenticated && !isEditMode && (
+                            <button 
+                                className={styles.editModeButton}
+                                onClick={enableEditMode}
+                            >
+                                ✏️ Edit Mode
+                            </button>
+                        )}
                     </div>
                 </div>
             </nav>
