@@ -281,11 +281,25 @@
       "address": "Oxford Academy\n5172 Orange Ave\nCypress, CA 90630",
       "email": "contact@oarobotics.org",
       "meetingTimes": "Mondays & Wednesdays\n3:30 PM - 5:30 PM"
-    }
+    },
+    "stats": [
+      {
+        "value": "50+"
+      },
+      {
+        "value": "5"
+      },
+      {
+        "value": "10+"
+      },
+      {
+        "value": "Daily"
+      }
+    ]
   },
   "teams": {
     "frc": {
-      "title": "FIRST Robotics Competition",
+      "title": "2025-2026 Competition Schedule",
       "subtitle": "Team 4079 - The Nuclear Knights",
       "description": "Our FRC team competes in the most challenging high school robotics competition, building 120+ pound robots to compete in dynamic games.",
       "backgroundImage": "/images/FRCBanner.jpg",
@@ -294,10 +308,18 @@
         "founded": "2012",
         "robotWeight": "120+ lbs",
         "buildSeason": "6 weeks"
-      }
+      },
+      "robots": [
+        {
+          "name": "Crescendo"
+        },
+        {
+          "name": "Charged Up"
+        }
+      ]
     },
     "ftc": {
-      "title": "2026 Season Schedule",
+      "title": "2025 Season Schedule",
       "subtitle": "Building Innovation Together",
       "description": "Our FTC teams focus on designing, building, and programming robots to compete in alliance-based competitions.",
       "backgroundImage": "/images/FTCBanner.jpg",
@@ -516,7 +538,7 @@
       },
       {
         "platform": "YouTube",
-        "url": "https://www.youtube.com/channel/UCj9Z8Z9Z9Z9Z9Z9Z9Z9Z9ZA",
+        "url": "https://www.youtube.com/@Team-QuantumLeap",
         "icon": "youtube"
       }
     ],
@@ -530,11 +552,16 @@
     "hero": {
       "stats": [
         {
-          "value": "$10K+"
+          "value": "$10K+",
+          "label": "Money raised per year"
         },
-        null,
         {
-          "value": "500+"
+          "value": "10+",
+          "label": "companies sponsored"
+        },
+        {
+          "value": "500+",
+          "label": "Students Impacted"
         }
       ]
     },
@@ -542,7 +569,8 @@
       "title": {
         "style": {
           "fontSize": "100px"
-        }
+        },
+        "value": "Our Sponsors"
       },
       "intro": "We're grateful to partner with these incredible organizations who share our    commitment to STEM education and innovation.                                                 "
     }

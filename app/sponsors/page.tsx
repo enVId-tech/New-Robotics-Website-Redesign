@@ -9,11 +9,12 @@ import img1 from "@/public/images/robotics/sponsors_bg.jpg";
 import { useContent } from "@/hooks/useContent";
 import EditableText from "@/components/editable/EditableText";
 import EditableImage from "@/components/editable/EditableImage";
+import { getContentValue } from "@/utils/contentHelpers";
 
 export default function Sponsor() {
     const { content, loading } = useContent();
     
-    const sponsorsData = content?.sponsors || {
+    const defaultSponsorsData = {
         hero: {
             title: "Building the Future Together",
             description: "Our sponsors are more than funders—they are partners in our mission to inspire the next generation of innovators, engineers, and problem-solvers. Through their generous support, we can provide world-class robotics education and compete at the highest levels.",
@@ -141,6 +142,46 @@ export default function Sponsor() {
         }
     };
 
+    // Deep merge content with defaults to ensure all nested objects exist
+    const sponsorsData = {
+        hero: {
+            ...defaultSponsorsData.hero,
+            ...(content?.sponsors?.hero || {})
+        },
+        currentSponsors: {
+            ...defaultSponsorsData.currentSponsors,
+            ...(content?.sponsors?.currentSponsors || {})
+        },
+        howSponsorsHelp: {
+            ...defaultSponsorsData.howSponsorsHelp,
+            ...(content?.sponsors?.howSponsorsHelp || {})
+        },
+        opportunities: {
+            ...defaultSponsorsData.opportunities,
+            ...(content?.sponsors?.opportunities || {}),
+            benefits: {
+                ...defaultSponsorsData.opportunities.benefits,
+                ...(content?.sponsors?.opportunities?.benefits || {})
+            },
+            tiers: {
+                ...defaultSponsorsData.opportunities.tiers,
+                ...(content?.sponsors?.opportunities?.tiers || {})
+            },
+            image: {
+                ...defaultSponsorsData.opportunities.image,
+                ...(content?.sponsors?.opportunities?.image || {}),
+                caption: {
+                    ...defaultSponsorsData.opportunities.image.caption,
+                    ...(content?.sponsors?.opportunities?.image?.caption || {})
+                }
+            }
+        },
+        contact: {
+            ...defaultSponsorsData.contact,
+            ...(content?.sponsors?.contact || {})
+        }
+    };
+
     if (loading) return <div>Loading...</div>;
 
     return (
@@ -170,20 +211,24 @@ export default function Sponsor() {
                             multiline
                         />
                         <div className={styles.impactStats}>
-                            {sponsorsData.hero.stats.map((stat, index) => (
-                                <div key={index} className={styles.stat}>
-                                    <EditableText
-                                        value={stat.value}
-                                        path={`sponsors.hero.stats.${index}.value`}
-                                        as="h3"
-                                    />
-                                    <EditableText
-                                        value={stat.label}
-                                        path={`sponsors.hero.stats.${index}.label`}
-                                        as="p"
-                                    />
-                                </div>
-                            ))}
+                            {sponsorsData.hero.stats.map((stat, index) => {
+                                // Ensure stat is an object with default values if null/undefined
+                                const safestat = stat || { value: '', label: '' };
+                                return (
+                                    <div key={index} className={styles.stat}>
+                                        <EditableText
+                                            value={getContentValue(safestat.value) || ''}
+                                            path={`sponsors.hero.stats.${index}.value`}
+                                            as="h3"
+                                        />
+                                        <EditableText
+                                            value={getContentValue(safestat.label) || ''}
+                                            path={`sponsors.hero.stats.${index}.label`}
+                                            as="p"
+                                        />
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
@@ -205,42 +250,48 @@ export default function Sponsor() {
                         multiline
                     />
                     <div className={styles.sponsorTiers}>
-                        {sponsorsData.currentSponsors.tiers.map((tier, tierIndex) => (
-                            <div key={tierIndex} className={styles.tier}>
-                                <EditableText
-                                    value={tier.name}
-                                    path={`sponsors.currentSponsors.tiers.${tierIndex}.name`}
-                                    as="h2"
-                                    className={styles.tierTitle}
-                                />
-                                <div className={styles.sponsorGrid}>
-                                    {tier.sponsors.map((sponsor, sponsorIndex) => (
-                                        <div key={sponsorIndex} className={styles.sponsorCard}>
-                                            <div className={styles.sponsorLogo}>
-                                                <EditableImage
-                                                    src={sponsor.logo}
-                                                    alt={sponsor.name}
-                                                    path={`sponsors.currentSponsors.tiers.${tierIndex}.sponsors.${sponsorIndex}.logo`}
-                                                />
-                                            </div>
-                                            <div className={styles.sponsorInfo}>
-                                                <EditableText
-                                                    value={sponsor.name}
-                                                    path={`sponsors.currentSponsors.tiers.${tierIndex}.sponsors.${sponsorIndex}.name`}
-                                                    as="h3"
-                                                />
-                                                <EditableText
-                                                    value={sponsor.description}
-                                                    path={`sponsors.currentSponsors.tiers.${tierIndex}.sponsors.${sponsorIndex}.description`}
-                                                    as="p"
-                                                    multiline
-                                                />
-                                            </div>
-                                        </div>
-                                    ))}
+                        {(sponsorsData.currentSponsors.tiers || []).map((tier, tierIndex) => {
+                            const safeTier = tier || { name: '', sponsors: [] };
+                            return (
+                                <div key={tierIndex} className={styles.tier}>
+                                    <EditableText
+                                        value={safeTier.name}
+                                        path={`sponsors.currentSponsors.tiers.${tierIndex}.name`}
+                                        as="h2"
+                                        className={styles.tierTitle}
+                                    />
+                                    <div className={styles.sponsorGrid}>
+                                        {(safeTier.sponsors || []).map((sponsor, sponsorIndex) => {
+                                            const safeSponsor = sponsor || { logo: '', name: '', description: '' };
+                                            return (
+                                                <div key={sponsorIndex} className={styles.sponsorCard}>
+                                                    <div className={styles.sponsorLogo}>
+                                                        <EditableImage
+                                                            src={safeSponsor.logo}
+                                                            alt={safeSponsor.name}
+                                                            path={`sponsors.currentSponsors.tiers.${tierIndex}.sponsors.${sponsorIndex}.logo`}
+                                                        />
+                                                    </div>
+                                                    <div className={styles.sponsorInfo}>
+                                                        <EditableText
+                                                            value={safeSponsor.name}
+                                                            path={`sponsors.currentSponsors.tiers.${tierIndex}.sponsors.${sponsorIndex}.name`}
+                                                            as="h3"
+                                                        />
+                                                        <EditableText
+                                                            value={safeSponsor.description}
+                                                            path={`sponsors.currentSponsors.tiers.${tierIndex}.sponsors.${sponsorIndex}.description`}
+                                                            as="p"
+                                                            multiline
+                                                        />
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </section>
@@ -254,28 +305,31 @@ export default function Sponsor() {
                         as="h1"
                     />
                     <div className={styles.helpGrid}>
-                        {sponsorsData.howSponsorsHelp.cards.map((card, index) => (
-                            <div key={index} className={styles.helpCard}>
-                                <div className={styles.helpIcon}>
+                        {(sponsorsData.howSponsorsHelp.cards || []).map((card, index) => {
+                            const safeCard = card || { icon: '', title: '', description: '' };
+                            return (
+                                <div key={index} className={styles.helpCard}>
+                                    <div className={styles.helpIcon}>
+                                        <EditableText
+                                            value={safeCard.icon}
+                                            path={`sponsors.howSponsorsHelp.cards.${index}.icon`}
+                                            as="span"
+                                        />
+                                    </div>
                                     <EditableText
-                                        value={card.icon}
-                                        path={`sponsors.howSponsorsHelp.cards.${index}.icon`}
-                                        as="span"
+                                        value={safeCard.title}
+                                        path={`sponsors.howSponsorsHelp.cards.${index}.title`}
+                                        as="h3"
+                                    />
+                                    <EditableText
+                                        value={safeCard.description}
+                                        path={`sponsors.howSponsorsHelp.cards.${index}.description`}
+                                        as="p"
+                                        multiline
                                     />
                                 </div>
-                                <EditableText
-                                    value={card.title}
-                                    path={`sponsors.howSponsorsHelp.cards.${index}.title`}
-                                    as="h3"
-                                />
-                                <EditableText
-                                    value={card.description}
-                                    path={`sponsors.howSponsorsHelp.cards.${index}.description`}
-                                    as="p"
-                                    multiline
-                                />
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </section>
@@ -304,10 +358,10 @@ export default function Sponsor() {
                                     as="h3"
                                 />
                                 <ul>
-                                    {sponsorsData.opportunities.benefits.items.map((item, index) => (
+                                    {(sponsorsData.opportunities.benefits.items || []).map((item, index) => (
                                         <li key={index}>
                                             <EditableText
-                                                value={item}
+                                                value={item || ''}
                                                 path={`sponsors.opportunities.benefits.items.${index}`}
                                                 as="span"
                                             />
@@ -323,24 +377,27 @@ export default function Sponsor() {
                                     as="h3"
                                 />
                                 <div className={styles.tierList}>
-                                    {sponsorsData.opportunities.tiers.levels.map((tier, index) => (
-                                        <div key={index} className={styles.tierOption}>
-                                            <span className={styles.tierAmount}>
-                                                <EditableText
-                                                    value={tier.amount}
-                                                    path={`sponsors.opportunities.tiers.levels.${index}.amount`}
-                                                    as="span"
-                                                />
-                                            </span>
-                                            <span className={styles.tierLevel}>
-                                                <EditableText
-                                                    value={tier.level}
-                                                    path={`sponsors.opportunities.tiers.levels.${index}.level`}
-                                                    as="span"
-                                                />
-                                            </span>
-                                        </div>
-                                    ))}
+                                    {(sponsorsData.opportunities.tiers.levels || []).map((tier, index) => {
+                                        const safeTier = tier || { amount: '', level: '' };
+                                        return (
+                                            <div key={index} className={styles.tierOption}>
+                                                <span className={styles.tierAmount}>
+                                                    <EditableText
+                                                        value={safeTier.amount}
+                                                        path={`sponsors.opportunities.tiers.levels.${index}.amount`}
+                                                        as="span"
+                                                    />
+                                                </span>
+                                                <span className={styles.tierLevel}>
+                                                    <EditableText
+                                                        value={safeTier.level}
+                                                        path={`sponsors.opportunities.tiers.levels.${index}.level`}
+                                                        as="span"
+                                                    />
+                                                </span>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>
@@ -387,23 +444,26 @@ export default function Sponsor() {
                                 multiline
                             />
                             <div className={styles.contactDetails}>
-                                {sponsorsData.contact.details.map((detail, index) => (
-                                    <div key={index} className={styles.contactItem}>
-                                        <strong>
+                                {(sponsorsData.contact.details || []).map((detail, index) => {
+                                    const safeDetail = detail || { label: '', value: '' };
+                                    return (
+                                        <div key={index} className={styles.contactItem}>
+                                            <strong>
+                                                <EditableText
+                                                    value={safeDetail.label}
+                                                    path={`sponsors.contact.details.${index}.label`}
+                                                    as="span"
+                                                />
+                                            </strong>
+                                            {" "}
                                             <EditableText
-                                                value={detail.label}
-                                                path={`sponsors.contact.details.${index}.label`}
+                                                value={safeDetail.value}
+                                                path={`sponsors.contact.details.${index}.value`}
                                                 as="span"
                                             />
-                                        </strong>
-                                        {" "}
-                                        <EditableText
-                                            value={detail.value}
-                                            path={`sponsors.contact.details.${index}.value`}
-                                            as="span"
-                                        />
-                                    </div>
-                                ))}
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                         <div className={styles.formContainer}>

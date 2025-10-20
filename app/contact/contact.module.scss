@@ -18,7 +18,7 @@
   // Contact Hero Section
   .contactHero {
     padding: 8vh 0;
-    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2a2a2a 100%);
+    background: #000000;
     position: relative;
     
     &::before {
@@ -28,7 +28,6 @@
       left: 0;
       right: 0;
       height: 100px;
-      background: linear-gradient(to bottom, transparent 0%, rgba(26, 26, 26, 0.3) 100%);
       pointer-events: none;
     }
     
@@ -245,7 +244,7 @@
   // Contact Form Section
   .formSection {
     padding: 8vh 0;
-    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    background: #000000;
 
     .formWrapper {
       max-width: 800px;

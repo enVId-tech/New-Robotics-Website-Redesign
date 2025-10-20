@@ -55,7 +55,8 @@ export async function POST(request: NextRequest) {
           return; // Skip this update
         }
         
-        if (!(key in current)) {
+        // Initialize if key doesn't exist OR if it's null/undefined
+        if (!(key in current) || current[key] === null || current[key] === undefined) {
           // Check if next key is a number (array index)
           const nextKey = keys[i + 1];
           if (!isNaN(Number(nextKey))) {
@@ -112,14 +113,17 @@ export async function POST(request: NextRequest) {
         }
       } else {
         // Regular value update
-        // If we're updating a value that has a style, preserve the style
-        if (typeof current[lastKey] === 'object' && current[lastKey] !== null && 'style' in current[lastKey]) {
+        
+        // Check if we're updating a styled object (object with 'style' property)
+        if (typeof current[lastKey] === 'object' && current[lastKey] !== null && 'style' in current[lastKey] && lastKey !== 'style') {
+          // Preserve existing style when updating the value
           const existingStyle = current[lastKey].style;
           current[lastKey].value = value;
           console.log(`[bulk-update] Updated value in styled object, preserving style:`, current[lastKey]);
         } else {
+          // Simple value assignment
           current[lastKey] = value;
-          console.log(`[bulk-update] Set simple value for ${jsonPath}:`, value);
+          console.log(`[bulk-update] Set value for ${jsonPath}:`, value);
         }
       }
     });
