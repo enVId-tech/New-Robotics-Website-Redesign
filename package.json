@@ -1,12 +1,13 @@
 {
-  "name": "main",
+  "name": "new-robotics-redesign",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "update-deps": "ncu -u && npm install --force"
   },
   "dependencies": {
     "@types/sass": "^1.45.0",
