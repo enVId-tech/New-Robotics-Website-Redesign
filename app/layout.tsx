@@ -2,6 +2,7 @@ import React from "react";
 import '@/app/globals.scss';
 import img from "@/public/logos/OARoboticsLogo_24-25.webp";
 import { EditModeProvider } from '@/contexts/EditModeContext';
+import { ContentProvider } from '@/contexts/ContentContext';
 import EditToolbar from '@/components/editable/EditToolbar';
 
 export const metadata = {
@@ -19,10 +20,12 @@ export default function RootLayout({children}: { children: React.ReactNode }): R
     return (
         <html lang="en">
         <body>
-            <EditModeProvider>
-                <EditToolbar />
-                {children}
-            </EditModeProvider>
+            <ContentProvider>
+                <EditModeProvider>
+                    <EditToolbar />
+                    {children}
+                </EditModeProvider>
+            </ContentProvider>
         </body>
         </html>
     )
