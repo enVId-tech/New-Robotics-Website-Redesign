@@ -27,8 +27,8 @@
         {
           "id": "1",
           "label": "Years Active",
-          "value": "12+",
-          "description": "Since 2012",
+          "value": "16+",
+          "description": "Since 2009",
           "icon": "🏆"
         },
         {
@@ -136,7 +136,7 @@
       "backgroundImage": "/images/AboutBanner.jpg",
       "stats": [
         {
-          "number": "12+",
+          "number": "16+",
           "label": "Years Strong"
         },
         {
@@ -327,7 +327,7 @@
       "logo": "/logos/FRCLogo.png",
       "name": "FRC Team 4079",
       "description": "Our FRC team competes in the FIRST Robotics Competition, building 120+ pound robots to play challenging games in intense competitions.",
-      "founded": "2012",
+      "founded": " 2012",
       "link": "/frc"
     },
     {
@@ -335,7 +335,7 @@
       "logo": "/logos/FTCLogo.png",
       "name": "FTC Teams 19812 & 23796",
       "description": "Our FTC teams design, build, and program smaller robots while learning valuable engineering and teamwork skills.",
-      "founded": "2021",
+      "founded": " 2021",
       "link": "/ftc"
     },
     {
@@ -343,7 +343,7 @@
       "logo": "/logos/VEXLogo.png",
       "name": "VEX Robotics",
       "description": "VEX teams focus on rapid prototyping and strategic gameplay with standardized robot kits.",
-      "founded": "2012",
+      "founded": " 2009",
       "link": "/vex"
     }
   ],
@@ -524,6 +524,27 @@
       "copyright": "© 2025 OA Robotics. All rights reserved.",
       "websiteDeveloper": "Website by Erick Tran",
       "betaNotice": "Oxford Academy"
+    }
+  },
+  "sponsors": {
+    "hero": {
+      "stats": [
+        {
+          "value": "$10K+"
+        },
+        null,
+        {
+          "value": "500+"
+        }
+      ]
+    },
+    "currentSponsors": {
+      "title": {
+        "style": {
+          "fontSize": "100px"
+        }
+      },
+      "intro": "We're grateful to partner with these incredible organizations who share our    commitment to STEM education and innovation.                                                 "
     }
   }
 }
