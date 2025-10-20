@@ -247,6 +247,7 @@ export default function EditableText({
   `.trim();
 
   const inlineStyle = {
+    color: localStyle.color,
     fontSize: localStyle.fontSize,
     fontFamily: localStyle.fontFamily,
     fontWeight: localStyle.fontWeight,
