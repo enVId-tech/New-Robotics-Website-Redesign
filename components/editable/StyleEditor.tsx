@@ -98,6 +98,26 @@ export default function StyleEditor({
       <div className={styles.content}>
         {type === 'text' ? (
           <>
+            {/* Text Color */}
+            <div className={styles.property}>
+              <label>Text Color</label>
+              <div className={styles.inputGroup}>
+                <input
+                  type="text"
+                  value={(localStyles as TextStyle).color || ''}
+                  onChange={(e) => handleChange('color', e.target.value)}
+                  placeholder="e.g., #ff0000, red, rgb(255,0,0)"
+                />
+                <input
+                  type="color"
+                  value={(localStyles as TextStyle).color?.startsWith('#') ? (localStyles as TextStyle).color : '#000000'}
+                  onChange={(e) => handleChange('color', e.target.value)}
+                  style={{ width: '40px', marginLeft: '5px' }}
+                />
+                <button onClick={() => handleReset('color')} title="Reset">↺</button>
+              </div>
+            </div>
+
             {/* Font Size */}
             <div className={styles.property}>
               <label>Font Size</label>

@@ -13,6 +13,7 @@ export interface ImageStyle {
 
 // Style properties for text
 export interface TextStyle {
+  color?: string;
   fontSize?: string;
   fontFamily?: 'Titillium Web' | 'Montserrat' | 'Arial' | 'Helvetica' | 'sans-serif';
   fontWeight?: '300' | '400' | '500' | '600' | '700' | '900';
