@@ -89,29 +89,37 @@ export async function POST(request: NextRequest) {
         
         const parentValue = grandparent[parentKey];
         
+        console.log(`[bulk-update] Setting style for ${jsonPath}, parent value type: ${typeof parentValue}`);
+        
         // If parent is a string, convert it to an object with value and style
         if (typeof parentValue === 'string') {
           grandparent[parentKey] = {
             value: parentValue,
             style: value
           };
+          console.log(`[bulk-update] Converted string to object:`, grandparent[parentKey]);
         } else if (typeof parentValue === 'object' && parentValue !== null) {
           // Parent is already an object, just set the style
           grandparent[parentKey].style = value;
+          console.log(`[bulk-update] Updated existing object style:`, grandparent[parentKey]);
         } else {
           // Parent doesn't exist or is null, create new object
           grandparent[parentKey] = {
             value: '',
             style: value
           };
+          console.log(`[bulk-update] Created new object with empty value:`, grandparent[parentKey]);
         }
       } else {
         // Regular value update
         // If we're updating a value that has a style, preserve the style
         if (typeof current[lastKey] === 'object' && current[lastKey] !== null && 'style' in current[lastKey]) {
+          const existingStyle = current[lastKey].style;
           current[lastKey].value = value;
+          console.log(`[bulk-update] Updated value in styled object, preserving style:`, current[lastKey]);
         } else {
           current[lastKey] = value;
+          console.log(`[bulk-update] Set simple value for ${jsonPath}:`, value);
         }
       }
     });

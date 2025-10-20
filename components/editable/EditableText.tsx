@@ -6,10 +6,10 @@ import { useContent } from '@/hooks/useContent';
 import styles from './EditableText.module.scss';
 import StyleEditor from './StyleEditor';
 import { TextStyle } from '@/utils/content';
-import { getContentStyle } from '@/utils/contentHelpers';
+import { getContentStyle, getContentValue } from '@/utils/contentHelpers';
 
 interface EditableTextProps {
-  value: string;
+  value: string | any; // Can be string or {value, style} object
   path: string; // JSON path like "homepage.hero.title"
   onChange?: (value: string) => void;
   className?: string;
@@ -21,7 +21,7 @@ interface EditableTextProps {
 }
 
 export default function EditableText({
-  value,
+  value: rawValue,
   path,
   onChange,
   className = '',
@@ -33,6 +33,10 @@ export default function EditableText({
 }: EditableTextProps) {
   const { isEditMode, addPendingChange, pendingChanges } = useEditMode();
   const { content } = useContent();
+  
+  // Normalize the value - handle both string and {value, style} formats
+  const value = getContentValue(rawValue);
+  
   const [isEditing, setIsEditing] = useState(false);
   const [localValue, setLocalValue] = useState(value);
   const [hasChanges, setHasChanges] = useState(false);
@@ -46,10 +50,22 @@ export default function EditableText({
   const prevValueRef = useRef<string>(value);
   const isFirstFocusRef = useRef(false);
 
-  // Load style from content JSON using the path
+  // Load style from rawValue or content JSON
   useEffect(() => {
+    // First check if style is embedded in the rawValue prop
+    const embeddedStyle = getContentStyle(rawValue);
+    if (embeddedStyle && Object.keys(embeddedStyle).length > 0) {
+      const styleString = JSON.stringify(embeddedStyle);
+      if (styleString !== prevStyleRef.current) {
+        console.log(`[EditableText] Loading embedded style for path "${path}":`, embeddedStyle);
+        setLocalStyle(embeddedStyle);
+        prevStyleRef.current = styleString;
+      }
+      return;
+    }
+    
+    // Fallback: Load style from content JSON using the path
     if (!initialStyle && content && path) {
-      // Navigate through the content object using the path
       const keys = path.split('.').flatMap(key => {
         const arrayMatch = key.match(/^([^\[]+)\[(\d+)\]$/);
         if (arrayMatch) {
@@ -70,13 +86,16 @@ export default function EditableText({
       
       // Extract style from the value
       const style = getContentStyle(current);
-      if (style) {
-        console.log(`[EditableText] Loading style for path "${path}":`, style);
-        setLocalStyle(style);
-        prevStyleRef.current = JSON.stringify(style);
+      if (style && Object.keys(style).length > 0) {
+        const styleString = JSON.stringify(style);
+        if (styleString !== prevStyleRef.current) {
+          console.log(`[EditableText] Loading style from content for path "${path}":`, style);
+          setLocalStyle(style);
+          prevStyleRef.current = styleString;
+        }
       }
     }
-  }, [content, path, initialStyle]);
+  }, [content, path, initialStyle, rawValue]);
 
   // Track if component is mounted for portal
   useEffect(() => {

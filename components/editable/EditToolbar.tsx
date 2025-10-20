@@ -20,14 +20,14 @@ export default function EditToolbar() {
     
     if (success) {
       setSaveStatus('success');
+      // Reload the page to ensure all components get the updated content
       setTimeout(() => {
-        setSaveStatus('idle');
-      }, 3000);
+        window.location.reload();
+      }, 1000);
     } else {
       setSaveStatus('error');
+      setIsSaving(false);
     }
-
-    setIsSaving(false);
   };
 
   const handleCancel = () => {
