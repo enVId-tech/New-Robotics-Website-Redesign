@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@types/sass": "^1.45.0",
-    "next": "16.2.9",
-    "npm": "^11.17.0",
+    "next": "16.2.10",
+    "npm": "^11.18.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "sass": "^1.101.0"
@@ -23,7 +23,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^10",
-    "eslint-config-next": "16.2.9",
+    "eslint-config-next": "16.2.10",
     "typescript": "^6"
   }
 }
